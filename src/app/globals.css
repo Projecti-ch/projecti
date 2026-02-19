@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #191919;
+  --color-foreground: #ffffff;
+  --color-accent: #efff00;
+  --color-accent-hover: #d9e600;
+  --color-muted: #999999;
+  --color-tertiary: #666666;
+  --color-card: #222222;
+  --color-card-hover: #2a2a2a;
+  --color-border: #333333;
+  --font-nohemi: "Nohemi", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-nohemi);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
 }
+
+/* ─── Typography ─── */
+h1, h2, h3, h4 {
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Fade-in animation ─── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.stagger-children .fade-in:nth-child(1) { transition-delay: 0ms; }
+.stagger-children .fade-in:nth-child(2) { transition-delay: 100ms; }
+.stagger-children .fade-in:nth-child(3) { transition-delay: 200ms; }
+.stagger-children .fade-in:nth-child(4) { transition-delay: 300ms; }
+.stagger-children .fade-in:nth-child(5) { transition-delay: 400ms; }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #191919;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ─── Testimonial horizontal scroll ─── */
+.testimonial-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.testimonial-scroll::-webkit-scrollbar {
+  display: none;
+}
+
