@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
 import SectionDivider from "@/components/SectionDivider";
+
+export const metadata: Metadata = {
+  title: "Ausgewählte Projekte",
+  description:
+    "Referenzprojekte aus Architekturplanung und digitalen Lösungen. Wohnbauprojekte, Marktanalysen, Projektmanagement. Strukturiert und transparent umgesetzt.",
+  openGraph: {
+    title: "Ausgewählte Projekte",
+    description:
+      "Referenzprojekte aus Architekturplanung und digitalen Lösungen. Wohnbauprojekte, Marktanalysen, Projektmanagement. Strukturiert und transparent umgesetzt.",
+    url: "https://www.projecti.ch/projekte",
+  },
+};
 import Image from "next/image";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";

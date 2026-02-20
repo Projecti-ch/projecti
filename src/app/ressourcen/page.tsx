@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
 import SectionDivider from "@/components/SectionDivider";
+
+export const metadata: Metadata = {
+  title: "Ressourcen & Insights",
+  description:
+    "Ratgeber, Updates und Einblicke zu Immobilienentwicklung. Von Bauvorschriften über Planungsprozesse bis zu digitalen Werkzeugen. Transparent und praxisnah.",
+  openGraph: {
+    title: "Ressourcen & Insights",
+    description:
+      "Ratgeber, Updates und Einblicke zu Immobilienentwicklung. Von Bauvorschriften über Planungsprozesse bis zu digitalen Werkzeugen. Transparent und praxisnah.",
+    url: "https://www.projecti.ch/ressourcen",
+  },
+};
 import Image from "next/image";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";

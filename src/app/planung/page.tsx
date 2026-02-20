@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
 import SectionDivider from "@/components/SectionDivider";
+
+export const metadata: Metadata = {
+  title: "Strukturierte Architekturplanung Schweiz",
+  description:
+    "Von der Machbarkeitsstudie bis zur Ausführungsplanung – strukturierte Planungsprozesse mit klaren Verantwortlichkeiten. Aus Landquart, Schweiz.",
+  openGraph: {
+    title: "Strukturierte Architekturplanung Schweiz",
+    description:
+      "Von der Machbarkeitsstudie bis zur Ausführungsplanung – strukturierte Planungsprozesse mit klaren Verantwortlichkeiten. Aus Landquart, Schweiz.",
+    url: "https://www.projecti.ch/planung",
+  },
+};
 import Link from "next/link";
 import Image from "next/image";
 

@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
 import SectionDivider from "@/components/SectionDivider";
 import FadeIn from "@/components/FadeIn";
+
+export const metadata: Metadata = {
+  title: "Impressum & Datenschutz",
+  description:
+    "Impressum und Datenschutzerklärung von Projecti, c/o The Luka Dosen Labs, Bahnhofstrasse 11, 7302 Landquart, Schweiz.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 

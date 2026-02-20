@@ -1,9 +1,22 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
 import SectionDivider from "@/components/SectionDivider";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Über Projecti & Luka Došen",
+  description:
+    "Agentur für Architekturplanung und digitale Lösungen in der Deutschschweiz. Gegründet mit dem Ziel, Immobilienprojekte strukturierter zu machen. Über 9 Jahre Erfahrung.",
+  openGraph: {
+    title: "Über Projecti & Luka Došen",
+    description:
+      "Agentur für Architekturplanung und digitale Lösungen in der Deutschschweiz. Gegründet mit dem Ziel, Immobilienprojekte strukturierter zu machen. Über 9 Jahre Erfahrung.",
+    url: "https://www.projecti.ch/ueber",
+  },
+};
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
