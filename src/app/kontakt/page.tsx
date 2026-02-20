@@ -24,21 +24,21 @@ function Kontakt() {
   const channels = [
     {
       title: "Gespräch vereinbaren",
-      body: "Der direkteste Weg. Buchen Sie ein kurzes Erstgespräch. Unverbindlich und direkt.",
+      body: "Der direkteste Weg. Buch ein kurzes Erstgespräch. Unverbindlich und direkt.",
       linkLabel: "Erstgespräch vereinbaren",
       linkHref: "https://cal.com/luka-dosen/projecti",
       external: true,
     },
     {
       title: "E-Mail",
-      body: "Für Anfragen, Unterlagen oder erste Informationen.",
+      body: "Schreib mir für Fragen, Unterlagen oder wenn du dein Vorhaben kurz schildern möchtest.",
       linkLabel: "luka@projecti.ch",
       linkHref: "mailto:luka@projecti.ch",
       external: false,
     },
     {
       title: "LinkedIn",
-      body: "Für den fachlichen Austausch und aktuelle Einblicke.",
+      body: "Vernetze dich mit mir für Updates, Einblicke und fachlichen Austausch.",
       linkLabel: "linkedin.com/in/lukadosen",
       linkHref: "https://www.linkedin.com/in/lukadosen/",
       external: true,
@@ -47,11 +47,11 @@ function Kontakt() {
 
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
-      <SectionDivider label="Kontakt" />
+      <SectionDivider label="Kontaktmöglichkeiten" />
       <div className={`${cx} mt-8 md:mt-12`}>
         <FadeIn>
           <h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold">
-            So erreichen Sie uns
+            Wie du mich erreichst
           </h2>
         </FadeIn>
         <div className="mt-12 grid gap-6 md:grid-cols-3 items-stretch">
@@ -120,8 +120,8 @@ export default function KontaktPage() {
       <main>
         <SubpageHero
           tag="Kontakt"
-          headline="Kontakt"
-          subheadline="Sie haben ein Projekt im Kopf oder Fragen? Wir tauschen uns gerne mit Ihnen darüber aus. Per Gespräch, E-Mail oder LinkedIn."
+          headline="Lass uns sprechen"
+          subheadline="Projekt geplant? Fragen zu deinem Vorhaben? Melde dich. Ich bin gespannt, was du vorhast."
           bgImage="/images/illustration-placeholder.png"
         />
         <Kontakt />
