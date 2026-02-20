@@ -72,11 +72,10 @@ function RessourcenCta() {
             {/* Text + button */}
             <div className="flex flex-col items-start">
               <h2 className="text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold text-[#191919]">
-                Entdecken Sie unsere Projekte
+                Lust auf einen Austausch?
               </h2>
               <p className="mt-3 text-[16px] leading-[1.6] text-[#191919]/70">
-                Sehen Sie, wie wir Herausforderungen strukturiert angehen. Von
-                strategischer Planung bis zu digitalen Lösungen.
+                Ob Kooperation, fachlicher Austausch oder einfach Interesse an einem Gespräch. Ich freue mich, von dir zu hören.
               </p>
               <a
                 href="https://cal.com/luka-dosen/projecti"
@@ -84,7 +83,7 @@ function RessourcenCta() {
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center rounded-full bg-[#191919] px-5 py-2 text-[14px] font-light text-accent transition-colors duration-200 hover:bg-[#2a2a2a]"
               >
-                Erstgespräch vereinbaren
+                Gespräch abmachen
               </a>
             </div>
           </div>

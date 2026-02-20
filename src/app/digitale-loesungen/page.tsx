@@ -54,7 +54,7 @@ function Schwerpunkte() {
       <div className={`${cx} mt-8 md:mt-12`}>
         <FadeIn>
           <h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold">
-            Unsere Schwerpunkte
+            Wo wir dich unterstützen können
           </h2>
         </FadeIn>
         <FadeIn delay={60}>
@@ -87,7 +87,7 @@ function Schwerpunkte() {
                     <ul className="mt-6 flex-1 space-y-3 text-[16px] leading-[1.6] text-muted">
                       {a.items.map((item) => (
                         <li key={item} className="flex items-start gap-3">
-                          <span className="mt-[7px] block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                          <span className="mt-[7px] block h-1.5 w-1.5 shrink-0 rounded-full bg-muted" />
                           {item}
                         </li>
                       ))}
@@ -130,19 +130,19 @@ function WieWirArbeiten() {
   const steps = [
     {
       title: "Verstehen",
-      body: "Wir analysieren, wie Sie heute arbeiten und wo die grössten Reibungsverluste liegen.",
+      body: "Wir analysieren, wie du heute arbeitest und wo die grössten Reibungsverluste liegen.",
     },
     {
       title: "Konzipieren",
-      body: "Wir entwickeln eine Lösung, die zu Ihren Werkzeugen, Ihrem Team und Ihren Projekten passt.",
+      body: "Auf Basis der Analyse entwickeln wir ein System, das zu deinen bestehenden Werkzeugen und deinem Team passt.",
     },
     {
       title: "Implementieren",
-      body: "Wir setzen die Lösung um und begleiten die Einführung, bis sie läuft.",
+      body: "Schrittweise Umsetzung mit Begleitung. Wir sind dabei, bis das System im Alltag funktioniert.",
     },
     {
       title: "Übergeben",
-      body: "Wir dokumentieren das System und schulen Ihr Team. Sie bleiben unabhängig.",
+      body: "Komplette Dokumentation und Schulung. Dein Team kann das System eigenständig nutzen und weiterentwickeln.",
     },
   ];
 
@@ -152,24 +152,22 @@ function WieWirArbeiten() {
       <div className={`${cx} mt-8 md:mt-12`}>
         <FadeIn>
           <h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold">
-            Wie wir arbeiten
+            So entwickeln wir Lösungen, die funktionieren
           </h2>
         </FadeIn>
         <FadeIn delay={60}>
           <p className="mt-4 max-w-[640px] text-[16px] leading-[1.6] text-muted">
-            Digitale Lösungen sind nur nützlich, wenn sie im Alltag
-            funktionieren. Deshalb arbeiten wir nicht mit Standardpaketen. Wir
-            passen Lösungen an Ihre Situation an.
+            Systeme, die nicht genutzt werden, sind wertlos. Deshalb entwickeln wir keine Standardlösungen. Wir analysieren deine Abläufe und bauen Werkzeuge, die zu deinem Team passen.
           </p>
         </FadeIn>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 items-stretch">
           {steps.map((s, i) => (
             <FadeIn key={s.title} delay={i * 100}>
               <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-accent flex flex-col">
-                <span className="text-[14px] font-medium text-accent">
+                <span className="text-[22px] font-semibold text-accent leading-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
+                <h3 className="mt-3 text-[22px] leading-[1.3] font-semibold tracking-[-0.02em]">
                   {s.title}
                 </h3>
                 <p className="mt-4 text-[16px] leading-[1.6] text-muted flex-1">
@@ -189,18 +187,18 @@ function Vorteile() {
   const benefits = [
     {
       num: "01",
-      title: "Zeit gewinnen",
-      body: "Automatisierte Workflows und strukturierte Prozesse reduzieren manuelle Arbeit und Abstimmungsaufwand.",
+      title: "Automatisierung statt manuelle Fleissarbeit",
+      body: "Automatisierte Workflows reduzieren repetitive Aufgaben massiv. Datenanalysen laufen im Hintergrund. Dokumentation erfolgt während der Arbeit, nicht danach. Du gewinnst Kapazität für strategische Themen.",
     },
     {
       num: "02",
-      title: "Fehler vermeiden",
-      body: "Klare Informationsstrukturen und dokumentierte Entscheidungen verhindern, dass wichtige Details verloren gehen oder falsch verstanden werden.",
+      title: "Fehler erkennen, bevor sie teuer werden",
+      body: "Keine E-Mail-Suche mehr nach der aktuellen Planung. Keine widersprüchlichen Informationen in verschiedenen Ordnern. Keine vergessenen Entscheidungen. Klare Strukturen verhindern teure Missverständnisse.",
     },
     {
       num: "03",
-      title: "Unabhängig bleiben",
-      body: "Wir liefern Systeme, die Ihr Team selbst weiterführen kann. Keine Abhängigkeit von externen Spezialisten. Schulung und Übergabe inklusive.",
+      title: "Keine Abhängigkeit von externen Dienstleistern",
+      body: "Nach der Übergabe gehört das System dir. Dein Team kann es eigenständig nutzen, anpassen und weiterentwickeln. Keine monatlichen Kosten für externe Dienstleister. Keine Abhängigkeit.",
     },
   ];
 
@@ -229,10 +227,10 @@ function Vorteile() {
                     {b.num}
                   </span>
                   <div>
-                    <h3 className="text-[22px] leading-[1.3] font-semibold tracking-[-0.02em]">
+                    <h3 className="text-[22px] leading-[1.3] font-semibold tracking-[-0.02em] min-h-[58px]">
                       {b.title}
                     </h3>
-                    <p className="mt-3 text-[14px] leading-[1.6] text-muted">
+                    <p className="mt-3 text-[16px] leading-[1.6] text-muted">
                       {b.body}
                     </p>
                   </div>
@@ -268,12 +266,10 @@ function DigitaleCta() {
             {/* Text + button */}
             <div className="flex flex-col items-start">
               <h2 className="text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold text-[#191919]">
-                Welche Herausforderung möchten Sie lösen?
+                Welche Herausforderung möchtest du lösen?
               </h2>
               <p className="mt-3 text-[16px] leading-[1.6] text-[#191919]/70">
-                Beschreiben Sie uns, wo es in Ihren Projekten oder Prozessen
-                hakt. In einem kurzen Erstgespräch klären wir, ob und wie eine
-                digitale Lösung helfen kann.
+                Beschreib uns kurz, wo es in deinen Projekten oder Prozessen nicht rund läuft. Wir klären im Gespräch, ob und wie eine digitale Lösung helfen kann.
               </p>
               <a
                 href="https://cal.com/luka-dosen/projecti"
@@ -298,7 +294,7 @@ export default function DigitaleLoesungenPage() {
       <main>
         <SubpageHero
           tag="Digitale Lösungen"
-          headline="Digitale Lösungen mit konkretem Nutzen."
+          headline="Systeme, die Immobilienprojekte effizienter machen."
           subheadline="Viele Unternehmen in der Immobilienbranche arbeiten mit fragmentierten Informationen, manuellen Prozessen und Werkzeugen, die nicht zusammenspielen. Das kostet Zeit, erzeugt Fehler und erschwert die Zusammenarbeit. Wir entwickeln digitale Lösungen, die diese Probleme pragmatisch adressieren."
           bgImage="/images/illustration-placeholder.png"
           cta="Erstgespräch vereinbaren"

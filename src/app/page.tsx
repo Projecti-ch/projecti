@@ -41,9 +41,8 @@ function Hero() {
           <p className="mt-8 max-w-[640px] text-[16px] leading-[1.6] text-white/80">
             Viele Projekte verlieren Zeit und Geld durch fragmentierte
             Informationen und unklare Entscheidungen. Projecti arbeitet anders.
-            Strukturierte Planungsphasen, digitale Workflows, dokumentierte
-            Entscheidungen. Das Ergebnis sind planbare Projektverläufe und
-            fundierte Grundlagen.
+            Wir strukturieren Planungsphasen, digitalisieren Abläufe und
+            dokumentieren jede wichtige Entscheidung für planbare Projektverläufe.
           </p>
         </FadeIn>
 
@@ -74,7 +73,8 @@ function ClientLogos() {
 
   return (
     <section className="py-12 md:py-16">
-      <div className={cx}>
+      <SectionDivider label="Kunden, die uns vertrauen" />
+      <div className={`${cx} mt-8 md:mt-12`}>
         <FadeIn>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {logos.map((logo) => (
@@ -105,13 +105,12 @@ function Services() {
     {
       title: "Architekturplanung",
       description:
-        "Wir begleiten Immobilienentwickler mit strukturierten Abläufen und einem digitalen Gebäudemodell. Entscheidungen werden dokumentiert. Risiken werden identifiziert.",
+        "Wir begleiten Immobilienentwickler mit strukturierten Abläufen und einem digitalen Gebäudemodell. Alle Beteiligten wissen jederzeit, wo das Projekt steht. Von der Analyse bis zur Ausführung.",
       bullets: [
         "Strategische Planung und Entwurfssimulationen",
         "Vorprojekt bis Baubewilligung",
         "Ausschreibung und Modellauswertungen",
         "Ausführungsplanung und Koordination",
-        "Visualisierungen für Vermarktung",
       ],
       linkLabel: "Zur Planung",
       linkHref: "/planung",
@@ -119,11 +118,11 @@ function Services() {
     {
       title: "Digitale Lösungen",
       description:
-        "Immobilienprojekte verlieren Zeit durch unklare Abläufe und fragmentierte Informationen. Wir entwickeln digitale Lösungen, die diese Probleme pragmatisch adressieren.",
+        "Wir entwickeln digitale Lösungen für effizientere Projektarbeit. Pragmatisch, projektbezogen und selbständig weiterführbar. Weniger manuelle Arbeit, schnellere Umsetzung.",
       bullets: [
         "GIS basierte Markt und Standortanalysen",
         "Projektverwaltung mit Risikomanagement",
-        "AI gestützte Workflows für Recherche und Dokumentation",
+        "AI gestützte Workflows für Optimierungen",
         "Visualisierung und digitale Vermarktung",
       ],
       linkLabel: "Digitale Lösungen",
@@ -161,7 +160,7 @@ function Services() {
                     {s.description}
                   </p>
                   {/* Bullet list — padded to max count so links align */}
-                  <ul className="mt-6 space-y-2 text-[14px] leading-[1.6] text-muted">
+                  <ul className="mt-6 space-y-2 text-[16px] leading-[1.6] text-muted">
                     {Array.from({ length: maxBullets }).map((_, bi) => {
                       const item = s.bullets[bi];
                       return (
@@ -169,7 +168,7 @@ function Services() {
                           key={bi}
                           className={`flex items-start gap-3 ${!item ? "invisible" : ""}`}
                         >
-                          <span className="mt-[7px] block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                          <span className="mt-[9px] block h-1.5 w-1.5 shrink-0 rounded-full bg-muted" />
                           {item || "\u00A0"}
                         </li>
                       );
@@ -198,18 +197,18 @@ function Benefits() {
   const benefits = [
     {
       num: "01",
-      title: "Weniger Überraschungen, weniger Nacharbeit",
-      body: "Strukturierte Abläufe und frühe Simulation im digitalen Modell reduzieren späte Änderungen. Dokumentierte Entscheidungen verhindern Nachträge und unvorhergesehene Probleme.",
+      title: "Risiken früh erkennen, nicht erst auf der Baustelle",
+      body: "Frühe Simulation im digitalen Modell zeigt Probleme, bevor sie teuer werden. Dokumentierte Entscheidungen verhindern Missverständnisse. Strukturierte Ausschreibungen reduzieren Nachträge. Weniger Überraschungen, planbare Umsetzung.",
     },
     {
       num: "02",
-      title: "Klarere Verantwortlichkeiten, schnellere Abläufe",
-      body: "Jeder weiss, wer was bis wann liefert. Definierte Schnittstellen beschleunigen Entscheidungen. Regelmässige Abstimmungen halten Aufgaben im Fluss.",
+      title: "Schnellere Abläufe durch Systematik statt Improvisation",
+      body: "Systematische Prozesse statt individuelle Lösungen. Klare Verantwortlichkeiten verkürzen Entscheidungswege. Digitale Werkzeuge reduzieren Abstimmungsaufwand. Deine Zeit wird effizienter genutzt.",
     },
     {
       num: "03",
-      title: "Fundierte Entscheidungen statt Bauchgefühl",
-      body: "Wichtige Entscheidungen werden mit Begründung, Datum und Verantwortlichkeit festgehalten. Risiken werden identifiziert und beobachtet.",
+      title: "Datenbasierte Entscheidungen statt Bauchgefühl",
+      body: "Objektive Analysen statt interessengeleiteter Empfehlungen. Datenbasierte Variantenvergleiche. Dokumentierte Entscheidungsgrundlagen. Du entscheidest fundiert, nicht auf Basis von Absichten anderer.",
     },
   ];
 
@@ -239,10 +238,10 @@ function Benefits() {
                     {b.num}
                   </span>
                   <div>
-                    <h3 className="text-[22px] leading-[1.3] font-semibold tracking-[-0.02em]">
+                    <h3 className="text-[22px] leading-[1.3] font-semibold tracking-[-0.02em] min-h-[58px]">
                       {b.title}
                     </h3>
-                    <p className="mt-3 text-[14px] leading-[1.6] text-muted">
+                    <p className="mt-3 text-[16px] leading-[1.6] text-muted">
                       {b.body}
                     </p>
                   </div>
@@ -307,7 +306,7 @@ function Testimonials() {
   const testimonials = [
     {
       quote:
-        "Anfang 2025 reifte bei uns die Idee auf unserem Grundstück einen Neubau zu erstellen. Aus der Nachbarschaft wurden wir auf Luka Dosen aufmerksam gemacht. Innerhalb weniger Tage erstellte Luka nach unseren Wünschen einen Plan, der uns sofort begeisterte. Änderungen flossen zeitnah in das Projekt ein. Auch bei der Finanzierung wurden wir beraten und mit dem richtigen Entwickler verbunden. Die Zusammenarbeit war und ist zu jeder Zeit zielführend. Wir freuen uns auf die erfolgreiche Umsetzung des gemeinsamen Plans!",
+        "Wir wollten auf unserem Grundstück neu bauen. Luka orchestrierte die Projektentwicklung, beriet uns bei der Finanzierung und verknüpfte uns mit dem passenden Entwickler. Nun setzen wir es alle gemeinsam um.",
       name: "Carlo Gambon",
       role: "Privater Bauherr",
       portrait: "/images/testimonial-carlo-gambon.jpg",
@@ -438,7 +437,7 @@ function Testimonials() {
 
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
-      <SectionDivider label="Testimonials" />
+      <SectionDivider label="Was Kunden sagten" />
       <div className={`${cx} mt-8 md:mt-12`}>
         {/* Horizontal scroll — cards sized so ~2.5 are visible */}
         <div
@@ -456,19 +455,19 @@ function Testimonials() {
               </p>
               {/* Person */}
               <div className="mt-6 flex items-center gap-4 border-t border-border pt-5">
-                <div className="h-12 w-12 shrink-0 rounded-xl overflow-hidden bg-gradient-to-br from-[#333] to-[#222]">
+                <div className="h-24 w-24 shrink-0 rounded-xl overflow-hidden bg-gradient-to-br from-[#333] to-[#222]">
                   <Image
                     src={t.portrait}
                     alt={`Portrait von ${t.name}`}
-                    width={48}
-                    height={48}
+                    width={96}
+                    height={96}
                     loading="lazy"
                     className="h-full w-full object-cover"
                   />
                 </div>
                 <div>
-                  <p className="text-[14px] font-semibold">{t.name}</p>
-                  <p className="text-[12px] text-muted">{t.role}</p>
+                  <p className="text-[16px] font-semibold">{t.name}</p>
+                  <p className="text-[14px] text-muted">{t.role}</p>
                 </div>
               </div>
             </div>

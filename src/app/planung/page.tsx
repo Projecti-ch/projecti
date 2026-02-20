@@ -10,77 +10,79 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
 /* ─── Strategische Planung ─── */
 function StrategischePlanung() {
+  const boxes = [
+    {
+      title: "Bestandesanalyse",
+      body: "Was ist heute möglich? Zustand, Potenziale und regulatorische Rahmenbedingungen deines Grundstücks.",
+    },
+    {
+      title: "Marktanalyse",
+      body: "Wie entwickelt sich die Lage? Standortentwicklung, Nachfrage und Wettbewerb in deiner Region.",
+    },
+    {
+      title: "Variantenvergleich",
+      body: "Welche Wege gibt es? Entwicklungspfade mit transparenter Wirtschaftlichkeitsbetrachtung.",
+    },
+    {
+      title: "Entscheidungsgrundlage",
+      body: "Welcher Weg passt zu dir? Klare Empfehlung basierend auf Daten, Markt und deiner Situation.",
+    },
+  ];
+
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
       <SectionDivider label="Strategische Planung" />
       <div className={`${cx} mt-8 md:mt-12`}>
-        <div className="grid gap-12 md:grid-cols-2 md:gap-12 lg:gap-20 items-center">
-          {/* Text */}
-          <div>
-            <FadeIn>
-              <h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold">
-                Bevor wir planen, verstehen wir die Situation.
-              </h2>
-            </FadeIn>
-            <FadeIn delay={60}>
-              <div className="mt-6 space-y-4 text-[16px] leading-[1.6] text-muted">
-                <p>
-                  Am Anfang jeder Entwicklung steht eine grundlegende Frage. Was ist
-                  der richtige Weg für dieses Grundstück, dieses Gebäude, diese
-                  Situation? Sanieren oder neu bauen? Verdichten oder verkaufen?
-                  Selbst nutzen oder vermieten?
-                </p>
-                <p>
-                  Jeder Pfad hat Konsequenzen. Finanziell, zeitlich, persönlich. In
-                  der strategischen Planung analysieren wir Ihre Ausgangslage
-                  objektiv und datenbasiert.
+        {/* Intro text */}
+        <FadeIn>
+          <h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold max-w-[700px]">
+            Der richtige Entwicklungspfad für dein Grundstück
+          </h2>
+        </FadeIn>
+        <FadeIn delay={60}>
+          <div className="mt-6 max-w-[700px] space-y-4 text-[16px] leading-[1.6] text-muted">
+            <p>
+              Du hast ein Grundstück mit Potenzial. Aber welcher Weg ist der richtige?
+              Sanieren, neu bauen, verdichten oder verkaufen? In der strategischen
+              Planung analysieren wir deine Ausgangslage objektiv und zeigen dir alle
+              Optionen transparent auf.
+            </p>
+            <p>
+              Das Ergebnis ist eine fundierte Entscheidungsbasis. Mit klaren nächsten
+              Schritten. Bevor du dich festlegst, bevor grosse Planungskosten entstehen.
+              Dieser Workshop ist ideal für private Grundeigentümer, die eine unabhängige
+              Analyse ihrer Entwicklungsmöglichkeiten möchten.
+            </p>
+          </div>
+        </FadeIn>
+
+        {/* 2×2 grid */}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {boxes.map((box, i) => (
+            <FadeIn key={box.title} delay={i * 80}>
+              <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-accent flex flex-col">
+                <h3 className="text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
+                  {box.title}
+                </h3>
+                <p className="mt-4 text-[16px] leading-[1.6] text-muted flex-1">
+                  {box.body}
                 </p>
               </div>
             </FadeIn>
-            <FadeIn delay={120}>
-              <ul className="mt-8 space-y-3 text-[16px] leading-[1.6] text-muted">
-                {[
-                  "Bestandesanalyse: Zustand, Potenziale, regulatorische Rahmenbedingungen",
-                  "Marktanalyse: Standortentwicklung, Nachfrage, Wettbewerb",
-                  "Variantenvergleich: Entwicklungspfade mit Wirtschaftlichkeitsbetrachtung",
-                  "Entscheidungsgrundlage: Welcher Weg passt zu Ihrer Situation?",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="mt-[7px] block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
-            <FadeIn delay={160}>
-              <p className="mt-8 text-[16px] leading-[1.6] text-muted">
-                Das Ergebnis ist eine fundierte Entscheidungsbasis mit klaren
-                nächsten Schritten. Bevor Sie sich festlegen. Bevor Planungskosten
-                entstehen.
-              </p>
-            </FadeIn>
-            <FadeIn delay={200}>
-              <Link
-                href="/kontakt"
-                className="mt-8 inline-flex items-center gap-1 text-[14px] font-medium text-accent transition-colors duration-200 hover:text-accent-hover"
-              >
-                Strategische Planung anfragen <span className="ml-1">→</span>
-              </Link>
-            </FadeIn>
-          </div>
-          {/* Image placeholder */}
-          <FadeIn delay={120}>
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-              <Image
-                src="/images/illustration-placeholder.png"
-                alt="Illustration Strategische Planung"
-                fill
-                loading="lazy"
-                className="object-cover"
-              />
-            </div>
-          </FadeIn>
+          ))}
         </div>
+
+        {/* CTA button below boxes */}
+        <FadeIn delay={360}>
+          <div className="mt-10 text-center">
+            <Link
+              href="/kontakt"
+              className="inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+            >
+              Strategische Planung anfragen
+            </Link>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -97,7 +99,6 @@ function Planungsleistungen() {
         "Optimierung von Ausnutzung und Wirtschaftlichkeit",
         "Koordination mit Fachplanern und Behörden",
         "Bewilligungsreife Planunterlagen",
-        "Entscheidungsprotokoll und Risikoregister",
       ],
     },
     {
@@ -144,13 +145,13 @@ function Planungsleistungen() {
                 </div>
                 {/* Content */}
                 <div className="p-6 md:p-8 flex flex-col flex-1">
-                  <h3 className="text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
+                  <h3 className="text-[20px] leading-[1.3] font-semibold tracking-[-0.02em] min-h-[52px]">
                     {s.title}
                   </h3>
                   <p className="mt-3 text-[16px] leading-[1.6] text-muted min-h-[52px]">
                     {s.body}
                   </p>
-                  <ul className="mt-6 space-y-2 text-[14px] leading-[1.6] text-muted">
+                  <ul className="mt-6 space-y-2 text-[16px] leading-[1.6] text-muted">
                     {Array.from({ length: maxBullets }).map((_, bi) => {
                       const item = s.items[bi];
                       return (
@@ -158,7 +159,7 @@ function Planungsleistungen() {
                           key={bi}
                           className={`flex items-start gap-3 ${!item ? "invisible" : ""}`}
                         >
-                          <span className="mt-[7px] block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                          <span className="mt-[9px] block h-1.5 w-1.5 shrink-0 rounded-full bg-muted" />
                           {item || "\u00A0"}
                         </li>
                       );
@@ -178,19 +179,19 @@ function Planungsleistungen() {
 function Rollen() {
   const roles = [
     {
-      emoji: "🏗️",
+      icon: "/images/icon-bauherrenvertretung.svg",
       title: "Bauherrenvertretung",
-      body: "Als Bauherrenvertreter treffen wir alle planerischen Entscheidungen und koordinieren in Ihrem Auftrag.",
+      body: "Vollumfängliche Projektführung. Wir treffen Entscheidungen, koordinieren Beteiligte und liefern Ergebnisse.",
     },
     {
-      emoji: "📋",
+      icon: "/images/icon-projektleitung.svg",
       title: "Projektleitung",
-      body: "Als Projektleitung begleiten wir Ihr Projekt und arbeiten mit Ihrem Architekten zusammen.",
+      body: "Koordination zwischen Bauherr, Architekten und Fachplanern. Wir halten das Projekt auf Kurs.",
     },
     {
-      emoji: "🧊",
+      icon: "/images/icon-modellierung.svg",
       title: "Modellierung",
-      body: "Als Modellierer bauen wir digitale Strukturen auf, die als Grundlage für alle Beteiligten dienen.",
+      body: "Wir digitalisieren Bestandsgebäude und bauen 3D Modelle. Als Grundlage für Planung und Koordination.",
     },
   ];
 
@@ -207,7 +208,13 @@ function Rollen() {
           {roles.map((r, i) => (
             <FadeIn key={r.title} delay={i * 100}>
               <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-accent flex flex-col">
-                <span className="text-[32px] leading-none">{r.emoji}</span>
+                <Image
+                  src={r.icon}
+                  alt={r.title}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10"
+                />
                 <h3 className="mt-4 text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
                   {r.title}
                 </h3>
@@ -239,17 +246,17 @@ function Vorteile() {
     {
       num: "01",
       title: "Fundierte Entscheidungen",
-      body: "Sie entscheiden auf Basis von Daten und Analysen. Nicht auf Basis von Empfehlungen, die fremde Interessen verfolgen.",
+      body: "Durchdachte Planung statt interessengeleiteter Empfehlungen. Du entscheidest fundiert auf Basis von Fakten. Wir liefern die Grundlagen für ein durchdachtes Projekt.",
     },
     {
       num: "02",
       title: "Weniger Reibungsverluste",
-      body: "Strukturierte Abläufe verhindern, dass Informationen verloren gehen. Dokumentierte Entscheidungen halten Aufgaben im Fluss.",
+      body: "Klare Prozesse, dokumentierte Entscheidungen, definierte Verantwortlichkeiten. Du sparst Zeit durch weniger Abstimmungsschleifen.",
     },
     {
       num: "03",
       title: "Planbarer Projektverlauf",
-      body: "Klare Verantwortlichkeiten und regelmässige Abstimmungen schaffen Planbarkeit. Durchdachtes Risikomanagement reduziert Überraschungen.",
+      body: "Systematisches Risikomanagement und klare Verantwortlichkeiten machen den Projektverlauf planbarer. Weniger Überraschungen, weniger Stress.",
     },
   ];
 
@@ -281,7 +288,7 @@ function Vorteile() {
                     <h3 className="text-[22px] leading-[1.3] font-semibold tracking-[-0.02em]">
                       {b.title}
                     </h3>
-                    <p className="mt-3 text-[14px] leading-[1.6] text-muted">
+                    <p className="mt-3 text-[16px] leading-[1.6] text-muted">
                       {b.body}
                     </p>
                   </div>
@@ -317,10 +324,10 @@ function PlanungCta() {
             {/* Text + button */}
             <div className="flex flex-col items-start">
               <h2 className="text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold text-[#191919]">
-                Wo steht Ihr Projekt?
+                Wo steht dein Projekt?
               </h2>
               <p className="mt-3 text-[16px] leading-[1.6] text-[#191919]/70">
-                Erzählen Sie uns, was Sie vorhaben. In einem kurzen Erstgespräch klären wir, welche Unterstützung sinnvoll wäre.
+                In einem kurzen Gespräch klären wir, wo du stehst und wie wir dich unterstützen können.
               </p>
               <a
                 href="https://cal.com/luka-dosen/projecti"

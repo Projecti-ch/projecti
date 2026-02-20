@@ -80,7 +80,7 @@ function Standort() {
             {/* Grayscale + dark tint overlay for the map */}
             <div className="relative aspect-[16/9] md:aspect-[21/9]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.8609228835313!2d9.583657715644835!3d46.96503937921916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4784c7d3f3b2a1a5%3A0x0!2sProjecti%20c%2Fo%20The%20Luka%20Dosen%20Labs%2C%20Bahnhofstrasse%2011%2C%207302%20Landquart!5e0!3m2!1sde!2sch!4v1700000000000"
+                src="https://maps.google.com/maps?q=Bahnhofstrasse+11,+7302+Landquart,+Switzerland&output=embed&z=16"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "grayscale(100%) brightness(0.6) contrast(1.1)" }}

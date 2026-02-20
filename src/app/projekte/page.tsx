@@ -89,11 +89,10 @@ function ProjekteCta() {
             {/* Text + button */}
             <div className="flex flex-col items-start">
               <h2 className="text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold text-[#191919]">
-                Bereit für Ihr Projekt?
+                Bereit für dein Projekt?
               </h2>
               <p className="mt-3 text-[16px] leading-[1.6] text-[#191919]/70">
-                Erzählen Sie uns von Ihrem Vorhaben. In einem kurzen Erstgespräch
-                klären wir, wie wir Sie unterstützen können.
+                Erzähl uns, was du vorhast. Wir klären im Gespräch, wie wir dich unterstützen können. Unverbindlich und direkt.
               </p>
               <a
                 href="https://cal.com/luka-dosen/projecti"
