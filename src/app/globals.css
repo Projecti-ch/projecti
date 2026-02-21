@@ -123,3 +123,18 @@ h1, h2, h3, h4 {
   display: none;
 }
 
+/* ─── Mux Player (Hero Video) ─── */
+mux-player {
+  --controls: none;
+  --loading-indicator: none;
+  --dialog: none;
+  --media-loading-indicator-display: none;
+  --media-object-fit: cover;
+  --media-object-position: center;
+  aspect-ratio: unset !important;
+}
+
+mux-player::part(loading-indicator) {
+  display: none;
+}
+
