@@ -3,7 +3,10 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
-import SectionDivider from "@/components/SectionDivider";
+import Image from "next/image";
+import Link from "next/link";
+import { getUpdates, getMediaUrl } from "@/lib/cms";
+import type { Update } from "@/types/cms";
 
 export const metadata: Metadata = {
   title: "Ressourcen & Insights",
@@ -16,46 +19,73 @@ export const metadata: Metadata = {
     url: "https://www.projecti.ch/ressourcen",
   },
 };
-import Image from "next/image";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
-/* ─── Resource Grid — 2 per row with image placeholders ─── */
-function ResourceGrid() {
-  const resources = [
-    { title: "Beitrag A", tag: "Ratgeber" },
-    { title: "Beitrag B", tag: "Template" },
-    { title: "Beitrag C", tag: "Update" },
-    { title: "Beitrag D", tag: "Ratgeber" },
-    { title: "Beitrag E", tag: "Checkliste" },
-    { title: "Beitrag F", tag: "Update" },
-  ];
+/* ─── Resource Card ─── */
+function ResourceCard({ update, index }: { update: Update; index: number }) {
+  const imageUrl = getMediaUrl(update.featuredImage, 'card');
+
+  return (
+    <FadeIn delay={index * 80}>
+      <Link href={`/ressourcen/${update.slug}`} className="block">
+        <div className="group relative overflow-hidden rounded-xl bg-card aspect-[16/9] border border-border transition-colors duration-300 hover:border-accent">
+          {/* Background image or gradient */}
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={update.title}
+              fill
+              loading="lazy"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] transition-transform duration-500 group-hover:scale-[1.03]" />
+          )}
+          
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
+          
+          {/* Content */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
+              Update
+            </p>
+            <h3 className="mt-2 text-[18px] font-semibold text-white">
+              {update.title}
+            </h3>
+            {update.metaDescription && (
+              <p className="mt-2 text-[14px] leading-[1.6] text-white/70 line-clamp-2">
+                {update.metaDescription}
+              </p>
+            )}
+          </div>
+        </div>
+      </Link>
+    </FadeIn>
+  );
+}
+
+/* ─── Resource Grid ─── */
+async function ResourceGrid() {
+  const { docs: updates } = await getUpdates({ limit: 20 });
+
+  if (updates.length === 0) {
+    return (
+      <section className="py-16 md:py-20 lg:py-[120px]">
+        <div className={`${cx} mt-16 md:mt-20`}>
+          <p className="text-center text-muted">Noch keine Ressourcen vorhanden.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
       <div className={`${cx} mt-16 md:mt-20`}>
         <div className="grid gap-6 sm:grid-cols-2">
-          {resources.map((r, i) => (
-            <FadeIn key={r.title} delay={i * 80}>
-              <div className="group relative overflow-hidden rounded-xl bg-card aspect-[16/9] border border-border transition-colors duration-300 hover:border-accent">
-                {/* Background image placeholder + tint */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] transition-transform duration-500 group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
-                {/* Content overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
-                    {r.tag}
-                  </p>
-                  <h3 className="mt-2 text-[18px] font-semibold">
-                    {r.title}
-                  </h3>
-                  <p className="mt-2 text-[14px] leading-[1.6] text-muted">
-                    Platzhalter für den Beitragsinhalt. Hier kommt eine kurze
-                    Beschreibung des Beitrags.
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
+          {updates.map((update, i) => (
+            <ResourceCard key={update.id} update={update} index={i} />
           ))}
         </div>
       </div>
@@ -114,7 +144,7 @@ export default function RessourcenPage() {
         <SubpageHero
           tag="Ressourcen"
           headline="Wissen teilen. Transparenz schaffen. Gemeinsam bauen."
-          bgImage="/images/illustration-placeholder.png"
+          heroVideoPlaybackId="wdQwisuelj029C6y1nn2I2yOpINErQjvlYFG3rpx7CbQ"
         />
         <ResourceGrid />
         <RessourcenCta />

@@ -3,7 +3,10 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
-import SectionDivider from "@/components/SectionDivider";
+import Image from "next/image";
+import Link from "next/link";
+import { getProjects, getMediaUrl, formatDate, categoryLabels } from "@/lib/cms";
+import type { Project } from "@/types/cms";
 
 export const metadata: Metadata = {
   title: "Ausgewählte Projekte",
@@ -16,63 +19,68 @@ export const metadata: Metadata = {
     url: "https://www.projecti.ch/projekte",
   },
 };
-import Image from "next/image";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
+/* ─── Project Card ─── */
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const imageUrl = getMediaUrl(project.heroImage, 'card');
+  const categoryLabel = categoryLabels[project.category];
+  const date = formatDate(project.date);
+
+  return (
+    <FadeIn delay={index * 80}>
+      <Link href={`/projekte/${project.slug}`} className="block">
+        <div className="group relative overflow-hidden rounded-xl bg-card aspect-[4/3] border border-border transition-colors duration-300 hover:border-accent">
+          {/* Background image or gradient */}
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] transition-transform duration-500 group-hover:scale-[1.03]" />
+          )}
+          
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
+          
+          {/* Content */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
+              {categoryLabel}
+            </p>
+            <p className="mt-2 text-[18px] font-semibold text-white">{project.title}</p>
+            {date && <p className="mt-1 text-[12px] text-white/70">{date}</p>}
+          </div>
+        </div>
+      </Link>
+    </FadeIn>
+  );
+}
+
 /* ─── Project Grid ─── */
-function ProjectGrid() {
-  const projects = [
-    {
-      category: "Planung",
-      title: "Neubau Duplex Maienfeld",
-      date: "Juni 2025",
-    },
-    {
-      category: "Digitale Lösungen",
-      title: "GIS Analyse Zürich",
-      date: "Mai 2025",
-    },
-    {
-      category: "Planung",
-      title: "Sanierung MFH Chur",
-      date: "April 2025",
-    },
-    {
-      category: "Digitale Lösungen",
-      title: "Projektportal Graubünden",
-      date: "März 2025",
-    },
-    {
-      category: "Planung",
-      title: "Verdichtungsstudie Landquart",
-      date: "Februar 2025",
-    },
-    {
-      category: "Digitale Lösungen",
-      title: "Marktanalyse Engadin",
-      date: "Januar 2025",
-    },
-  ];
+async function ProjectGrid() {
+  const { docs: projects } = await getProjects({ limit: 20 });
+
+  if (projects.length === 0) {
+    return (
+      <section className="py-16 md:py-20 lg:py-[120px]">
+        <div className={`${cx} mt-16 md:mt-20`}>
+          <p className="text-center text-muted">Noch keine Projekte vorhanden.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
       <div className={`${cx} mt-16 md:mt-20`}>
         <div className="grid gap-6 sm:grid-cols-2">
-          {projects.map((p, i) => (
-            <FadeIn key={p.title} delay={i * 80}>
-              <div className="group relative overflow-hidden rounded-xl bg-card aspect-[4/3] border border-border transition-colors duration-300 hover:border-accent">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] transition-transform duration-500 group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
-                    {p.category}
-                  </p>
-                  <p className="mt-2 text-[18px] font-semibold">{p.title}</p>
-                  <p className="mt-1 text-[12px] text-muted">{p.date}</p>
-                </div>
-              </div>
-            </FadeIn>
+          {projects.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} />
           ))}
         </div>
       </div>
@@ -132,7 +140,7 @@ export default function ProjektePage() {
           tag="Projekte"
           headline="Wie wir Projekte strukturiert umsetzen."
           subheadline="Jedes Projekt ist massgeschneidert. Unterschiedliche Ausgangssituationen, unterschiedliche Herausforderungen, unterschiedliche Ziele. Was bleibt, ist unser Ansatz. Strukturierte Planung, dokumentierte Entscheidungen und digitale Workflows. Das Ergebnis sind planbare Projektverläufe."
-          bgImage="/images/illustration-placeholder.png"
+          heroVideoPlaybackId="ypmexRhWuuYyN3jU02VBiebP6hTQGNJRqYuLGCrulViI"
           cta="Erstgespräch vereinbaren"
           ctaHref="https://cal.com/luka-dosen/projecti"
         />

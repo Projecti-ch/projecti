@@ -1,4 +1,5 @@
 import FadeIn from "./FadeIn";
+import HeroVideo from "./HeroVideo";
 
 export default function SubpageHero({
   tag,
@@ -7,6 +8,7 @@ export default function SubpageHero({
   cta,
   ctaHref = "/kontakt",
   bgImage,
+  heroVideoPlaybackId,
 }: {
   tag?: string;
   headline: string;
@@ -14,15 +16,24 @@ export default function SubpageHero({
   cta?: string;
   ctaHref?: string;
   bgImage?: string;
+  heroVideoPlaybackId?: string;
 }) {
   return (
     <section
       className={`relative overflow-hidden ${
-        bgImage
-          ? "flex min-h-[70vh] flex-col justify-end"
-          : "pt-32 pb-20 md:pt-44 md:pb-28"
+        heroVideoPlaybackId
+          ? "flex min-h-screen flex-col justify-end"
+          : "flex min-h-[70vh] flex-col justify-end"
       }`}
     >
+      {/* Optional hero video */}
+      {heroVideoPlaybackId && (
+        <>
+          <HeroVideo playbackId={heroVideoPlaybackId} />
+          <div className="absolute inset-0 bg-[#191919]/70" />
+        </>
+      )}
+
       {/* Optional background image with dark tint */}
       {bgImage && (
         <>
@@ -35,11 +46,7 @@ export default function SubpageHero({
       )}
 
       <div
-        className={`${
-          bgImage ? "relative z-10 w-full" : ""
-        } mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20 ${
-          bgImage ? "pb-20 pt-40" : ""
-        }`}
+        className="relative z-10 w-full mx-auto max-w-300 px-6 md:px-10 lg:px-20 pb-20 pt-40"
       >
         {tag && (
           <FadeIn>

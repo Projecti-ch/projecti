@@ -7,6 +7,7 @@ import SectionDivider from "@/components/SectionDivider";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import HeroVideo from "@/components/HeroVideo";
 
 /* ─── Container helper ─── */
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
@@ -15,17 +16,7 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col justify-end overflow-hidden">
-      {/* Video background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/images/projecti-hero-projektvisualisierung.jpg"
-        className="absolute inset-0 h-full w-full object-cover"
-      >
-        <source src="/images/projecti-hero-projektanimation.mp4" type="video/mp4" />
-      </video>
+      <HeroVideo playbackId="9NISyZNr4uzu43pBnrLzGax2w9aAq99RQDj7wy5fliE"/>
 
       {/* Dark tint overlay for readability */}
       <div className="absolute inset-0 bg-[#191919]/70" />
