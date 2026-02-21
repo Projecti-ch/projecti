@@ -1,6 +1,8 @@
+import { cache } from 'react';
 import type { Project, Update, Media } from '@/types/cms';
 
-const CMS_URL = process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3000';
+// Server-only CMS URL (not exposed to client bundle)
+const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3000';
 
 // CMS Response wrapper
 export interface CMSResponse<T> {
@@ -61,9 +63,10 @@ async function fetchCollection<T>(
   }
 
   // Add additional where clauses
+  // Keys should be field names, values are what to match (equals)
   Object.entries(where).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
-      params.append(`where[${key}]`, String(value));
+      params.append(`where[${key}][equals]`, String(value));
     }
   });
 
@@ -94,7 +97,7 @@ async function fetchBySlug<T>(
   const response = await fetchCollection<T>(collection, {
     ...options,
     limit: 1,
-    where: { 'slug[equals]': slug },
+    where: { slug },
   });
 
   return response.docs[0] || null;
@@ -111,18 +114,18 @@ export async function getProjects(options?: FetchOptions): Promise<CMSResponse<P
   });
 }
 
-export async function getFeaturedProjects(limit = 4): Promise<Project[]> {
+export const getFeaturedProjects = cache(async (limit = 4): Promise<Project[]> => {
   const response = await fetchCollection<Project>('projects', {
     limit,
     sort: '-date',
-    where: { 'featured[equals]': true },
+    where: { featured: 'true' },
   });
   return response.docs;
-}
+});
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
+export const getProjectBySlug = cache(async (slug: string): Promise<Project | null> => {
   return fetchBySlug<Project>('projects', slug, { depth: 2 });
-}
+});
 
 export async function getProjectsByCategory(
   category: Project['category'],
@@ -130,7 +133,7 @@ export async function getProjectsByCategory(
 ): Promise<CMSResponse<Project>> {
   return fetchCollection<Project>('projects', {
     ...options,
-    where: { 'category[equals]': category },
+    where: { category },
   });
 }
 
@@ -145,9 +148,9 @@ export async function getUpdates(options?: FetchOptions): Promise<CMSResponse<Up
   });
 }
 
-export async function getUpdateBySlug(slug: string): Promise<Update | null> {
+export const getUpdateBySlug = cache(async (slug: string): Promise<Update | null> => {
   return fetchBySlug<Update>('updates', slug, { depth: 2 });
-}
+});
 
 // ============================================
 // Utility functions
