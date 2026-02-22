@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 import ProjectHero from "@/components/ProjectHero";
 import ContentSection from "@/components/ContentSection";
+import GalleryCarousel from "@/components/GalleryCarousel";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -64,31 +65,26 @@ function GallerySection({
 }) {
   if (!images || images.length === 0) return null;
 
+  // Transform images for carousel
+  const carouselImages = images
+    .map((item, index) => {
+      const imageUrl = getMediaUrl(item.image as Media, "hero");
+      if (!imageUrl) return null;
+      const mediaObj = item.image as Media;
+      return {
+        url: imageUrl,
+        alt: mediaObj?.alt || `Gallery image ${index + 1}`,
+      };
+    })
+    .filter((img): img is { url: string; alt: string } => img !== null);
+
+  if (carouselImages.length === 0) return null;
+
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-12 md:py-16 lg:py-20">
       <div className={cx}>
         <FadeIn>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {images.map((item, index) => {
-              const imageUrl = getMediaUrl(item.image as Media, "card");
-              if (!imageUrl) return null;
-
-              return (
-                <div
-                  key={item.id || index}
-                  className="relative aspect-[4/3] overflow-hidden rounded-xl"
-                >
-                  <Image
-                    src={imageUrl}
-                    alt={`Gallery image ${index + 1}`}
-                    fill
-                    loading="lazy"
-                    className="object-cover"
-                  />
-                </div>
-              );
-            })}
-          </div>
+          <GalleryCarousel images={carouselImages} />
         </FadeIn>
       </div>
     </section>
