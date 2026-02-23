@@ -6,8 +6,10 @@ import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
 import ProjectHero from "@/components/ProjectHero";
+import SectionDivider from "@/components/SectionDivider";
 import RichText from "@/components/RichText";
 import { getUpdates, getUpdateBySlug, getMediaUrl, formatDate } from "@/lib/cms";
+import type { Update } from "@/types/cms";
 
 /* ─── Static Params ─── */
 export async function generateStaticParams() {
@@ -36,13 +38,87 @@ export async function generateMetadata({
       description: update.metaDescription || undefined,
       url: `https://www.projecti.ch/ressourcen/${update.slug}`,
       images: update.featuredImage
-        ? [{ url: getMediaUrl(update.featuredImage, "card") || "" }]
+        ? [{ url: getMediaUrl(update.featuredImage, "hero") || "" }]
         : undefined,
     },
   };
 }
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
+
+/* ─── Related Resources ─── */
+async function RelatedResources({ currentSlug }: { currentSlug: string }) {
+  const { docs: updates } = await getUpdates({ limit: 5 });
+
+  const relatedUpdates = updates
+    .filter((u) => u.slug !== currentSlug)
+    .slice(0, 4);
+
+  if (relatedUpdates.length === 0) return null;
+
+  return (
+    <section className="py-16 md:py-20 lg:py-[120px]">
+      <div className={cx}>
+        <FadeIn>
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-foreground mb-8 md:mb-12">
+            Weitere Ressourcen
+          </h2>
+        </FadeIn>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {relatedUpdates.map((update, index) => {
+            const imageUrl = getMediaUrl(update.featuredImage, "hero");
+            const date = formatDate(update.date);
+
+            return (
+              <FadeIn key={update.id} delay={index * 80}>
+                <Link href={`/ressourcen/${update.slug}`} className="block">
+                  <div className="group relative overflow-hidden rounded-xl bg-card h-[280px] border border-border transition-colors duration-300 hover:border-accent">
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={update.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        loading="lazy"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]" />
+                    )}
+                    {/* Solid tint overlay for text readability */}
+                    <div className="absolute inset-0 bg-[#191919]/80" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
+                        Update
+                      </p>
+                      <h3 className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.01em] text-white">
+                        {update.title}
+                      </h3>
+                      {date && (
+                        <p className="mt-1 text-[12px] text-white/60">{date}</p>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              </FadeIn>
+            );
+          })}
+        </div>
+
+        <FadeIn delay={400}>
+          <div className="mt-10 text-center">
+            <Link
+              href="/ressourcen"
+              className="inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+            >
+              Alle Ressourcen ansehen
+            </Link>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
 
 /* ─── Main Page ─── */
 export default async function UpdateDetailPage({
@@ -72,43 +148,21 @@ export default async function UpdateDetailPage({
       />
 
       {/* Article Content */}
-      <article className="py-16 md:py-20 lg:py-[120px]">
-        <div className={cx}>
-          {/* Header */}
-          <FadeIn>
-            <header className="max-w-[800px]">
-              {/* Date */}
-              {update.date && (
-                <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5] mb-4">
-                  {formatDate(update.date)}
-                </p>
-              )}
-              {/* Title */}
-              <h1 className="font-sans text-[32px] md:text-[40px] lg:text-[48px] font-bold uppercase leading-[1.1] tracking-[-0.02em] text-foreground">
-                {update.title}
-              </h1>
-              {/* Meta description as subtitle */}
-              {update.metaDescription && (
-                <p className="mt-6 text-[18px] md:text-[20px] leading-[1.6] text-muted">
-                  {update.metaDescription}
-                </p>
-              )}
-            </header>
-          </FadeIn>
+      <section className="py-12 md:py-16">
+        {/* Date as SectionDivider */}
+        {update.date && <SectionDivider label={formatDate(update.date)} />}
 
-          {/* Divider */}
-          <FadeIn delay={100}>
-            <div className="my-12 md:my-16 h-px bg-border" />
-          </FadeIn>
-
-          {/* Content */}
-          <FadeIn delay={200}>
-            <div className="max-w-[800px] prose prose-invert prose-lg">
+        <div className={`${cx} mt-8 md:mt-12`}>
+          <FadeIn delay={80}>
+            <div className="max-w-[800px] text-[16px] leading-[1.6] text-white">
               <RichText content={update.content} />
             </div>
           </FadeIn>
         </div>
-      </article>
+      </section>
+
+      {/* Related Resources */}
+      <RelatedResources currentSlug={update.slug} />
 
       {/* CTA Section */}
       <section className="py-16 md:py-20 lg:py-[120px]">
@@ -145,36 +199,6 @@ export default async function UpdateDetailPage({
                 </a>
               </div>
             </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* Back Link */}
-      <section className="pb-16 md:pb-20 lg:pb-[120px]">
-        <div className={cx}>
-          <FadeIn>
-            <Link
-              href="/ressourcen"
-              className="inline-flex items-center gap-2 text-[14px] font-medium text-muted hover:text-foreground transition-colors"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="rotate-180"
-              >
-                <path
-                  d="M6 12L10 8L6 4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Zurück zu Ressourcen
-            </Link>
           </FadeIn>
         </div>
       </section>

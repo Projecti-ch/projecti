@@ -34,8 +34,8 @@ export default function ProjectHero({
         <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]" />
       )}
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-[#191919]/40" />
+      {/* Dark Overlay — matches SubpageHero tint */}
+      <div className="absolute inset-0 bg-[#191919]/70" />
 
       {/* Breadcrumb */}
       <div className="absolute bottom-0 left-0 right-0 z-10">

@@ -120,34 +120,36 @@ async function RelatedProjects({
         </FadeIn>
         <div className="grid gap-6 sm:grid-cols-2">
           {relatedProjects.map((project, index) => {
-            const imageUrl = getMediaUrl(project.heroImage, "card");
+            const imageUrl = getMediaUrl(project.heroImage, "hero");
             const date = formatDate(project.date);
 
             return (
               <FadeIn key={project.id} delay={index * 80}>
                 <Link href={`/projekte/${project.slug}`} className="block">
-                  <div className="group relative overflow-hidden rounded-xl bg-card aspect-[4/3] border border-border transition-colors duration-300 hover:border-accent">
+                  <div className="group relative overflow-hidden rounded-xl bg-card h-[280px] border border-border transition-colors duration-300 hover:border-accent">
                     {imageUrl ? (
                       <Image
                         src={imageUrl}
                         alt={project.title}
                         fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
                         loading="lazy"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] transition-transform duration-500 group-hover:scale-[1.03]" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]" />
                     )}
-                    <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    {/* Solid tint overlay for text readability */}
+                    <div className="absolute inset-0 bg-[#191919]/80" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
                       <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
                         {categoryLabels[project.category]}
                       </p>
-                      <p className="mt-2 text-[18px] font-semibold text-white">
+                      <h3 className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.01em] text-white">
                         {project.title}
-                      </p>
+                      </h3>
                       {date && (
-                        <p className="mt-1 text-[12px] text-white/70">{date}</p>
+                        <p className="mt-1 text-[12px] text-white/60">{date}</p>
                       )}
                     </div>
                   </div>
@@ -156,6 +158,17 @@ async function RelatedProjects({
             );
           })}
         </div>
+
+        <FadeIn delay={400}>
+          <div className="mt-10 text-center">
+            <Link
+              href="/projekte"
+              className="inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+            >
+              Alle Projekte ansehen
+            </Link>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -238,17 +251,6 @@ export default async function ProjectPage({ params }: Props) {
           imageAlt={heroImageAlt}
           breadcrumb={breadcrumb}
         />
-
-        {/* Main Headline */}
-        <section className="py-16 md:py-20 lg:py-[120px]">
-          <div className={cx}>
-            <FadeIn>
-              <h1 className="text-[32px] md:text-[48px] lg:text-[56px] leading-[1.1] tracking-[-0.02em] font-bold uppercase">
-                {project.title}
-              </h1>
-            </FadeIn>
-          </div>
-        </section>
 
         {/* Section One */}
         <ContentSection

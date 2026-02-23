@@ -38,30 +38,14 @@ export default function ContentSection({
       {/* Divider with label */}
       {label && <SectionDivider label={label} />}
 
-      {/* Two-column content: Label on left, body on right */}
+      {/* Body content */}
       {body && (
         <div className={`${cx} mt-8 md:mt-12`}>
-          <div className="grid gap-8 md:grid-cols-[200px_1fr] lg:grid-cols-[240px_1fr]">
-            {/* Left column - Label (hidden on mobile, shown above as SectionDivider) */}
-            <div className="hidden md:block">
-              {label && (
-                <FadeIn>
-                  <p className="text-[12px] font-medium uppercase tracking-widest text-muted">
-                    {label}
-                  </p>
-                </FadeIn>
-              )}
+          <FadeIn delay={80}>
+            <div className="max-w-[800px] text-[16px] leading-[1.6] text-white">
+              <RichText content={body} />
             </div>
-
-            {/* Right column - Body */}
-            <div>
-              <FadeIn delay={80}>
-                <div className="text-[16px] leading-[1.6] text-muted">
-                  <RichText content={body} />
-                </div>
-              </FadeIn>
-            </div>
-          </div>
+          </FadeIn>
         </div>
       )}
 
