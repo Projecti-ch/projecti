@@ -27,7 +27,7 @@ export default async function FeaturedProjects() {
             return (
               <FadeIn key={project.id} delay={i * 100}>
                 <Link href={`/projekte/${project.slug}`} className="block">
-                  <div className="group relative overflow-hidden rounded-xl bg-card aspect-[4/3] border border-border transition-colors duration-300 hover:border-accent">
+                  <div className="group relative overflow-hidden rounded-xl bg-card h-[280px] border border-border transition-colors duration-300 hover:border-accent">
                     {imageUrl ? (
                       <Image
                         src={imageUrl}
@@ -37,18 +37,22 @@ export default async function FeaturedProjects() {
                         className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] transition-transform duration-500 group-hover:scale-[1.03]" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]" />
                     )}
-                    <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+
+                    {/* Gradient overlay — strong at bottom for readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
+
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
                       <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
                         {categoryLabel}
                       </p>
-                      <p className="mt-2 text-[18px] font-semibold text-white">
+                      <h3 className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.01em] text-white">
                         {project.title}
-                      </p>
+                      </h3>
                       {date && (
-                        <p className="mt-1 text-[12px] text-white/70">{date}</p>
+                        <p className="mt-1 text-[12px] text-white/60">{date}</p>
                       )}
                     </div>
                   </div>
