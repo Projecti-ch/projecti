@@ -52,7 +52,7 @@ async function RelatedResources({ currentSlug }: { currentSlug: string }) {
 
   const relatedUpdates = updates
     .filter((u) => u.slug !== currentSlug)
-    .slice(0, 4);
+    .slice(0, 2);
 
   if (relatedUpdates.length === 0) return null;
 

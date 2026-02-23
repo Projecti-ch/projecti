@@ -106,7 +106,7 @@ async function RelatedProjects({
   // Filter out current project and limit to 4
   const relatedProjects = projects
     .filter((p) => p.slug !== currentSlug)
-    .slice(0, 4);
+    .slice(0, 2);
 
   if (relatedProjects.length === 0) return null;
 
