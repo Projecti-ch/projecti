@@ -144,7 +144,7 @@ export default function RessourcenPage() {
         <SubpageHero
           tag="Ressourcen"
           headline="Wissen teilen. Transparenz schaffen. Gemeinsam bauen."
-          heroVideoPlaybackId="wdQwisuelj029C6y1nn2I2yOpINErQjvlYFG3rpx7CbQ"
+          heroVideoPlaybackId="6H8fW7WeUqqJBJHu02bBtoa00KRdvDrQTVvatEhy01iKJ4"
         />
         <ResourceGrid />
         <RessourcenCta />
