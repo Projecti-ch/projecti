@@ -5,7 +5,7 @@ import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
-import { getUpdates, getMediaUrl } from "@/lib/cms";
+import { getUpdates, getMediaUrl, formatDate } from "@/lib/cms";
 import type { Update } from "@/types/cms";
 
 export const metadata: Metadata = {
@@ -25,11 +25,12 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 /* ─── Resource Card ─── */
 function ResourceCard({ update, index }: { update: Update; index: number }) {
   const imageUrl = getMediaUrl(update.featuredImage, 'card');
+  const date = formatDate(update.date);
 
   return (
     <FadeIn delay={index * 80}>
       <Link href={`/ressourcen/${update.slug}`} className="block">
-        <div className="group relative overflow-hidden rounded-xl bg-card aspect-[16/9] border border-border transition-colors duration-300 hover:border-accent">
+        <div className="group relative overflow-hidden rounded-xl bg-card h-[280px] border border-border transition-colors duration-300 hover:border-accent">
           {/* Background image or gradient */}
           {imageUrl ? (
             <Image
@@ -40,25 +41,21 @@ function ResourceCard({ update, index }: { update: Update; index: number }) {
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] transition-transform duration-500 group-hover:scale-[1.03]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]" />
           )}
-          
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
-          
+
+          {/* Gradient overlay — strong at bottom for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
+
           {/* Content */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+          <div className="absolute bottom-0 left-0 right-0 p-6">
             <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
               Update
             </p>
-            <h3 className="mt-2 text-[18px] font-semibold text-white">
+            <h3 className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.01em] text-white">
               {update.title}
             </h3>
-            {update.metaDescription && (
-              <p className="mt-2 text-[14px] leading-[1.6] text-white/70 line-clamp-2">
-                {update.metaDescription}
-              </p>
-            )}
+            {date && <p className="mt-1 text-[12px] text-white/60">{date}</p>}
           </div>
         </div>
       </Link>

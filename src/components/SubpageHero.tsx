@@ -19,13 +19,7 @@ export default function SubpageHero({
   heroVideoPlaybackId?: string;
 }) {
   return (
-    <section
-      className={`relative overflow-hidden ${
-        heroVideoPlaybackId
-          ? "flex min-h-screen flex-col justify-end"
-          : "flex min-h-[70vh] flex-col justify-end"
-      }`}
-    >
+    <section className="relative overflow-hidden flex min-h-[90vh] flex-col justify-end">
       {/* Optional hero video */}
       {heroVideoPlaybackId && (
         <>
