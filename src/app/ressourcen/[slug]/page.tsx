@@ -6,10 +6,12 @@ import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
 import ProjectHero from "@/components/ProjectHero";
+import ContentSection from "@/components/ContentSection";
+import GalleryCarousel from "@/components/GalleryCarousel";
 import SectionDivider from "@/components/SectionDivider";
 import RichText from "@/components/RichText";
 import { getUpdates, getUpdateBySlug, getMediaUrl, formatDate } from "@/lib/cms";
-import type { Update } from "@/types/cms";
+import type { Media } from "@/types/cms";
 
 /* ─── Static Params ─── */
 export async function generateStaticParams() {
@@ -45,6 +47,40 @@ export async function generateMetadata({
 }
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
+
+/* ─── Gallery Section ─── */
+function GallerySection({
+  images,
+}: {
+  images: { image: number | Media; id?: string | null }[] | null | undefined;
+}) {
+  if (!images || images.length === 0) return null;
+
+  // Transform images for carousel
+  const carouselImages = images
+    .map((item, index) => {
+      const imageUrl = getMediaUrl(item.image as Media, "hero");
+      if (!imageUrl) return null;
+      const mediaObj = item.image as Media;
+      return {
+        url: imageUrl,
+        alt: mediaObj?.alt || `Gallery image ${index + 1}`,
+      };
+    })
+    .filter((img): img is { url: string; alt: string } => img !== null);
+
+  if (carouselImages.length === 0) return null;
+
+  return (
+    <section className="py-12 md:py-16 lg:py-20">
+      <div className={cx}>
+        <FadeIn>
+          <GalleryCarousel images={carouselImages} />
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
 
 /* ─── Related Resources ─── */
 async function RelatedResources({ currentSlug }: { currentSlug: string }) {
@@ -136,6 +172,23 @@ export default async function UpdateDetailPage({
   const heroImage = getMediaUrl(update.featuredImage, "hero");
   const breadcrumb = `Ressourcen | Update | ${update.slugTitle}`;
 
+  // Check if update has sections
+  const hasSections =
+    update.sectionOne?.title ||
+    update.sectionOne?.body ||
+    update.sectionTwo?.title ||
+    update.sectionTwo?.body ||
+    update.sectionThree?.title ||
+    update.sectionThree?.body;
+
+  // Helper to get media URL from section images
+  const getSectionImageUrl = (
+    image: (number | null) | Media | undefined
+  ): string | null => {
+    if (!image || typeof image === "number") return null;
+    return getMediaUrl(image, "hero");
+  };
+
   return (
     <>
       <Nav />
@@ -147,19 +200,51 @@ export default async function UpdateDetailPage({
         breadcrumb={breadcrumb}
       />
 
-      {/* Article Content */}
-      <section className="py-12 md:py-16">
-        {/* Date as SectionDivider */}
-        {update.date && <SectionDivider label={formatDate(update.date)} />}
+      {/* Date as SectionDivider */}
+      {update.date && <SectionDivider label={formatDate(update.date)} />}
 
-        <div className={`${cx} mt-8 md:mt-12`}>
-          <FadeIn delay={80}>
-            <div className="max-w-[800px] text-[16px] leading-[1.6] text-white">
-              <RichText content={update.content} />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      {/* Sections-based content (new format) */}
+      {hasSections ? (
+        <>
+          {/* Section One */}
+          <ContentSection
+            label={update.sectionOne?.title}
+            body={update.sectionOne?.body}
+            image={getSectionImageUrl(update.sectionOne?.image)}
+            imageAlt="Section one image"
+          />
+
+          {/* Section Two */}
+          <ContentSection
+            label={update.sectionTwo?.title}
+            body={update.sectionTwo?.body}
+            image={getSectionImageUrl(update.sectionTwo?.image)}
+            imageAlt="Section two image"
+            image2={getSectionImageUrl(update.sectionTwo?.image2)}
+            image2Alt="Section two image 2"
+          />
+
+          {/* Section Three */}
+          <ContentSection
+            label={update.sectionThree?.title}
+            body={update.sectionThree?.body}
+          />
+
+          {/* Gallery */}
+          <GallerySection images={update.gallery} />
+        </>
+      ) : (
+        /* Legacy content field (old format) */
+        <section className="py-12 md:py-16">
+          <div className={`${cx} mt-8 md:mt-12`}>
+            <FadeIn delay={80}>
+              <div className="max-w-[800px] text-[16px] leading-[1.6] text-white">
+                <RichText content={update.content} />
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      )}
 
       {/* Related Resources */}
       <RelatedResources currentSlug={update.slug} />
