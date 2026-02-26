@@ -24,7 +24,7 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
 /* ─── Resource Card ─── */
 function ResourceCard({ update, index }: { update: Update; index: number }) {
-  const imageUrl = getMediaUrl(update.featuredImage, 'card');
+  const imageUrl = getMediaUrl(update.featuredImage, 'hero');
   const date = formatDate(update.date);
 
   return (
@@ -37,15 +37,16 @@ function ResourceCard({ update, index }: { update: Update; index: number }) {
               src={imageUrl}
               alt={update.title}
               fill
+              sizes="(max-width: 640px) 100vw, 50vw"
               loading="lazy"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
             />
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]" />
           )}
 
-          {/* Gradient overlay — strong at bottom for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
+          {/* Solid tint overlay for text readability */}
+          <div className="absolute inset-0 bg-[#191919]/80" />
 
           {/* Content */}
           <div className="absolute bottom-0 left-0 right-0 p-6">
