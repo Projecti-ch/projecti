@@ -124,7 +124,9 @@ export const getFeaturedProjects = cache(async (limit = 4): Promise<Project[]> =
 });
 
 export const getProjectBySlug = cache(async (slug: string): Promise<Project | null> => {
-  return fetchBySlug<Project>('projects', slug, { depth: 2 });
+  // Decode URL-encoded characters (e.g., %C3%BC -> ü)
+  const decodedSlug = decodeURIComponent(slug);
+  return fetchBySlug<Project>('projects', decodedSlug, { depth: 2 });
 });
 
 export async function getProjectsByCategory(
@@ -149,7 +151,9 @@ export async function getUpdates(options?: FetchOptions): Promise<CMSResponse<Up
 }
 
 export const getUpdateBySlug = cache(async (slug: string): Promise<Update | null> => {
-  return fetchBySlug<Update>('updates', slug, { depth: 2 });
+  // Decode URL-encoded characters (e.g., %C3%BC -> ü)
+  const decodedSlug = decodeURIComponent(slug);
+  return fetchBySlug<Update>('updates', decodedSlug, { depth: 2 });
 });
 
 // ============================================

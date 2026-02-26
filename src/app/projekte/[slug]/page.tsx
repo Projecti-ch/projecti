@@ -16,7 +16,7 @@ import {
   formatDate,
   categoryLabels,
 } from "@/lib/cms";
-import type { Media, Project } from "@/types/cms";
+import type { Media, Project, ContentSection as ContentSectionType } from "@/types/cms";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -241,6 +241,45 @@ export default async function ProjectPage({ params }: Props) {
     return getMediaUrl(image, "hero");
   };
 
+  // Get sections - prefer new array, fallback to legacy fields
+  const getSections = (): ContentSectionType[] => {
+    // Use new sections array if available
+    if (project.sections && project.sections.length > 0) {
+      return project.sections;
+    }
+    
+    // Fallback to legacy fields
+    const legacySections: ContentSectionType[] = [];
+    
+    if (project.sectionOne?.title || project.sectionOne?.body || project.sectionOne?.image) {
+      legacySections.push({
+        title: project.sectionOne.title,
+        body: project.sectionOne.body,
+        image: project.sectionOne.image,
+      });
+    }
+    
+    if (project.sectionTwo?.title || project.sectionTwo?.body || project.sectionTwo?.image || project.sectionTwo?.image2) {
+      legacySections.push({
+        title: project.sectionTwo.title,
+        body: project.sectionTwo.body,
+        image: project.sectionTwo.image,
+        image2: project.sectionTwo.image2,
+      });
+    }
+    
+    if (project.sectionThree?.title || project.sectionThree?.body) {
+      legacySections.push({
+        title: project.sectionThree.title,
+        body: project.sectionThree.body,
+      });
+    }
+    
+    return legacySections;
+  };
+
+  const sections = getSections();
+
   return (
     <>
       <Nav />
@@ -252,29 +291,18 @@ export default async function ProjectPage({ params }: Props) {
           breadcrumb={breadcrumb}
         />
 
-        {/* Section One */}
-        <ContentSection
-          label={project.sectionOne?.title}
-          body={project.sectionOne?.body}
-          image={getSectionImageUrl(project.sectionOne?.image)}
-          imageAlt="Section one image"
-        />
-
-        {/* Section Two */}
-        <ContentSection
-          label={project.sectionTwo?.title}
-          body={project.sectionTwo?.body}
-          image={getSectionImageUrl(project.sectionTwo?.image)}
-          imageAlt="Section two image"
-          image2={getSectionImageUrl(project.sectionTwo?.image2)}
-          image2Alt="Section two image 2"
-        />
-
-        {/* Section Three */}
-        <ContentSection
-          label={project.sectionThree?.title}
-          body={project.sectionThree?.body}
-        />
+        {/* Content Sections */}
+        {sections.map((section, index) => (
+          <ContentSection
+            key={section.id || `section-${index}`}
+            label={section.title}
+            body={section.body}
+            image={getSectionImageUrl(section.image)}
+            imageAlt={`Section ${index + 1} image`}
+            image2={getSectionImageUrl(section.image2)}
+            image2Alt={`Section ${index + 1} image 2`}
+          />
+        ))}
 
         {/* Gallery */}
         <GallerySection images={project.gallery} />

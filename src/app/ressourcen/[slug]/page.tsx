@@ -11,7 +11,7 @@ import GalleryCarousel from "@/components/GalleryCarousel";
 import SectionDivider from "@/components/SectionDivider";
 import RichText from "@/components/RichText";
 import { getUpdates, getUpdateBySlug, getMediaUrl, formatDate } from "@/lib/cms";
-import type { Media } from "@/types/cms";
+import type { Media, ContentSection as ContentSectionType } from "@/types/cms";
 
 /* ─── Static Params ─── */
 export async function generateStaticParams() {
@@ -172,15 +172,6 @@ export default async function UpdateDetailPage({
   const heroImage = getMediaUrl(update.featuredImage, "hero");
   const breadcrumb = `Ressourcen | Update | ${update.slugTitle}`;
 
-  // Check if update has sections
-  const hasSections =
-    update.sectionOne?.title ||
-    update.sectionOne?.body ||
-    update.sectionTwo?.title ||
-    update.sectionTwo?.body ||
-    update.sectionThree?.title ||
-    update.sectionThree?.body;
-
   // Helper to get media URL from section images
   const getSectionImageUrl = (
     image: (number | null) | Media | undefined
@@ -188,6 +179,45 @@ export default async function UpdateDetailPage({
     if (!image || typeof image === "number") return null;
     return getMediaUrl(image, "hero");
   };
+
+  // Get sections - prefer new array, fallback to legacy fields
+  const getSections = (): ContentSectionType[] => {
+    // Use new sections array if available
+    if (update.sections && update.sections.length > 0) {
+      return update.sections;
+    }
+    
+    // Fallback to legacy section fields
+    const legacySections: ContentSectionType[] = [];
+    
+    if (update.sectionOne?.title || update.sectionOne?.body || update.sectionOne?.image) {
+      legacySections.push({
+        title: update.sectionOne.title,
+        body: update.sectionOne.body,
+        image: update.sectionOne.image,
+      });
+    }
+    
+    if (update.sectionTwo?.title || update.sectionTwo?.body || update.sectionTwo?.image || update.sectionTwo?.image2) {
+      legacySections.push({
+        title: update.sectionTwo.title,
+        body: update.sectionTwo.body,
+        image: update.sectionTwo.image,
+        image2: update.sectionTwo.image2,
+      });
+    }
+    
+    if (update.sectionThree?.title || update.sectionThree?.body) {
+      legacySections.push({
+        title: update.sectionThree.title,
+        body: update.sectionThree.body,
+      });
+    }
+    
+    return legacySections;
+  };
+
+  const sections = getSections();
 
   return (
     <>
@@ -203,37 +233,25 @@ export default async function UpdateDetailPage({
       {/* Date as SectionDivider */}
       {update.date && <SectionDivider label={formatDate(update.date)} />}
 
-      {/* Sections-based content (new format) */}
-      {hasSections ? (
+      {/* Content Sections */}
+      {sections.length > 0 ? (
         <>
-          {/* Section One */}
-          <ContentSection
-            label={update.sectionOne?.title}
-            body={update.sectionOne?.body}
-            image={getSectionImageUrl(update.sectionOne?.image)}
-            imageAlt="Section one image"
-          />
-
-          {/* Section Two */}
-          <ContentSection
-            label={update.sectionTwo?.title}
-            body={update.sectionTwo?.body}
-            image={getSectionImageUrl(update.sectionTwo?.image)}
-            imageAlt="Section two image"
-            image2={getSectionImageUrl(update.sectionTwo?.image2)}
-            image2Alt="Section two image 2"
-          />
-
-          {/* Section Three */}
-          <ContentSection
-            label={update.sectionThree?.title}
-            body={update.sectionThree?.body}
-          />
+          {sections.map((section, index) => (
+            <ContentSection
+              key={section.id || `section-${index}`}
+              label={section.title}
+              body={section.body}
+              image={getSectionImageUrl(section.image)}
+              imageAlt={`Section ${index + 1} image`}
+              image2={getSectionImageUrl(section.image2)}
+              image2Alt={`Section ${index + 1} image 2`}
+            />
+          ))}
 
           {/* Gallery */}
           <GallerySection images={update.gallery} />
         </>
-      ) : (
+      ) : update.content ? (
         /* Legacy content field (old format) */
         <section className="py-12 md:py-16">
           <div className={`${cx} mt-8 md:mt-12`}>
@@ -244,7 +262,7 @@ export default async function UpdateDetailPage({
             </FadeIn>
           </div>
         </section>
-      )}
+      ) : null}
 
       {/* Related Resources */}
       <RelatedResources currentSlug={update.slug} />

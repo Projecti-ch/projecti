@@ -192,6 +192,31 @@ export interface Media {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
+/**
+ * Content Section - used in both Projects and Updates
+ */
+export interface ContentSection {
+  id?: string | null;
+  title?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: (number | null) | Media;
+  image2?: (number | null) | Media;
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -202,6 +227,8 @@ export interface Project {
   category: 'planung' | 'analyse';
   date?: string | null;
   featured?: boolean | null;
+  sections?: ContentSection[] | null;
+  // Legacy fields (hidden in CMS, kept for migration)
   sectionOne?: {
     title?: string | null;
     body?: {
@@ -281,9 +308,8 @@ export interface Update {
   metaDescription?: string | null;
   featuredImage?: (number | null) | Media;
   date?: string | null;
-  /**
-   * Legacy content field - use sections below for new updates
-   */
+  sections?: ContentSection[] | null;
+  // Legacy fields (hidden in CMS, kept for migration)
   content?: {
     root: {
       type: string;
