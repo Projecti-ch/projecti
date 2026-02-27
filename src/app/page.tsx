@@ -28,7 +28,7 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 function Hero() {
   return (
     <section className="relative flex min-h-[80vh] flex-col justify-end overflow-hidden">
-      <HeroVideo playbackId="5CAjrgFXZiZxHrhWw2htsbw1LVxE93t00xw2sjTm02oHk" />
+      <HeroVideo playbackId="dW2PUtb023Lcn971b1QpTXR821FtbrSbLLFoVHw1BYjg" />
 
       {/* Dark tint overlay for readability */}
       <div className="absolute inset-0 bg-[#191919]/70" />
