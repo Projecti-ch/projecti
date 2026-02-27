@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import FadeIn from "./FadeIn";
 import SectionDivider from "./SectionDivider";
-import { getFeaturedProjects, getMediaUrl, formatDate, categoryLabels } from "@/lib/cms";
+import { getFeaturedProjects, getMediaUrl, formatDate, getCategoryLabel } from "@/lib/cms";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
@@ -21,7 +21,7 @@ export default async function FeaturedProjects() {
         <div className="grid gap-6 sm:grid-cols-2">
           {projects.map((project, i) => {
             const imageUrl = getMediaUrl(project.heroImage, "card");
-            const categoryLabel = categoryLabels[project.category];
+            const categoryLabel = getCategoryLabel(project.category);
             const date = formatDate(project.date);
 
             return (

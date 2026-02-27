@@ -5,7 +5,7 @@ import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
-import { getProjects, getMediaUrl, formatDate, categoryLabels } from "@/lib/cms";
+import { getProjects, getMediaUrl, formatDate, getCategoryLabel } from "@/lib/cms";
 import type { Project } from "@/types/cms";
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 /* ─── Project Card ─── */
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const imageUrl = getMediaUrl(project.heroImage, 'card');
-  const categoryLabel = categoryLabels[project.category];
+  const categoryLabel = getCategoryLabel(project.category);
   const date = formatDate(project.date);
 
   return (

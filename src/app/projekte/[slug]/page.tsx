@@ -14,7 +14,8 @@ import {
   getProjectsByCategory,
   getMediaUrl,
   formatDate,
-  categoryLabels,
+  getCategoryLabel,
+  getCategoryId,
 } from "@/lib/cms";
 import type { Media, Project, ContentSection as ContentSectionType } from "@/types/cms";
 
@@ -93,15 +94,15 @@ function GallerySection({
 
 /* ─── Related Projects Section ─── */
 async function RelatedProjects({
-  category,
+  categoryId,
   currentSlug,
 }: {
-  category: Project["category"];
+  categoryId: number;
   currentSlug: string;
 }) {
   // Fetch projects from same category, limit to 5 to ensure we have 4 after excluding current
   // Use depth: 1 since we only need heroImage populated, not full sections
-  const { docs: projects } = await getProjectsByCategory(category, { limit: 5, depth: 1 });
+  const { docs: projects } = await getProjectsByCategory(categoryId, { limit: 5, depth: 1 });
 
   // Filter out current project and limit to 4
   const relatedProjects = projects
@@ -143,7 +144,7 @@ async function RelatedProjects({
                     <div className="absolute inset-0 bg-[#191919]/80" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                       <p className="text-[12px] font-medium uppercase tracking-widest text-accent leading-[1.5]">
-                        {categoryLabels[project.category]}
+                        {getCategoryLabel(project.category)}
                       </p>
                       <h3 className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.01em] text-white">
                         {project.title}
@@ -230,7 +231,7 @@ export default async function ProjectPage({ params }: Props) {
       : project.title;
 
   // Build breadcrumb: "Projekte | Category | SlugTitle"
-  const categoryLabel = categoryLabels[project.category];
+  const categoryLabel = getCategoryLabel(project.category);
   const breadcrumb = `Projekte | ${categoryLabel} | ${project.slugTitle}`;
 
   // Helper to get media URL from section images
@@ -309,7 +310,7 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* Related Projects */}
         <RelatedProjects
-          category={project.category}
+          categoryId={getCategoryId(project.category)}
           currentSlug={project.slug}
         />
 
