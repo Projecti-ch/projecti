@@ -217,6 +217,18 @@ export interface ContentSection {
   image2?: (number | null) | Media;
 }
 
+/**
+ * Category - managed via CMS
+ */
+export interface Category {
+  id: number;
+  label: string;
+  slug: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -224,7 +236,9 @@ export interface Project {
   slug: string;
   metaDescription?: string | null;
   heroImage?: (number | null) | Media;
-  category: 'planung' | 'analyse';
+  category: number | Category;
+  /** @deprecated Legacy field - use category relationship instead */
+  legacyCategory?: 'planung' | 'analyse' | null;
   date?: string | null;
   featured?: boolean | null;
   sections?: ContentSection[] | null;

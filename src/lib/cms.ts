@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import type { Project, Update, Media } from '@/types/cms';
+import type { Project, Update, Media, Category } from '@/types/cms';
 
 // Server-only CMS URL (not exposed to client bundle)
 const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3000';
@@ -130,12 +130,12 @@ export const getProjectBySlug = cache(async (slug: string): Promise<Project | nu
 });
 
 export async function getProjectsByCategory(
-  category: Project['category'],
+  categoryId: number,
   options?: Omit<FetchOptions, 'where'>
 ): Promise<CMSResponse<Project>> {
   return fetchCollection<Project>('projects', {
     ...options,
-    where: { category },
+    where: { category: categoryId },
   });
 }
 
@@ -199,8 +199,41 @@ export function formatDate(dateString: string | null | undefined): string {
   });
 }
 
-// Category display mapping
-export const categoryLabels: Record<Project['category'], string> = {
+/**
+ * Get the category label from a project's category field
+ * Handles both populated Category objects and unpopulated IDs
+ */
+export function getCategoryLabel(category: Project['category']): string {
+  if (typeof category === 'number') {
+    // Not populated - return empty or you could fetch it
+    return '';
+  }
+  return (category as Category).label;
+}
+
+/**
+ * Get the category slug from a project's category field
+ */
+export function getCategorySlug(category: Project['category']): string {
+  if (typeof category === 'number') {
+    return '';
+  }
+  return (category as Category).slug;
+}
+
+/**
+ * Get the category ID from a project's category field
+ */
+export function getCategoryId(category: Project['category']): number {
+  if (typeof category === 'number') {
+    return category;
+  }
+  return (category as Category).id;
+}
+
+// Legacy category display mapping (for backwards compatibility)
+// @deprecated Use getCategoryLabel() instead
+export const categoryLabels: Record<string, string> = {
   planung: 'Planung',
   analyse: 'Digitale Lösungen',
 };
