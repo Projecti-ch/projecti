@@ -19,6 +19,12 @@ const shapes = [
   { name: 'Hexagon', shape: 'hexagon' },
   { name: 'Diamond', shape: 'diamond' },
   { name: 'Arc', shape: 'arc' },
+  { name: 'Nested Squares', shape: 'nested-squares' },
+  { name: 'Semicircle', shape: 'semicircle' },
+  { name: 'Octagon', shape: 'octagon' },
+  { name: 'Pill', shape: 'pill' },
+  { name: 'Grid 2×2', shape: 'grid-2x2' },
+  { name: 'Grid 3×3', shape: 'grid-3x3' },
 ] as const;
 
 export default function ShapesPreviewPage() {
@@ -32,11 +38,11 @@ export default function ShapesPreviewPage() {
         <section className="py-12 md:py-16">
           <div className={cx}>
             <FadeIn>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-8">
+              <div className="grid grid-cols-4 sm:grid-cols-6 gap-8">
                 {shapes.map(({ name, shape }) => (
                   <div key={shape} className="flex flex-col items-center gap-4">
                     <ShapeIcon shape={shape} size={80} fillColor="#191919" />
-                    <span className="text-[13px] text-muted font-light tracking-wide">
+                    <span className="text-[13px] text-muted font-light tracking-wide text-center">
                       {name}
                     </span>
                   </div>
@@ -52,11 +58,11 @@ export default function ShapesPreviewPage() {
           <div className={cx}>
             <FadeIn delay={80}>
               <div className="rounded-xl bg-card p-8 md:p-12">
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-8">
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-8">
                   {shapes.map(({ name, shape }) => (
                     <div key={shape} className="flex flex-col items-center gap-4">
                       <ShapeIcon shape={shape} size={80} fillColor="#222222" />
-                      <span className="text-[13px] text-muted font-light tracking-wide">
+                      <span className="text-[13px] text-muted font-light tracking-wide text-center">
                         {name}
                       </span>
                     </div>
@@ -72,11 +78,11 @@ export default function ShapesPreviewPage() {
         <section className="py-12 md:py-16">
           <div className={cx}>
             <FadeIn delay={160}>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-8">
+              <div className="grid grid-cols-4 sm:grid-cols-6 gap-8">
                 {shapes.map(({ name, shape }) => (
                   <div key={shape} className="flex flex-col items-center gap-4">
                     <ShapeIcon shape={shape} size={128} fillColor="#191919" />
-                    <span className="text-[13px] text-muted font-light tracking-wide">
+                    <span className="text-[13px] text-muted font-light tracking-wide text-center">
                       {name}
                     </span>
                   </div>

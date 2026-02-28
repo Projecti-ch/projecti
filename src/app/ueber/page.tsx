@@ -105,7 +105,7 @@ function Vision() {
                   strukturierten Prozessen, digitalen Werkzeugen und transparenten
                   Abläufen. Damit die Schweiz den Wohnraum erhält, den sie braucht.
                 </p>
-                <p className="text-white font-medium">
+                <p>
                   Nicht nur schneller. Sondern besser. Mit einem nachhaltigen
                   Fundament für die nächste Generation. Das ist mein Anspruch. Das
                   ist Projecti.

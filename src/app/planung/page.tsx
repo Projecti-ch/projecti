@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 import Link from "next/link";
 import Image from "next/image";
+import ShapeIcon from "@/components/shapes/ShapeIcon";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
@@ -192,17 +193,17 @@ function Planungsleistungen() {
 function Rollen() {
   const roles = [
     {
-      icon: "/images/icon-bauherrenvertretung.svg",
+      shape: "circle" as const,
       title: "Bauherrenvertretung",
       body: "Vollumfängliche Projektführung. Wir treffen Entscheidungen, koordinieren Beteiligte und liefern Ergebnisse.",
     },
     {
-      icon: "/images/icon-projektleitung.svg",
+      shape: "triangle" as const,
       title: "Projektleitung",
       body: "Koordination zwischen Bauherr, Architekten und Fachplanern. Wir halten das Projekt auf Kurs.",
     },
     {
-      icon: "/images/icon-modellierung.svg",
+      shape: "square" as const,
       title: "Modellierung",
       body: "Wir digitalisieren Bestandsgebäude und bauen 3D Modelle. Als Grundlage für Planung und Koordination.",
     },
@@ -221,13 +222,7 @@ function Rollen() {
           {roles.map((r, i) => (
             <FadeIn key={r.title} delay={i * 100}>
               <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-accent flex flex-col">
-                <Image
-                  src={r.icon}
-                  alt={r.title}
-                  width={40}
-                  height={40}
-                  className="h-10 w-10"
-                />
+                <ShapeIcon shape={r.shape} size={40} fillColor="#222222" />
                 <h3 className="mt-4 text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
                   {r.title}
                 </h3>
