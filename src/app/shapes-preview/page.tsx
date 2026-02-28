@@ -29,9 +29,9 @@ const shapes = [
 ] as const;
 
 const compositions = [
-  { name: 'Nested Circles', composition: 'nested-circles' },
-  { name: 'Alignment', composition: 'alignment' },
-  { name: 'Converging Chevrons', composition: 'converging-chevrons' },
+  { name: 'Stacked Circles', composition: 'stacked-circles' },
+  { name: 'Stacked Diamonds', composition: 'stacked-diamonds' },
+  { name: 'Stacked Hexagons', composition: 'stacked-hexagons' },
 ] as const;
 
 export default function ShapesPreviewPage() {
@@ -99,14 +99,14 @@ export default function ShapesPreviewPage() {
           </div>
         </section>
 
-        {/* Compositions — Main background */}
-        <SectionDivider label="Compositions — Main Background (#191919)" />
+        {/* Stacked Compositions — Dark background */}
+        <SectionDivider label="Stacked Compositions — Dark Background (#191919)" />
         <section className="py-12 md:py-16">
           <div className={cx}>
             <FadeIn>
               <div className="grid grid-cols-3 gap-12">
                 {compositions.map(({ name, composition }) => (
-                  <div key={composition} className="flex flex-col items-center gap-4">
+                  <div key={composition} className="flex flex-col items-center gap-6">
                     <CompositionIcon composition={composition} size={96} fillColor="#191919" />
                     <span className="text-[13px] text-muted font-light tracking-wide text-center">
                       {name}
@@ -118,15 +118,15 @@ export default function ShapesPreviewPage() {
           </div>
         </section>
 
-        {/* Compositions — Card background */}
-        <SectionDivider label="Compositions — Card Background (#222222)" />
+        {/* Stacked Compositions — Card background */}
+        <SectionDivider label="Stacked Compositions — Card Background (#222222)" />
         <section className="py-12 md:py-16">
           <div className={cx}>
             <FadeIn delay={80}>
               <div className="rounded-xl bg-card p-8 md:p-12">
                 <div className="grid grid-cols-3 gap-12">
                   {compositions.map(({ name, composition }) => (
-                    <div key={composition} className="flex flex-col items-center gap-4">
+                    <div key={composition} className="flex flex-col items-center gap-6">
                       <CompositionIcon composition={composition} size={96} fillColor="#222222" />
                       <span className="text-[13px] text-muted font-light tracking-wide text-center">
                         {name}

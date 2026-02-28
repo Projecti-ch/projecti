@@ -1,8 +1,8 @@
-import CompNestedCircles from './CompNestedCircles';
-import CompAlignment from './CompAlignment';
-import CompConvergingChevrons from './CompConvergingChevrons';
+import StackedCircles from './StackedCircles';
+import StackedDiamonds from './StackedDiamonds';
+import StackedHexagons from './StackedHexagons';
 
-type CompositionVariant = 'nested-circles' | 'alignment' | 'converging-chevrons';
+type CompositionVariant = 'stacked-circles' | 'stacked-diamonds' | 'stacked-hexagons';
 
 interface CompositionIconProps {
   composition: CompositionVariant;
@@ -20,12 +20,12 @@ export default function CompositionIcon({
   const props = { size, className, fillColor };
 
   switch (composition) {
-    case 'nested-circles':
-      return <CompNestedCircles {...props} />;
-    case 'alignment':
-      return <CompAlignment {...props} />;
-    case 'converging-chevrons':
-      return <CompConvergingChevrons {...props} />;
+    case 'stacked-circles':
+      return <StackedCircles {...props} />;
+    case 'stacked-diamonds':
+      return <StackedDiamonds {...props} />;
+    case 'stacked-hexagons':
+      return <StackedHexagons {...props} />;
     default:
       return null;
   }
