@@ -1,3 +1,4 @@
+import Image from "next/image";
 import FadeIn from "./FadeIn";
 import HeroVideo from "./HeroVideo";
 
@@ -8,6 +9,7 @@ export default function SubpageHero({
   cta,
   ctaHref = "/kontakt",
   bgImage,
+  bgImageAlt,
   heroVideoPlaybackId,
 }: {
   tag?: string;
@@ -16,6 +18,7 @@ export default function SubpageHero({
   cta?: string;
   ctaHref?: string;
   bgImage?: string;
+  bgImageAlt?: string;
   heroVideoPlaybackId?: string;
 }) {
   return (
@@ -31,9 +34,12 @@ export default function SubpageHero({
       {/* Optional background image with dark tint */}
       {bgImage && (
         <>
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${bgImage})` }}
+          <Image
+            src={bgImage}
+            alt={bgImageAlt ?? ""}
+            fill
+            priority
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-[#191919]/70" />
         </>

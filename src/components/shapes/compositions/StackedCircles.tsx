@@ -1,52 +1,56 @@
 interface CompositionProps {
   size?: number;
   className?: string;
-  fillColor?: string;
+  variant?: 'dark' | 'light';
 }
 
 export default function StackedCircles({
   size = 96,
   className = '',
-  fillColor = '#191919',
+  variant = 'dark',
 }: CompositionProps) {
-  const id = 'compGradStackedCircles';
+  const id = `compGradStackedCircles-${variant}`;
+  const isDark = variant === 'dark';
 
-  // ViewBox 0 0 80 80 — 8px extra on each side vs the 64-unit shape space.
-  // Shape centre: (40, 40). Circle r=28.
-  // Transform order: translate then rotate — SVG applies right-to-left, so
-  // the shape rotates around (40,40) first, then shifts to its offset position.
-  // Circles are rotation-invariant so only the translate offsets are visible.
+  const gradStart = isDark ? '#efff00' : '#191919';
+  const gradEnd = isDark ? '#c4d100' : '#2a2a2a';
+  const fill = isDark ? '#191919' : '#efff00';
+  const shadow = isDark
+    ? 'drop-shadow(0 4px 12px rgba(239, 255, 0, 0.15))'
+    : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2))';
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 80 80"
+      viewBox="-20 -20 136 156"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={{ display: 'inline-block' }}
     >
       <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#efff00" />
-          <stop offset="1" stopColor="#c4d100" />
+        <linearGradient id={id} x1="-20" y1="-20" x2="116" y2="136" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor={gradStart} />
+          <stop offset="1" stopColor={gradEnd} />
         </linearGradient>
       </defs>
 
-      {/* Back layer — offset (-6, -4), opacity 0.4 */}
-      <g opacity="0.4" transform="translate(-6,-4) rotate(-15, 40, 40)">
-        <circle cx="40" cy="40" r="28" fill={fillColor} stroke={`url(#${id})`} strokeWidth="2" />
-      </g>
+      <g transform="scale(1, 0.85)">
+        {/* Bottom layer */}
+        <g opacity="0.35" transform="translate(0, 16)">
+          <circle cx="48" cy="58" r="28" fill={fill} stroke={`url(#${id})`} strokeWidth="2" />
+        </g>
 
-      {/* Middle layer — offset (-3, -2), opacity 0.7 */}
-      <g opacity="0.7" transform="translate(-3,-2) rotate(-7, 40, 40)">
-        <circle cx="40" cy="40" r="28" fill={fillColor} stroke={`url(#${id})`} strokeWidth="2" />
-      </g>
+        {/* Middle layer */}
+        <g opacity="0.65" transform="translate(0, 8)">
+          <circle cx="48" cy="58" r="28" fill={fill} stroke={`url(#${id})`} strokeWidth="2" />
+        </g>
 
-      {/* Front layer — no offset, full opacity, drop-shadow only here */}
-      <g style={{ filter: 'drop-shadow(0 4px 12px rgba(239, 255, 0, 0.15))' }}>
-        <circle cx="40" cy="40" r="28" fill={fillColor} stroke={`url(#${id})`} strokeWidth="2" />
+        {/* Top layer */}
+        <g style={{ filter: shadow }}>
+          <circle cx="48" cy="58" r="28" fill={fill} stroke={`url(#${id})`} strokeWidth="2" />
+        </g>
       </g>
     </svg>
   );

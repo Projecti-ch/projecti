@@ -122,7 +122,8 @@ export default function KontaktPage() {
           tag="Kontakt"
           headline="Lass uns sprechen"
           subheadline="Projekt geplant? Fragen zu deinem Vorhaben? Melde dich. Ich bin gespannt, was du vorhast."
-          bgImage="/images/illustration-placeholder.png"
+          bgImage="/images/projecti-hero-kontakt.jpg"
+          bgImageAlt="Technopark Gebäude in Landquart, Graubünden"
         />
         <Kontakt />
         <Standort />

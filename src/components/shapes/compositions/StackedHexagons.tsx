@@ -1,65 +1,105 @@
 interface CompositionProps {
   size?: number;
   className?: string;
-  fillColor?: string;
+  variant?: 'dark' | 'light';
 }
 
 export default function StackedHexagons({
   size = 96,
   className = '',
-  fillColor = '#191919',
+  variant = 'dark',
 }: CompositionProps) {
-  const id = 'compGradStackedHexagons';
+  const id = `compGradStackedHexagons-${variant}`;
+  const isDark = variant === 'dark';
 
-  // ViewBox 0 0 80 80. Shape centre: (40, 40). Hexagon r=28.
-  // Flat-top hexagon: points at angles -30°, 30°, 90°, 150°, 210°, 270°.
-  const r = 28;
-  const cx = 40;
-  const cy = 40;
-  const points = Array.from({ length: 6 }, (_, i) => {
+  const gradStart = isDark ? '#efff00' : '#191919';
+  const gradEnd = isDark ? '#c4d100' : '#2a2a2a';
+  const fill = isDark ? '#191919' : '#efff00';
+  const shadow = isDark
+    ? 'drop-shadow(0 4px 12px rgba(239, 255, 0, 0.15))'
+    : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2))';
+
+  // Flat-top hexagon, radius 28, center (48, 58).
+  // Rounded corners (~3px radius) using path with arc commands.
+  // Vertices at angles: -30°, 30°, 90°, 150°, 210°, 270°
+  const R = 28;
+  const cxVal = 48;
+  const cyVal = 58;
+  const cornerR = 3;
+
+  // Calculate vertices
+  const vertices = Array.from({ length: 6 }, (_, i) => {
     const a = (Math.PI / 180) * (60 * i - 30);
-    return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
-  }).join(' ');
+    return { x: cxVal + R * Math.cos(a), y: cyVal + R * Math.sin(a) };
+  });
+
+  // Build rounded hexagon path: for each vertex, cut short by cornerR
+  // and add a quadratic arc at each corner
+  const pathParts: string[] = [];
+  for (let i = 0; i < 6; i++) {
+    const prev = vertices[(i + 5) % 6];
+    const curr = vertices[i];
+    const next = vertices[(i + 1) % 6];
+
+    // Direction from curr to prev (incoming)
+    const dxIn = prev.x - curr.x;
+    const dyIn = prev.y - curr.y;
+    const lenIn = Math.sqrt(dxIn * dxIn + dyIn * dyIn);
+    // Point on edge just before vertex
+    const p1x = curr.x + (dxIn / lenIn) * cornerR;
+    const p1y = curr.y + (dyIn / lenIn) * cornerR;
+
+    // Direction from curr to next (outgoing)
+    const dxOut = next.x - curr.x;
+    const dyOut = next.y - curr.y;
+    const lenOut = Math.sqrt(dxOut * dxOut + dyOut * dyOut);
+    // Point on edge just after vertex
+    const p2x = curr.x + (dxOut / lenOut) * cornerR;
+    const p2y = curr.y + (dyOut / lenOut) * cornerR;
+
+    if (i === 0) {
+      pathParts.push(`M ${p1x.toFixed(2)} ${p1y.toFixed(2)}`);
+    } else {
+      pathParts.push(`L ${p1x.toFixed(2)} ${p1y.toFixed(2)}`);
+    }
+    // Quadratic bezier arc through vertex
+    pathParts.push(`Q ${curr.x.toFixed(2)} ${curr.y.toFixed(2)} ${p2x.toFixed(2)} ${p2y.toFixed(2)}`);
+  }
+  pathParts.push('Z');
+  const hexPath = pathParts.join(' ');
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 80 80"
+      viewBox="-20 -20 136 156"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={{ display: 'inline-block' }}
     >
       <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#efff00" />
-          <stop offset="1" stopColor="#c4d100" />
+        <linearGradient id={id} x1="-20" y1="-20" x2="116" y2="136" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor={gradStart} />
+          <stop offset="1" stopColor={gradEnd} />
         </linearGradient>
       </defs>
 
-      {/* Back layer — offset (-6, -4), rotated -15°, opacity 0.4 */}
-      <g opacity="0.4" transform="translate(-6,-4) rotate(-15, 40, 40)">
-        <polygon
-          points={points}
-          fill={fillColor} stroke={`url(#${id})`} strokeWidth="2" strokeLinejoin="round"
-        />
-      </g>
+      <g transform="scale(1, 0.85)">
+        {/* Bottom layer */}
+        <g opacity="0.35" transform="translate(0, 16)">
+          <path d={hexPath} fill={fill} stroke={`url(#${id})`} strokeWidth="2" />
+        </g>
 
-      {/* Middle layer — offset (-3, -2), rotated -7°, opacity 0.7 */}
-      <g opacity="0.7" transform="translate(-3,-2) rotate(-7, 40, 40)">
-        <polygon
-          points={points}
-          fill={fillColor} stroke={`url(#${id})`} strokeWidth="2" strokeLinejoin="round"
-        />
-      </g>
+        {/* Middle layer */}
+        <g opacity="0.65" transform="translate(0, 8)">
+          <path d={hexPath} fill={fill} stroke={`url(#${id})`} strokeWidth="2" />
+        </g>
 
-      {/* Front layer — no offset, no extra rotation, full opacity, drop-shadow */}
-      <g style={{ filter: 'drop-shadow(0 4px 12px rgba(239, 255, 0, 0.15))' }}>
-        <polygon
-          points={points}
-          fill={fillColor} stroke={`url(#${id})`} strokeWidth="2" strokeLinejoin="round"
-        />
+        {/* Top layer */}
+        <g style={{ filter: shadow }}>
+          <path d={hexPath} fill={fill} stroke={`url(#${id})`} strokeWidth="2" />
+        </g>
       </g>
     </svg>
   );

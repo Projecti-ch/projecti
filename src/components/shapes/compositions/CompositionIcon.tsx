@@ -8,16 +8,16 @@ interface CompositionIconProps {
   composition: CompositionVariant;
   size?: number;
   className?: string;
-  fillColor?: string;
+  variant?: 'dark' | 'light';
 }
 
 export default function CompositionIcon({
   composition,
   size = 96,
   className = '',
-  fillColor = '#191919',
+  variant = 'dark',
 }: CompositionIconProps) {
-  const props = { size, className, fillColor };
+  const props = { size, className, variant };
 
   switch (composition) {
     case 'stacked-circles':

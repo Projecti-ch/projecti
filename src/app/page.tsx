@@ -8,6 +8,8 @@ import FeaturedProjects from "@/components/FeaturedProjects";
 import Testimonials from "@/components/Testimonials";
 import Link from "next/link";
 import Image from "next/image";
+import AnimatedVisual from "@/components/AnimatedVisual";
+import ShapeIcon from "@/components/shapes/ShapeIcon";
 
 export const metadata: Metadata = {
   title: "Projecti | Planung und digitale Lösungen für Immobilienentwickler",
@@ -106,6 +108,7 @@ function Services() {
   const services = [
     {
       title: "Architekturplanung",
+      icon: 'nested-squares' as const,
       description:
         "Wir begleiten Immobilienentwickler mit strukturierten Abläufen und einem digitalen Gebäudemodell. Alle Beteiligten wissen jederzeit, wo das Projekt steht. Von der Analyse bis zur Ausführung.",
       bullets: [
@@ -119,6 +122,7 @@ function Services() {
     },
     {
       title: "Digitale Lösungen",
+      icon: 'grid-2x2' as const,
       description:
         "Wir entwickeln digitale Lösungen für effizientere Projektarbeit. Pragmatisch, projektbezogen und selbständig weiterführbar. Weniger manuelle Arbeit, schnellere Umsetzung.",
       bullets: [
@@ -143,15 +147,9 @@ function Services() {
           {services.map((s, si) => (
             <FadeIn key={s.title} delay={si * 150}>
               <div className="h-full rounded-xl border border-border bg-card overflow-hidden transition-colors duration-300 hover:border-accent flex flex-col">
-                {/* Illustration placeholder — top 1/3 */}
-                <div className="relative h-[200px] overflow-hidden">
-                  <Image
-                    src="/images/illustration-placeholder.png"
-                    alt="Illustration"
-                    fill
-                    loading="lazy"
-                    className="object-cover"
-                  />
+                {/* Icon panel */}
+                <div className="h-[200px] bg-card flex items-center justify-center">
+                  <ShapeIcon shape={s.icon} size={80} fillColor="#222222" />
                 </div>
                 {/* Content — bottom 2/3 */}
                 <div className="p-6 md:p-8 flex flex-col flex-1">
@@ -220,15 +218,9 @@ function Benefits() {
       <div className={`${cx} mt-8 md:mt-12`}>
         {/* Desktop: horizontal layout with illustration area on left */}
         <div className="flex gap-8 lg:gap-12">
-          {/* Illustration placeholder — 1/3 width on desktop */}
-          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative">
-            <Image
-              src="/images/illustration-placeholder.png"
-              alt="Illustration"
-              fill
-              loading="lazy"
-              className="object-cover"
-            />
+          {/* Animated visual — 1/3 width on desktop */}
+          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative border border-[#333333]">
+            <AnimatedVisual composition="stacked-circles" size={288} />
           </div>
 
           {/* Benefits list — 2/3 width on desktop, full on mobile */}

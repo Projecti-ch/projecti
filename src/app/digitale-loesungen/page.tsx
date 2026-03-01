@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 import Link from "next/link";
 import Image from "next/image";
+import AnimatedVisual from "@/components/AnimatedVisual";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
@@ -220,15 +221,9 @@ function Vorteile() {
       <SectionDivider label="Vorteile" />
       <div className={`${cx} mt-8 md:mt-12`}>
         <div className="flex gap-8 lg:gap-12">
-          {/* Illustration placeholder — 1/3 width on desktop */}
-          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative">
-            <Image
-              src="/images/illustration-placeholder.png"
-              alt="Illustration Vorteile"
-              fill
-              loading="lazy"
-              className="object-cover"
-            />
+          {/* Animated visual — 1/3 width on desktop */}
+          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative border border-[#333333]">
+            <AnimatedVisual composition="stacked-hexagons" size={288} />
           </div>
 
           {/* Benefits list — 2/3 width on desktop, full on mobile */}
@@ -309,7 +304,8 @@ export default function DigitaleLoesungenPage() {
           tag="Digitale Lösungen"
           headline="Systeme, die Immobilienprojekte effizienter machen."
           subheadline="Viele Unternehmen in der Immobilienbranche arbeiten mit fragmentierten Informationen, manuellen Prozessen und Werkzeugen, die nicht zusammenspielen. Das kostet Zeit, erzeugt Fehler und erschwert die Zusammenarbeit. Wir entwickeln digitale Lösungen, die diese Probleme pragmatisch adressieren."
-          bgImage="/images/illustration-placeholder.png"
+          bgImage="/images/projecti-hero-digitale-loesungen.jpg"
+          bgImageAlt="Person arbeitet am Laptop in einem modernen Büro"
           cta="Erstgespräch vereinbaren"
           ctaHref="https://cal.com/luka-dosen/projecti"
         />

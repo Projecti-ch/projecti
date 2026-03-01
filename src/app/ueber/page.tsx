@@ -151,7 +151,8 @@ export default function UeberPage() {
           tag="Über"
           headline="Die Baubranche braucht neue Ansätze"
           subheadline="Die Schweiz braucht mehr Wohnraum. Gleichzeitig verlieren zu viele Projekte Zeit und Geld durch fragmentierte Informationen und unklare Abläufe. Projecti verbindet strukturierte Planungsprozesse mit digitalen Workflows, damit Immobilienentwickler effizienter bauen können. Für Wohnraum, den wir dringend benötigen."
-          bgImage="/images/illustration-placeholder.png"
+          bgImage="/images/projecti-hero-ueber.jpg"
+          bgImageAlt="Offenes Büro mit moderner Raumgestaltung und Pflanzen"
         />
         <UeberMich />
         <Vision />

@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 import Link from "next/link";
 import Image from "next/image";
 import ShapeIcon from "@/components/shapes/ShapeIcon";
+import AnimatedVisual from "@/components/AnimatedVisual";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
@@ -47,7 +48,6 @@ function StrategischePlanung() {
     <section className="py-16 md:py-20 lg:py-[120px]">
       <SectionDivider label="Strategische Planung" />
       <div className={`${cx} mt-8 md:mt-12`}>
-        {/* Intro text */}
         <FadeIn>
           <h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold max-w-[700px]">
             Der richtige Entwicklungspfad für dein Grundstück
@@ -70,7 +70,6 @@ function StrategischePlanung() {
           </div>
         </FadeIn>
 
-        {/* 2×2 grid */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {boxes.map((box, i) => (
             <FadeIn key={box.title} delay={i * 80}>
@@ -78,7 +77,7 @@ function StrategischePlanung() {
                 <h3 className="text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
                   {box.title}
                 </h3>
-                <p className="mt-4 text-[16px] leading-[1.6] text-muted flex-1">
+                <p className="mt-4 text-[16px] leading-[1.6] text-muted">
                   {box.body}
                 </p>
               </div>
@@ -86,7 +85,6 @@ function StrategischePlanung() {
           ))}
         </div>
 
-        {/* CTA button below boxes */}
         <FadeIn delay={360}>
           <div className="mt-10 text-center">
             <Link
@@ -273,15 +271,9 @@ function Vorteile() {
       <SectionDivider label="Vorteile" />
       <div className={`${cx} mt-8 md:mt-12`}>
         <div className="flex gap-8 lg:gap-12">
-          {/* Illustration placeholder — 1/3 width on desktop */}
-          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative">
-            <Image
-              src="/images/illustration-placeholder.png"
-              alt="Illustration Vorteile"
-              fill
-              loading="lazy"
-              className="object-cover"
-            />
+          {/* Animated visual — 1/3 width on desktop */}
+          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative border border-[#333333]">
+            <AnimatedVisual composition="stacked-diamonds" size={288} />
           </div>
 
           {/* Benefits list — 2/3 width on desktop, full on mobile */}
@@ -362,7 +354,8 @@ export default function PlanungPage() {
           tag="Planung"
           headline="Architekturplanung für moderne Immobilienentwickler."
           subheadline="Immobilienprojekte werden anspruchsvoller. Mehr Normen, strengere Auflagen, komplexere Koordination. Gleichzeitig steigt der Druck, Entscheidungen früh zu treffen und Projekte effizient umzusetzen. Projecti strukturiert diese Komplexität."
-          bgImage="/images/illustration-placeholder.png"
+          bgImage="/images/projecti-hero-planung.jpg"
+          bgImageAlt="Architekt beim Zeichnen von Planunterlagen auf dem Arbeitstisch"
           cta="Projekt einreichen"
           ctaHref="https://lukadosen.notion.site/294d18b25563811d84d1e14c62459229?pvs=105"
         />
