@@ -5,6 +5,7 @@ import SubpageHero from "@/components/SubpageHero";
 import FadeIn from "@/components/FadeIn";
 import SectionDivider from "@/components/SectionDivider";
 import Image from "next/image";
+import HeroVideo from "@/components/HeroVideo";
 
 export const metadata: Metadata = {
   title: "Über Projecti & Luka Došen",
@@ -124,16 +125,10 @@ function Vision() {
             </FadeIn>
           </div>
 
-          {/* Image placeholder */}
+          {/* Vision video */}
           <FadeIn delay={120} className="h-full">
             <div className="relative h-full min-h-[400px] rounded-xl overflow-hidden">
-              <Image
-                src="/images/illustration-placeholder.png"
-                alt="Illustration Vision"
-                fill
-                loading="lazy"
-                className="object-cover"
-              />
+              <HeroVideo playbackId="xQRRwSq3EtiXHwXhfzMIPxnyZpSY8aGUF56Mzv4DBtk" />
             </div>
           </FadeIn>
         </div>

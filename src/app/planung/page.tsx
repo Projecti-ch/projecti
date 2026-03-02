@@ -105,6 +105,8 @@ function Planungsleistungen() {
   const services = [
     {
       title: "Vorprojekt bis Baubewilligung",
+      image: "/images/planungsleistungen-vorprojekt-baubewilligung.jpg",
+      imageAlt: "Architekt erstellt Planunterlagen für ein Bauprojekt",
       body: "Vom ersten Entwurf bis zur Baueingabe entwickeln wir das Projekt mit Simulation und Optimierung. Wir koordinieren mit Fachplanern und Behörden.",
       items: [
         "Entwurf und Vorprojekt mit Varianten",
@@ -115,6 +117,8 @@ function Planungsleistungen() {
     },
     {
       title: "Ausschreibung und Ausführung",
+      image: "/images/planungsleistungen-ausschreibung-ausfuehrung.jpg",
+      imageAlt: "Bauunternehmer prüft Ausschreibungsunterlagen auf der Baustelle",
       body: "Nach der Bewilligung steigt die Koordinationskomplexität. Wir erstellen strukturierte Ausschreibungsunterlagen mit dokumentierter Mengenermittlung.",
       items: [
         "Ausschreibungspläne und Leistungsverzeichnisse",
@@ -125,6 +129,8 @@ function Planungsleistungen() {
     },
     {
       title: "Digitalisierung und Visualisierung",
+      image: "/images/planungsleistungen-digitalisierung-visualisierung.jpg",
+      imageAlt: "3D-Visualisierung eines Gebäudes am Bildschirm",
       body: "Nicht jedes Projekt braucht vollständige Planungsbegleitung. Manchmal fehlt ein spezifischer Baustein wie digitale Daten oder Visualisierungen.",
       items: [
         "Digitalisierung von Bestandsgebäuden (2D/3D)",
@@ -148,8 +154,8 @@ function Planungsleistungen() {
                 {/* Image placeholder */}
                 <div className="relative h-[180px] overflow-hidden">
                   <Image
-                    src="/images/illustration-placeholder.png"
-                    alt="Illustration"
+                    src={s.image}
+                    alt={s.imageAlt}
                     fill
                     loading="lazy"
                     className="object-cover"
