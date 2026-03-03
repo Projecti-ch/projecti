@@ -2,7 +2,7 @@ import { cache } from 'react';
 import type { Project, Update, Media, Category } from '@/types/cms';
 
 // Server-only CMS URL (not exposed to client bundle)
-const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3000';
+const CMS_URL = (process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3000').replace(/\/$/, '');
 
 // CMS Response wrapper
 export interface CMSResponse<T> {
