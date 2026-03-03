@@ -84,7 +84,7 @@ function ClientLogos() {
             {logos.map((logo) => (
               <div
                 key={logo.name}
-                className="flex items-center justify-center rounded-xl border border-border bg-card py-6 md:py-8"
+                className="flex items-center justify-center rounded-xl border border-border bg-card px-4 py-6 md:px-6 md:py-8"
               >
                 <Image
                   src={logo.src}
