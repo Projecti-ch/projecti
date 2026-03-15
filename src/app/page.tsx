@@ -30,7 +30,10 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 function Hero() {
   return (
     <section className="relative flex min-h-[80vh] flex-col justify-end overflow-hidden">
-      <HeroVideo playbackId="dW2PUtb023Lcn971b1QpTXR821FtbrSbLLFoVHw1BYjg" />
+      <HeroVideo
+        playbackId="dW2PUtb023Lcn971b1QpTXR821FtbrSbLLFoVHw1BYjg"
+        poster="https://image.mux.com/dW2PUtb023Lcn971b1QpTXR821FtbrSbLLFoVHw1BYjg/thumbnail.webp?width=1920&height=1080&time=0"
+      />
 
       {/* Dark tint overlay for readability */}
       <div className="absolute inset-0 bg-[#191919]/70" />

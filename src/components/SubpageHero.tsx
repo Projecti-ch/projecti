@@ -11,6 +11,7 @@ export default function SubpageHero({
   bgImage,
   bgImageAlt,
   heroVideoPlaybackId,
+  heroVideoPoster,
 }: {
   tag?: string;
   headline: string;
@@ -20,13 +21,14 @@ export default function SubpageHero({
   bgImage?: string;
   bgImageAlt?: string;
   heroVideoPlaybackId?: string;
+  heroVideoPoster?: string;
 }) {
   return (
     <section className="relative overflow-hidden flex min-h-[80vh] flex-col justify-end">
       {/* Optional hero video */}
       {heroVideoPlaybackId && (
         <>
-          <HeroVideo playbackId={heroVideoPlaybackId} />
+          <HeroVideo playbackId={heroVideoPlaybackId} poster={heroVideoPoster} />
           <div className="absolute inset-0 bg-[#191919]/70" />
         </>
       )}

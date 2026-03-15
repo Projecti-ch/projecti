@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const links = [
@@ -17,6 +18,15 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuHeight, setMenuHeight] = useState(0);
+  const pathname = usePathname();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (pathname === href) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   // Measure the inner menu height for the slide animation
   useEffect(() => {
@@ -30,7 +40,7 @@ export default function Nav() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#191919]/60 backdrop-blur-md border-b border-white/5">
       <div className="flex h-16 items-center justify-between mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20">
-        <Link href="/" className="shrink-0">
+        <Link href="/" onClick={(e) => handleNavClick(e, "/")} className="shrink-0">
           <Image
             src="/projecti-logo.svg"
             alt="Projecti"
@@ -47,6 +57,7 @@ export default function Nav() {
             <Link
               key={l.href}
               href={l.href}
+              onClick={(e) => handleNavClick(e, l.href)}
               className="text-[15px] font-light leading-none text-white/60 transition-colors duration-200 hover:text-white"
             >
               {l.label}
@@ -99,7 +110,7 @@ export default function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              onClick={() => setOpen(false)}
+              onClick={(e) => { handleNavClick(e, l.href); setOpen(false); }}
               className="block py-3 text-lg font-light text-white/70 transition-all hover:text-white"
               style={{
                 opacity: open ? 1 : 0,

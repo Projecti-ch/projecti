@@ -143,6 +143,7 @@ export default function RessourcenPage() {
           tag="Ressourcen"
           headline="Wissen teilen. Transparenz schaffen. Gemeinsam bauen."
           heroVideoPlaybackId="ykx1Wa8MTEYkbunt02chw9vCLoAQcw8kP7bqGkWmb2D4"
+          heroVideoPoster="https://image.mux.com/ykx1Wa8MTEYkbunt02chw9vCLoAQcw8kP7bqGkWmb2D4/thumbnail.webp?width=1920&height=1080&time=0"
         />
         <ResourceGrid />
         <RessourcenCta />

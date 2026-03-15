@@ -142,6 +142,7 @@ export default function ProjektePage() {
           headline="Wie wir Projekte strukturiert umsetzen."
           subheadline="Jedes Projekt ist massgeschneidert. Unterschiedliche Ausgangssituationen, unterschiedliche Herausforderungen, unterschiedliche Ziele. Was bleibt, ist unser Ansatz. Strukturierte Planung, dokumentierte Entscheidungen und digitale Workflows. Das Ergebnis sind planbare Projektverläufe."
           heroVideoPlaybackId="loGXnXqjhYCYbEc85KYU1s6xEVe01GkPWzWbnf02lbx9c"
+          heroVideoPoster="https://image.mux.com/loGXnXqjhYCYbEc85KYU1s6xEVe01GkPWzWbnf02lbx9c/thumbnail.webp?width=1920&height=1080&time=0"
           cta="Erstgespräch vereinbaren"
           ctaHref="https://cal.com/luka-dosen/projecti"
         />

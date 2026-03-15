@@ -59,6 +59,9 @@ export default function Testimonials() {
   const isPaused = useRef(false);
   const isAutoScrolling = useRef(false);
 
+  // Doubled list for seamless infinite scroll
+  const doubled = [...testimonials, ...testimonials];
+
   // Get single card width (including gap) from the first card element
   const getCardStep = () => {
     const el = scrollRef.current;
@@ -74,20 +77,20 @@ export default function Testimonials() {
       if (isAutoScrolling.current) return;
       const step = getCardStep();
       if (step === 0) return;
-      const idx = Math.round(el.scrollLeft / step);
-      setActive(Math.min(idx, count - 1));
+      const idx = Math.round(el.scrollLeft / step) % count;
+      setActive(idx);
     };
     el.addEventListener("scroll", handleScroll, { passive: true });
     return () => el.removeEventListener("scroll", handleScroll);
   }, [count]);
 
-  // Ensure scroll starts at position 0 (card #1) on mount
+  // Ensure scroll starts at position 0 on mount
   useEffect(() => {
     const el = scrollRef.current;
     if (el) el.scrollLeft = 0;
   }, []);
 
-  // Autoscroll every 3s — infinite loop, pauses on hover
+  // Autoscroll every 3s — continuous loop, pauses on hover
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -97,20 +100,27 @@ export default function Testimonials() {
       const step = getCardStep();
       if (step === 0) return;
 
-      const nextIdx = (active + 1) % count;
+      const currentScrollIdx = Math.round(el.scrollLeft / step);
+      const nextScrollIdx = currentScrollIdx + 1;
 
       isAutoScrolling.current = true;
 
-      if (nextIdx === 0) {
-        // Loop back: instant jump to start, then let the next tick scroll to card 1
-        el.scrollTo({ left: 0, behavior: "smooth" });
-        setActive(0);
-        setTimeout(() => {
-          isAutoScrolling.current = false;
-        }, 500);
+      // If we've scrolled past the first set, silently reset to the
+      // equivalent position in the first set before scrolling forward
+      if (nextScrollIdx >= count) {
+        const resetIdx = nextScrollIdx - count;
+        el.scrollTo({ left: resetIdx * step, behavior: "instant" });
+        // Now smooth-scroll to the next card
+        requestAnimationFrame(() => {
+          el.scrollTo({ left: (resetIdx + 1) * step, behavior: "smooth" });
+          setActive((resetIdx + 1) % count);
+          setTimeout(() => {
+            isAutoScrolling.current = false;
+          }, 500);
+        });
       } else {
-        el.scrollTo({ left: nextIdx * step, behavior: "smooth" });
-        setActive(nextIdx);
+        el.scrollTo({ left: nextScrollIdx * step, behavior: "smooth" });
+        setActive(nextScrollIdx % count);
         setTimeout(() => {
           isAutoScrolling.current = false;
         }, 500);
@@ -136,7 +146,7 @@ export default function Testimonials() {
       el.removeEventListener("touchstart", pause);
       el.removeEventListener("touchend", resume);
     };
-  }, [active, count]);
+  }, [count]);
 
   const scrollTo = (idx: number) => {
     const step = getCardStep();
@@ -158,9 +168,9 @@ export default function Testimonials() {
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto testimonial-scroll items-stretch"
         >
-          {testimonials.map((t) => (
+          {doubled.map((t, i) => (
             <div
-              key={t.name}
+              key={`${t.name}-${i}`}
               className="w-[calc((100%-48px)/2.5)] min-w-[280px] shrink-0 rounded-xl border border-border bg-card p-6 md:p-8 flex flex-col"
             >
               {/* Quote text — flex-1 pushes the person block to the bottom */}
