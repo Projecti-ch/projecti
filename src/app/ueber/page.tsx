@@ -65,7 +65,7 @@ function UeberMich() {
           <FadeIn delay={120} className="h-full">
             <div className="h-full min-h-[400px] rounded-xl overflow-hidden">
               <Image
-                src="/images/portrait-luka-grau.jpg"
+                src="/images/portrait-luka.jpg"
                 alt="Portrait von Luka Došen, Gründer von Projecti"
                 width={600}
                 height={800}

@@ -275,7 +275,7 @@ export default async function UpdateDetailPage({
               {/* Portrait */}
               <div className="w-[120px] h-[120px] md:w-[160px] md:h-[160px] shrink-0 rounded-xl overflow-hidden">
                 <Image
-                  src="/images/portrait-luka-grau.jpg"
+                  src="/images/portrait-luka.jpg"
                   alt="Portrait von Luka Došen, Gründer von Projecti"
                   width={160}
                   height={160}
