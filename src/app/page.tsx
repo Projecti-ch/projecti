@@ -8,7 +8,7 @@ import FeaturedProjects from "@/components/FeaturedProjects";
 import Testimonials from "@/components/Testimonials";
 import Link from "next/link";
 import Image from "next/image";
-import AnimatedVisual from "@/components/AnimatedVisual";
+import SilkBackground from "@/components/SilkBackground";
 import ShapeIcon from "@/components/shapes/ShapeIcon";
 
 export const metadata: Metadata = {
@@ -223,7 +223,7 @@ function Benefits() {
         <div className="flex gap-8 lg:gap-12">
           {/* Animated visual — 1/3 width on desktop */}
           <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative border border-[#333333]">
-            <AnimatedVisual composition="stacked-circles" size={288} />
+            <SilkBackground composition="stacked-circles" size={288} />
           </div>
 
           {/* Benefits list — 2/3 width on desktop, full on mobile */}
