@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 import Link from "next/link";
 import Image from "next/image";
 import ShapeIcon from "@/components/shapes/ShapeIcon";
-import AnimatedVisual from "@/components/AnimatedVisual";
+import SilkBackground from "@/components/SilkBackground";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
@@ -279,7 +279,7 @@ function Vorteile() {
         <div className="flex gap-8 lg:gap-12">
           {/* Animated visual — 1/3 width on desktop */}
           <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative border border-[#333333]">
-            <AnimatedVisual composition="stacked-diamonds" size={288} />
+            <SilkBackground composition="stacked-diamonds" size={288} />
           </div>
 
           {/* Benefits list — 2/3 width on desktop, full on mobile */}
