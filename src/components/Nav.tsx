@@ -80,17 +80,17 @@ export default function Nav() {
           aria-label="Menü"
         >
           <span
-            className={`block h-0.5 w-6 bg-white transition-transform duration-200 ${
+            className={`block h-0.5 w-6 bg-accent transition-transform duration-200 ${
               open ? "translate-y-2 rotate-45" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-white transition-opacity duration-200 ${
+            className={`block h-0.5 w-6 bg-accent transition-opacity duration-200 ${
               open ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-white transition-transform duration-200 ${
+            className={`block h-0.5 w-6 bg-accent transition-transform duration-200 ${
               open ? "-translate-y-2 -rotate-45" : ""
             }`}
           />

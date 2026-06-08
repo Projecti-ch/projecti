@@ -25,7 +25,7 @@ const testimonials = [
     quote:
       "Unkomplizierte Zusammenarbeit, unsere Anforderungen wurden bestens verstanden und die Ergebnisse verständlich erklärt. Ein empfehlenswerter Service, den wir jederzeit wieder nutzen würden.",
     name: "Jonas Haas",
-    role: "Allreal Generalunternehmung",
+    role: "Allreal",
     portrait: "/images/testimonial-jonas-haas.jpg",
   },
   {
