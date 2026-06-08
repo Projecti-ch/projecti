@@ -150,6 +150,50 @@ button[class*="rounded-full"] {
   display: none;
 }
 
+/* ─── Client logo marquee ─── */
+.logo-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+.logo-marquee__track {
+  display: flex;
+  width: max-content;
+  /* Two identical copies sit side by side; shifting by -50% (one copy
+     width) and animating back to 0 moves the strip to the right and
+     loops seamlessly. */
+  animation: logo-marquee-right 40s linear infinite;
+}
+.logo-marquee:hover .logo-marquee__track {
+  animation-play-state: paused;
+}
+@keyframes logo-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee__track {
+    animation: none;
+    transform: none;
+  }
+}
+
 /* ─── Mux Player (Hero Video) ─── */
 mux-player {
   --controls: none;

@@ -76,29 +76,37 @@ function ClientLogos() {
     { name: "Swiss Prime Site Solutions", src: "/images/logo-spss.png" },
     { name: "Allreal", src: "/images/logo-allreal.png" },
     { name: "Axalo Immobilien", src: "/images/logo-axalo-immobilien.png" },
+    { name: "Ritter Schumacher", src: "/images/logo-ritter-schumacher.png" },
+    { name: "SR Baumanagement", src: "/images/logo-sr-baumanagement.png" },
   ];
+
+  // Two identical copies make the marquee loop seamlessly.
+  const marqueeLogos = [...logos, ...logos];
 
   return (
     <section className="py-12 md:py-16">
       <SectionDivider label="Kunden, die uns vertrauen" />
       <div className={`${cx} mt-8 md:mt-12`}>
         <FadeIn>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {logos.map((logo) => (
-              <div
-                key={logo.name}
-                className="flex items-center justify-center rounded-xl border border-border bg-card px-4 py-6 md:px-6 md:py-8"
-              >
-                <Image
-                  src={logo.src}
-                  alt={`${logo.name} Logo`}
-                  width={120}
-                  height={40}
-                  loading="lazy"
-                  className="h-8 w-auto object-contain opacity-60"
-                />
-              </div>
-            ))}
+          <div className="logo-marquee">
+            <div className="logo-marquee__track gap-4 md:gap-6">
+              {marqueeLogos.map((logo, i) => (
+                <div
+                  key={`${logo.name}-${i}`}
+                  aria-hidden={i >= logos.length}
+                  className="flex w-[160px] md:w-[200px] shrink-0 items-center justify-center rounded-xl border border-border bg-card px-4 py-6 md:px-6 md:py-8"
+                >
+                  <Image
+                    src={logo.src}
+                    alt={`${logo.name} Logo`}
+                    width={120}
+                    height={40}
+                    loading="lazy"
+                    className="h-8 w-auto object-contain opacity-60"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </FadeIn>
       </div>
