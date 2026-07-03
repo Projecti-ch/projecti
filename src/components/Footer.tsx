@@ -24,7 +24,7 @@ export default function Footer() {
               </Link>
             </div>
             <div className="mt-4 space-y-0 text-[14px] leading-[1.8] text-muted">
-              <p>&copy; 2026 Projecti</p>
+              <p>&copy; 2026 Projecti GmbH</p>
               <p>Alle Rechte vorbehalten</p>
               <Link
                 href="/rechtliches"

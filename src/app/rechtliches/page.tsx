@@ -8,7 +8,7 @@ import FadeIn from "@/components/FadeIn";
 export const metadata: Metadata = {
   title: "Impressum & Datenschutz",
   description:
-    "Impressum und Datenschutzerklärung von Projecti, c/o The Luka Dosen Labs, Bahnhofstrasse 11, 7302 Landquart, Schweiz.",
+    "Impressum und Datenschutzerklärung von Projecti GmbH, Bahnhofstrasse 11, 7302 Landquart, Schweiz.",
   robots: {
     index: false,
     follow: false,
@@ -40,7 +40,7 @@ function Datenschutz() {
             </p>
             <p className={`mt-4 max-w-[800px] ${prose}`}>
               <strong className="text-white font-medium">
-                The Luka Dosen Labs
+                Projecti GmbH
               </strong>
               <br />
               Bahnhofstrasse 11
@@ -332,9 +332,7 @@ function Impressum() {
             {/* 01 */}
             <h3 className={`${h3Style} max-w-[800px]`}>01 — Kontaktadresse</h3>
             <p className={`mt-4 max-w-[800px] ${prose}`}>
-              <strong className="text-white font-medium">Projecti</strong>
-              <br />
-              c/o The Luka Dosen Labs
+              <strong className="text-white font-medium">Projecti GmbH</strong>
               <br />
               Bahnhofstrasse 11
               <br />
@@ -373,9 +371,9 @@ function Impressum() {
             {/* 03 */}
             <h3 className={`${h3Style} max-w-[800px]`}>03 — Handelsregistereintrag</h3>
             <p className={`mt-4 max-w-[800px] ${prose}`}>
-              Eingetragener Firmenname: The Luka Dosen Labs
+              Eingetragener Firmenname: Projecti GmbH
               <br />
-              UID: CHE-461.710.564
+              UID: CHE-145.952.736
               <br />
               Handelsregisteramt: Chur
             </p>
@@ -395,7 +393,7 @@ export default function RechtlichesPage() {
         <SubpageHero
           tag="Rechtliches"
           headline="Datenschutz & Impressum"
-          subheadline="© Projecti | Landquart, 07.01.2025"
+          subheadline="© Projecti GmbH | Landquart, 01.07.2026"
         />
         <Datenschutz />
         <Impressum />
