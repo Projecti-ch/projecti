@@ -144,7 +144,7 @@ function renderNode(node: SerializedNode, index: number): React.ReactNode {
         <a
           key={index}
           href={url}
-          className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors"
+          className="text-jade underline underline-offset-2 hover:text-evergreen transition-colors"
           target={openInNewTab ? '_blank' : undefined}
           rel={openInNewTab ? 'noopener noreferrer' : undefined}
         >
@@ -175,7 +175,7 @@ function renderNode(node: SerializedNode, index: number): React.ReactNode {
 
     case 'quote':
       return (
-        <blockquote key={index} className="border-l-4 border-accent pl-4 italic my-6 text-muted">
+        <blockquote key={index} className="border-l-4 border-jade pl-4 italic my-6 text-muted">
           {node.children?.map((child, i) => renderNode(child, i))}
         </blockquote>
       );

@@ -174,12 +174,12 @@ export default function Testimonials() {
               className="w-[calc((100%-48px)/2.5)] min-w-[280px] shrink-0 rounded-xl border border-border bg-card p-6 md:p-8 flex flex-col"
             >
               {/* Quote text — flex-1 pushes the person block to the bottom */}
-              <p className="text-[16px] leading-[1.6] text-white/80 flex-1">
+              <p className="text-[16px] leading-[1.6] text-muted flex-1">
                 «{t.quote}»
               </p>
               {/* Person */}
               <div className="mt-6 flex items-center gap-4 border-t border-border pt-5">
-                <div className="h-24 w-24 shrink-0 rounded-xl overflow-hidden bg-gradient-to-br from-[#333] to-[#222]">
+                <div className="h-24 w-24 shrink-0 rounded-xl overflow-hidden bg-pistachio">
                   <Image
                     src={t.portrait}
                     alt={`Portrait von ${t.name}`}
@@ -191,7 +191,7 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <p className="text-[16px] font-semibold">{t.name}</p>
-                  <p className="text-[14px] text-muted">{t.role}</p>
+                  <p className="text-[14px] text-tertiary">{t.role}</p>
                 </div>
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function Testimonials() {
               key={i}
               onClick={() => scrollTo(i)}
               className={`h-2 w-2 rounded-full transition-colors duration-200 ${
-                i === active ? "bg-accent" : "bg-border"
+                i === active ? "bg-jade" : "bg-border"
               }`}
               aria-label={`Testimonial ${i + 1}`}
             />

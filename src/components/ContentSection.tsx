@@ -42,7 +42,7 @@ export default function ContentSection({
       {body && (
         <div className={`${cx} mt-8 md:mt-12`}>
           <FadeIn delay={80}>
-            <div className="max-w-[800px] text-[16px] leading-[1.6] text-white">
+            <div className="max-w-[800px] text-[16px] leading-[1.6] text-foreground">
               <RichText content={body} />
             </div>
           </FadeIn>

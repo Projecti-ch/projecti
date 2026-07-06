@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       "Strukturierte Architekturplanung und digitale Lösungen für Immobilienprojekte in der Deutschschweiz. Über 9 Jahre Erfahrung, 100+ Projekte. Jetzt Erstgespräch vereinbaren.",
     images: [
       {
-        url: "/images/projecti-social-preview.png",
+        url: "/images/projecti-social-preview.jpg",
         width: 1200,
         height: 630,
         alt: "Projecti — Architekturplanung & Digitale Lösungen",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Projecti | Architekturplanung & Digitale Lösungen",
     description:
       "Strukturierte Architekturplanung und digitale Lösungen für Immobilienprojekte in der Deutschschweiz. Über 9 Jahre Erfahrung, 100+ Projekte.",
-    images: ["/images/projecti-social-preview.png"],
+    images: ["/images/projecti-social-preview.jpg"],
   },
 };
 

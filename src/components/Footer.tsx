@@ -15,7 +15,7 @@ export default function Footer() {
             <div className="flex items-center h-[18px]">
               <Link href="/" className="inline-flex items-center">
                 <Image
-                  src="/projecti-logo.svg"
+                  src="/projecti-logo-canvas.svg"
                   alt="Projecti"
                   width={100}
                   height={14}
@@ -28,7 +28,7 @@ export default function Footer() {
               <p>Alle Rechte vorbehalten</p>
               <Link
                 href="/rechtliches"
-                className="block text-white/60 transition-colors duration-200 hover:text-white"
+                className="block text-muted transition-colors duration-200 hover:text-jade"
               >
                 Rechtliches
               </Link>
@@ -37,7 +37,7 @@ export default function Footer() {
 
           {/* Column 2 — Location */}
           <div className="lg:border-l lg:border-border lg:pl-8 lg:pr-8">
-            <p className="text-[12px] font-normal uppercase tracking-widest text-accent leading-[1.5]">
+            <p className="text-[12px] font-normal uppercase tracking-widest text-tertiary leading-[1.5]">
               Wo wir sind
             </p>
             <div className="mt-4 space-y-0 text-[14px] leading-[1.8] text-muted">
@@ -49,7 +49,7 @@ export default function Footer() {
 
           {/* Column 3 — Office hours */}
           <div className="lg:border-l lg:border-border lg:pl-8 lg:pr-8">
-            <p className="text-[12px] font-normal uppercase tracking-widest text-accent leading-[1.5]">
+            <p className="text-[12px] font-normal uppercase tracking-widest text-tertiary leading-[1.5]">
               Bürozeiten
             </p>
             <div className="mt-4 space-y-0 text-[14px] leading-[1.8] text-muted">
@@ -61,13 +61,13 @@ export default function Footer() {
 
           {/* Column 4 — Contact */}
           <div className="lg:border-l lg:border-border lg:pl-8">
-            <p className="text-[12px] font-normal uppercase tracking-widest text-accent leading-[1.5]">
+            <p className="text-[12px] font-normal uppercase tracking-widest text-tertiary leading-[1.5]">
               Kontakt
             </p>
             <div className="mt-4 space-y-0 text-[14px] leading-[1.8]">
               <a
                 href="mailto:luka@projecti.ch"
-                className="block text-muted transition-colors duration-200 hover:text-white"
+                className="block text-muted transition-colors duration-200 hover:text-jade"
               >
                 E-Mail Luka
               </a>
@@ -75,7 +75,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/lukadosen/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-muted transition-colors duration-200 hover:text-white"
+                className="block text-muted transition-colors duration-200 hover:text-jade"
               >
                 LinkedIn
               </a>
@@ -83,7 +83,7 @@ export default function Footer() {
                 href="https://cal.com/luka-dosen/projecti"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-muted transition-colors duration-200 hover:text-white"
+                className="block text-muted transition-colors duration-200 hover:text-jade"
               >
                 Call buchen
               </a>
