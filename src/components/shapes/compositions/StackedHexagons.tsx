@@ -12,11 +12,11 @@ export default function StackedHexagons({
   const id = `compGradStackedHexagons-${variant}`;
   const isDark = variant === 'dark';
 
-  const gradStart = isDark ? '#efff00' : '#191919';
-  const gradEnd = isDark ? '#c4d100' : '#2a2a2a';
-  const fill = isDark ? '#191919' : '#efff00';
+  const gradStart = isDark ? '#73e2a7' : '#12351f';
+  const gradEnd = isDark ? '#1c7c54' : '#1b512d';
+  const fill = isDark ? '#12351f' : '#73e2a7';
   const shadow = isDark
-    ? 'drop-shadow(0 4px 12px rgba(239, 255, 0, 0.15))'
+    ? 'drop-shadow(0 4px 12px rgba(115, 226, 167, 0.15))'
     : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2))';
 
   // Flat-top hexagon, radius 28, center (48, 58).

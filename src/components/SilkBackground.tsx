@@ -38,7 +38,7 @@ interface SilkBackgroundProps {
 }
 
 const DEFAULT_CONFIG: Required<SilkConfig> = {
-  veins: [0.09, 0.11, 0.0],
+  veins: [0.059, 0.137, 0.094], // #0F2318 (evergreen ink)
   edges: [0.28, 0.8],
   bias: 0.2,
   freq: 1.28,
@@ -47,9 +47,9 @@ const DEFAULT_CONFIG: Required<SilkConfig> = {
   blurScale: 0.45,
 };
 
-const YELLOW: [number, number, number] = [0.937, 1.0, 0.0]; // #EFFF00
+const YELLOW: [number, number, number] = [0.451, 0.886, 0.655]; // #73E2A7 (mint)
 const FALLBACK_BG =
-  'radial-gradient(120% 120% at 50% 35%, #EFFF00, #8f9900 55%, #2a2d00 100%)';
+  'radial-gradient(120% 120% at 50% 35%, #73E2A7, #1c7c54 55%, #0f2318 100%)';
 
 const VERT = `attribute vec2 a_pos; void main(){ gl_Position=vec4(a_pos,0.,1.); }`;
 const FRAG = `precision mediump float;

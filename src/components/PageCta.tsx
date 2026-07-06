@@ -35,14 +35,14 @@ export default function PageCta({
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={primaryHref}
-              className="inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+              className="inline-flex items-center rounded-full bg-mint px-4 py-1.5 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
             >
               {primaryCta}
             </Link>
             {secondaryCta && (
               <Link
                 href={secondaryHref}
-                className="inline-flex items-center rounded-full border border-white px-4 py-1.5 text-[14px] font-light text-white transition-colors duration-200 hover:bg-white/10"
+                className="inline-flex items-center rounded-full border border-border bg-card px-4 py-1.5 text-[14px] font-light text-foreground transition-colors duration-200 hover:border-jade hover:text-jade"
               >
                 {secondaryCta}
               </Link>

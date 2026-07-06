@@ -31,17 +31,23 @@ export default function ProjectHero({
           className="object-cover"
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]" />
+        <div className="absolute inset-0 bg-surface-dark" />
       )}
 
-      {/* Dark Overlay — matches SubpageHero tint */}
-      <div className="absolute inset-0 bg-[#191919]/70" />
+      {/* Evergreen scrim — matches SubpageHero tint */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,24,16,.3) 0%, rgba(10,24,16,.45) 36%, rgba(10,24,16,.75) 64%, rgba(10,24,16,.96) 100%)",
+        }}
+      />
 
       {/* Breadcrumb */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <div className="mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20 pb-6 md:pb-8">
           <FadeIn>
-            <p className="text-[18px] md:text-[22px] lg:text-[26px] font-light text-accent">
+            <p className="text-[18px] md:text-[22px] lg:text-[26px] font-light text-mint">
               {parts.map((part, i) => (
                 <span key={i}>
                   {i === 0 ? (

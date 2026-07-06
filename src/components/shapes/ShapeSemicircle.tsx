@@ -7,7 +7,7 @@ interface ShapeProps {
 export default function ShapeSemicircle({
   size = 64,
   className = '',
-  fillColor = '#191919',
+  fillColor = '#12351f',
 }: ShapeProps) {
   const id = 'gradSemicircle';
 
@@ -19,12 +19,12 @@ export default function ShapeSemicircle({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      style={{ display: 'inline-block', filter: 'drop-shadow(0 4px 12px rgba(239, 255, 0, 0.15))' }}
+      style={{ display: 'inline-block', filter: 'drop-shadow(0 4px 12px rgba(115, 226, 167, 0.15))' }}
     >
       <defs>
         <linearGradient id={id} x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
-          <stop offset="0" stopColor="#efff00" />
-          <stop offset="1" stopColor="#c4d100" />
+          <stop offset="0" stopColor="#73e2a7" />
+          <stop offset="1" stopColor="#1c7c54" />
         </linearGradient>
       </defs>
       {/* Filled upper dome — flat bottom at y=32 */}

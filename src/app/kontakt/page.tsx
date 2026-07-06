@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     description:
       "Kontakt zu Projecti aufnehmen. Erstgespräch vereinbaren, E-Mail senden oder auf LinkedIn vernetzen. Standort: Landquart, Graubünden. Für Projekte in der Deutschschweiz.",
     url: "https://www.projecti.ch/kontakt",
+    images: [
+      {
+        url: "/images/projecti-social-preview.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Projecti — Architekturplanung & Digitale Lösungen",
+      },
+    ],
   },
 };
 
@@ -57,7 +65,7 @@ function Kontakt() {
         <div className="mt-12 grid gap-6 md:grid-cols-3 items-stretch">
           {channels.map((c, i) => (
             <FadeIn key={c.title} delay={i * 100}>
-              <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-accent flex flex-col">
+              <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-jade flex flex-col">
                 <h3 className="text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
                   {c.title}
                 </h3>
@@ -69,7 +77,7 @@ function Kontakt() {
                   {...(c.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="mt-6 inline-flex items-center gap-1 text-[14px] font-medium text-accent transition-colors duration-200 hover:text-accent-hover"
+                  className="mt-6 inline-flex items-center gap-1 text-[14px] font-medium text-jade transition-colors duration-200 hover:text-evergreen"
                 >
                   {c.linkLabel} <span className="ml-1">→</span>
                 </a>
@@ -82,7 +90,7 @@ function Kontakt() {
   );
 }
 
-/* ─── Standort — Google Maps embed with dark/grayscale style ─── */
+/* ─── Standort — Google Maps embed, lightly desaturated with a jade wash ─── */
 function Standort() {
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
@@ -90,21 +98,21 @@ function Standort() {
       <div className={`${cx} mt-8 md:mt-12`}>
         <FadeIn>
           <div className="relative overflow-hidden rounded-xl border border-border">
-            {/* Grayscale + dark tint overlay for the map */}
+            {/* Black & white map with a jade brand wash (duotone) */}
             <div className="relative aspect-[16/9] md:aspect-[21/9]">
               <iframe
                 src="https://maps.google.com/maps?q=Bahnhofstrasse+11,+7302+Landquart,+Switzerland&output=embed&z=16"
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: "grayscale(100%) brightness(0.6) contrast(1.1)" }}
+                style={{ border: 0, filter: "grayscale(100%) contrast(1.05)" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="absolute inset-0 w-full h-full"
                 title="Projecti Standort — Bahnhofstrasse 11, 7302 Landquart"
               />
-              {/* Yellow accent tint overlay at 60% */}
-              <div className="absolute inset-0 bg-accent/60 pointer-events-none mix-blend-multiply" />
+              {/* Subtle jade brand wash */}
+              <div className="absolute inset-0 bg-jade/25 pointer-events-none mix-blend-multiply" />
             </div>
           </div>
         </FadeIn>

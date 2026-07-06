@@ -16,7 +16,7 @@ export default function NotFound() {
     <>
       <Nav />
       <main className="flex min-h-[80vh] flex-col items-center justify-center px-6 text-center">
-        <p className="text-[120px] md:text-[180px] lg:text-[240px] font-semibold leading-none tracking-[-0.04em] text-accent">
+        <p className="text-[120px] md:text-[180px] lg:text-[240px] font-semibold leading-none tracking-[-0.04em] text-jade">
           404
         </p>
         <p className="mt-6 text-[18px] leading-[1.6] text-muted max-w-[480px]">
@@ -24,7 +24,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="mt-10 inline-flex items-center rounded-full bg-accent px-5 py-2 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+          className="mt-10 inline-flex items-center rounded-full bg-mint px-5 py-2 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
         >
           Zur Startseite
         </Link>

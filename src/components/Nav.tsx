@@ -38,11 +38,11 @@ export default function Nav() {
   }, [open]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#191919]/60 backdrop-blur-md border-b border-white/5">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="flex h-16 items-center justify-between mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20">
         <Link href="/" onClick={(e) => handleNavClick(e, "/")} className="shrink-0">
           <Image
-            src="/projecti-logo.svg"
+            src="/projecti-logo-canvas.svg"
             alt="Projecti"
             width={120}
             height={32}
@@ -58,7 +58,7 @@ export default function Nav() {
               key={l.href}
               href={l.href}
               onClick={(e) => handleNavClick(e, l.href)}
-              className="text-[15px] font-light leading-none text-white/60 transition-colors duration-200 hover:text-white"
+              className="text-[15px] font-light leading-none text-muted transition-colors duration-200 hover:text-foreground"
             >
               {l.label}
             </Link>
@@ -67,7 +67,7 @@ export default function Nav() {
             href="https://cal.com/luka-dosen/projecti"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+            className="inline-flex items-center rounded-full bg-mint px-4 py-1.5 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
           >
             Austausch buchen
           </a>
@@ -80,17 +80,17 @@ export default function Nav() {
           aria-label="Menü"
         >
           <span
-            className={`block h-0.5 w-6 bg-accent transition-transform duration-200 ${
+            className={`block h-0.5 w-6 bg-foreground transition-transform duration-200 ${
               open ? "translate-y-2 rotate-45" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-accent transition-opacity duration-200 ${
+            className={`block h-0.5 w-6 bg-foreground transition-opacity duration-200 ${
               open ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-accent transition-transform duration-200 ${
+            className={`block h-0.5 w-6 bg-foreground transition-transform duration-200 ${
               open ? "-translate-y-2 -rotate-45" : ""
             }`}
           />
@@ -104,14 +104,14 @@ export default function Nav() {
       >
         <div
           ref={menuRef}
-          className="border-t border-border bg-[#191919]/90 backdrop-blur-md px-6 md:px-10 pb-8 pt-4"
+          className="border-t border-border bg-background/95 backdrop-blur-md px-6 md:px-10 pb-8 pt-4"
         >
           {links.map((l, i) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={(e) => { handleNavClick(e, l.href); setOpen(false); }}
-              className="block py-3 text-lg font-light text-white/70 transition-all hover:text-white"
+              className="block py-3 text-lg font-light text-muted transition-all hover:text-foreground"
               style={{
                 opacity: open ? 1 : 0,
                 transform: open ? "translateY(0)" : "translateY(-8px)",
@@ -126,7 +126,7 @@ export default function Nav() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="mt-4 inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+            className="mt-4 inline-flex items-center rounded-full bg-mint px-4 py-1.5 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
             style={{
               opacity: open ? 1 : 0,
               transform: open ? "translateY(0)" : "translateY(-8px)",

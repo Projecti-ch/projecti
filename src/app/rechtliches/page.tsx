@@ -19,7 +19,7 @@ const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
 /* ─── Shared prose styles — text capped at readable width ─── */
 const prose = "text-[16px] leading-[1.7] text-muted";
-const h3Style = "mt-10 text-[18px] font-semibold tracking-[-0.01em] text-white";
+const h3Style = "mt-10 text-[18px] font-semibold tracking-[-0.01em] text-foreground";
 /* hr spans the full container width (matching the yellow SectionDivider line) */
 const hrStyle = "my-8 border-t border-border";
 
@@ -39,7 +39,7 @@ function Datenschutz() {
               („wir" oder „uns"):
             </p>
             <p className={`mt-4 max-w-[800px] ${prose}`}>
-              <strong className="text-white font-medium">
+              <strong className="text-foreground font-medium">
                 Projecti GmbH
               </strong>
               <br />
@@ -228,7 +228,7 @@ function Datenschutz() {
                 href="https://tools.google.com/dlpage/gaoptout"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent hover:text-accent-hover transition-colors duration-200"
+                className="text-jade hover:text-evergreen transition-colors duration-200"
               >
                 tools.google.com/dlpage/gaoptout
               </a>{" "}
@@ -332,7 +332,7 @@ function Impressum() {
             {/* 01 */}
             <h3 className={`${h3Style} max-w-[800px]`}>01 — Kontaktadresse</h3>
             <p className={`mt-4 max-w-[800px] ${prose}`}>
-              <strong className="text-white font-medium">Projecti GmbH</strong>
+              <strong className="text-foreground font-medium">Projecti GmbH</strong>
               <br />
               Bahnhofstrasse 11
               <br />
@@ -344,7 +344,7 @@ function Impressum() {
               E-Mail:{" "}
               <a
                 href="mailto:luka@projecti.ch"
-                className="text-accent hover:text-accent-hover transition-colors duration-200"
+                className="text-jade hover:text-evergreen transition-colors duration-200"
               >
                 luka@projecti.ch
               </a>
@@ -354,7 +354,7 @@ function Impressum() {
                 href="https://www.projecti.ch"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent hover:text-accent-hover transition-colors duration-200"
+                className="text-jade hover:text-evergreen transition-colors duration-200"
               >
                 www.projecti.ch
               </a>

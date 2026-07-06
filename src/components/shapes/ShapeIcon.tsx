@@ -36,7 +36,7 @@ export default function ShapeIcon({
   shape,
   size = 64,
   className = '',
-  fillColor = '#191919',
+  fillColor = '#12351f',
 }: ShapeIconProps) {
   const props = { size, className, fillColor };
 

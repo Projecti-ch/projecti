@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     description:
       "Agentur für Architekturplanung und digitale Lösungen in der Deutschschweiz. Gegründet mit dem Ziel, Immobilienprojekte strukturierter zu machen. Über 9 Jahre Erfahrung.",
     url: "https://www.projecti.ch/ueber",
+    images: [
+      {
+        url: "/images/projecti-social-preview.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Projecti — Architekturplanung & Digitale Lösungen",
+      },
+    ],
   },
 };
 
@@ -65,7 +73,7 @@ function UeberMich() {
           <FadeIn delay={120} className="h-full">
             <div className="h-full min-h-[400px] rounded-xl overflow-hidden">
               <Image
-                src="/images/portrait-luka.jpg"
+                src="/images/2026-portrait-luka.jpg"
                 alt="Portrait von Luka Došen, Gründer von Projecti"
                 width={600}
                 height={800}
@@ -118,7 +126,7 @@ function Vision() {
                 href="https://cal.com/luka-dosen/projecti"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+                className="mt-8 inline-flex items-center rounded-full bg-mint px-4 py-1.5 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
               >
                 Sag mir hallo
               </a>

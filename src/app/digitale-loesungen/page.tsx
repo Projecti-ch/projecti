@@ -14,15 +14,28 @@ export const metadata: Metadata = {
     description:
       "Digitale Lösungen für effizientere Immobilienprojekte. GIS Analysen, Projektmanagement, AI Workflows. Pragmatisch umgesetzt, nicht nur konzipiert. Deutschschweiz.",
     url: "https://www.projecti.ch/digitale-loesungen",
+    images: [
+      {
+        url: "/images/projecti-social-preview.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Projecti — Architekturplanung & Digitale Lösungen",
+      },
+    ],
   },
 };
 import Link from "next/link";
 import Image from "next/image";
 import SilkBackground from "@/components/SilkBackground";
+import {
+  MotifAnalyse,
+  MotifStruktur,
+  MotifVermarktung,
+} from "@/components/SchwerpunktMotifs";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
-/* ─── Schwerpunkte — alternating text/image layout ─── */
+/* ─── Schwerpunkte — alternating cards with animated brand motifs ─── */
 function Schwerpunkte() {
   const areas = [
     {
@@ -35,6 +48,7 @@ function Schwerpunkte() {
         "Marktrecherchen für spezifische Nutzersegmente",
         "Aufbereitung von Entscheidungsgrundlagen für Investitionen",
       ],
+      Motif: MotifAnalyse,
     },
     {
       title: "Projekte strukturiert führen",
@@ -48,6 +62,7 @@ function Schwerpunkte() {
         "AI gestützte Workflows für wiederkehrende Aufgaben",
       ],
       mirrored: true,
+      Motif: MotifStruktur,
     },
     {
       title: "Projekte überzeugend kommunizieren",
@@ -59,6 +74,7 @@ function Schwerpunkte() {
         "Aufbereitung von Unterlagen für Investorengespräche",
         "Kampagnenunterstützung für Vermarktungsphasen",
       ],
+      Motif: MotifVermarktung,
     },
   ];
 
@@ -78,57 +94,68 @@ function Schwerpunkte() {
           </p>
         </FadeIn>
 
-        <div className="mt-12 space-y-8">
-          {areas.map((a, i) => (
-            <FadeIn key={a.title} delay={i * 80}>
-              <div className="rounded-xl border border-border bg-card overflow-hidden transition-colors duration-300 hover:border-accent h-full">
-                <div
-                  className={`flex flex-col h-full ${
-                    a.mirrored ? "lg:flex-row-reverse" : "lg:flex-row"
-                  }`}
-                >
-                  {/* Text content */}
-                  <div className="flex-1 p-6 md:p-8 lg:p-10 flex flex-col">
-                    <h3 className="text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]">
-                      {a.title}
-                    </h3>
-                    <p className="mt-1 text-[14px] leading-[1.5] text-muted">
-                      {a.sub}
-                    </p>
-                    <p className="mt-6 text-[16px] leading-[1.6] text-muted">
-                      {a.body}
-                    </p>
-                    <ul className="mt-6 flex-1 space-y-3 text-[16px] leading-[1.6] text-muted">
-                      {a.items.map((item) => (
-                        <li key={item} className="flex items-start gap-3">
-                          <span className="mt-[7px] block h-1.5 w-1.5 shrink-0 rounded-full bg-muted" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+        <div className="mt-12 space-y-[22px]">
+          {areas.map((a, i) => {
+            const Motif = a.Motif;
+            return (
+              <FadeIn key={a.title} delay={i * 80}>
+                <div className="rounded-[14px] border border-border bg-[linear-gradient(180deg,#FDFEFB_0%,#F9FCF3_100%)] overflow-hidden transition-colors duration-300 hover:border-jade">
+                  <div
+                    className={`lg:grid ${
+                      a.mirrored
+                        ? "lg:grid-cols-[0.85fr_1.15fr]"
+                        : "lg:grid-cols-[1.15fr_0.85fr]"
+                    }`}
+                  >
+                    {/* Text content */}
+                    <div
+                      className={`flex flex-col gap-4 p-6 md:p-10 lg:px-[52px] lg:py-[46px] ${
+                        a.mirrored ? "lg:order-2" : ""
+                      }`}
+                    >
+                      <h3 className="text-[24px] leading-[1.3] font-normal tracking-[0.005em]">
+                        {a.title}
+                      </h3>
+                      <p className="-mt-2 text-[15px] leading-[1.5] text-tertiary">
+                        {a.sub}
+                      </p>
+                      <p className="text-[15px] leading-[1.6] text-muted">
+                        {a.body}
+                      </p>
+                      <ul className="mt-1.5 flex flex-col gap-2.5">
+                        {a.items.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-3 text-[15px] leading-[1.6] text-muted"
+                          >
+                            <span className="mt-[8px] block h-1.5 w-1.5 shrink-0 rounded-full bg-muted" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  {/* Image placeholder */}
-                  <div className="hidden lg:block lg:w-[400px] shrink-0 relative overflow-hidden">
-                    <Image
-                      src="/images/illustration-placeholder.png"
-                      alt="Illustration"
-                      fill
-                      loading="lazy"
-                      className="object-cover"
-                    />
+                    {/* Animated brand motif */}
+                    <div
+                      className={`sp-visual hidden lg:block min-h-[400px] ${
+                        a.mirrored ? "lg:order-1" : ""
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <Motif />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            );
+          })}
         </div>
 
         <FadeIn delay={320}>
           <div className="mt-10 text-center">
             <Link
               href="/projekte"
-              className="inline-flex items-center rounded-full bg-accent px-4 py-1.5 text-[14px] font-light text-[#191919] transition-colors duration-200 hover:bg-accent-hover"
+              className="inline-flex items-center rounded-full bg-mint px-4 py-1.5 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
             >
               Projekte ansehen
             </Link>
@@ -177,8 +204,8 @@ function WieWirArbeiten() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 items-stretch">
           {steps.map((s, i) => (
             <FadeIn key={s.title} delay={i * 100}>
-              <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-accent flex flex-col">
-                <span className="text-[22px] font-semibold text-accent leading-none">
+              <div className="h-full rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-jade flex flex-col">
+                <span className="text-[22px] font-semibold text-jade leading-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-3 text-[22px] leading-[1.3] font-semibold tracking-[-0.02em]">
@@ -222,7 +249,7 @@ function Vorteile() {
       <div className={`${cx} mt-8 md:mt-12`}>
         <div className="flex gap-8 lg:gap-12">
           {/* Animated visual — 1/3 width on desktop */}
-          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative border border-[#333333]">
+          <div className="hidden lg:block lg:w-1/3 shrink-0 rounded-xl overflow-hidden min-h-[400px] relative border border-border">
             <SilkBackground composition="stacked-hexagons" size={288} />
           </div>
 
@@ -230,8 +257,8 @@ function Vorteile() {
           <div className="flex-1 space-y-6">
             {benefits.map((b, i) => (
               <FadeIn key={b.title} delay={i * 100}>
-                <div className="flex gap-6 rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-accent">
-                  <span className="text-[22px] font-semibold text-accent leading-none shrink-0 pt-1">
+                <div className="flex gap-6 rounded-xl border border-border bg-card p-6 md:p-8 transition-colors duration-300 hover:border-jade">
+                  <span className="text-[22px] font-semibold text-jade leading-none shrink-0 pt-1">
                     {b.num}
                   </span>
                   <div>
@@ -258,11 +285,12 @@ function DigitaleCta() {
     <section className="py-16 md:py-20 lg:py-[120px]">
       <div className={cx}>
         <FadeIn>
-          <div className="rounded-xl bg-accent p-6 md:p-10 lg:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-10">
+          <div className="relative overflow-hidden rounded-xl bg-surface-dark p-6 md:p-10 lg:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-10">
+            <div className="absolute inset-0 pointer-events-none" style={{background:"radial-gradient(70% 120% at 90% 120%, rgba(115,226,167,.28), rgba(28,124,84,.10) 45%, transparent 75%)"}} />
             {/* Portrait */}
-            <div className="w-[120px] h-[120px] md:w-[160px] md:h-[160px] shrink-0 rounded-xl overflow-hidden">
+            <div className="relative w-[120px] h-[120px] md:w-[160px] md:h-[160px] shrink-0 rounded-xl overflow-hidden">
               <Image
-                src="/images/portrait-luka.jpg"
+                src="/images/2026-portrait-luka.jpg"
                 alt="Portrait von Luka Došen, Gründer von Projecti"
                 width={160}
                 height={160}
@@ -272,18 +300,18 @@ function DigitaleCta() {
             </div>
 
             {/* Text + button */}
-            <div className="flex flex-col items-start">
-              <h2 className="text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold text-[#191919]">
+            <div className="relative flex flex-col items-start">
+              <h2 className="text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.02em] font-semibold text-on-dark">
                 Welche Herausforderung möchtest du lösen?
               </h2>
-              <p className="mt-3 text-[16px] leading-[1.6] text-[#191919]/70">
+              <p className="mt-3 text-[16px] leading-[1.6] text-on-dark/70">
                 Beschreib uns kurz, wo es in deinen Projekten oder Prozessen nicht rund läuft. Wir klären im Gespräch, ob und wie eine digitale Lösung helfen kann.
               </p>
               <a
                 href="https://cal.com/luka-dosen/projecti"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center rounded-full bg-[#191919] px-5 py-2 text-[14px] font-light text-accent transition-colors duration-200 hover:bg-[#2a2a2a]"
+                className="mt-6 inline-flex items-center rounded-full bg-mint px-5 py-2 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
               >
                 Erstgespräch vereinbaren
               </a>
