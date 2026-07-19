@@ -26,7 +26,14 @@ export default function FadeIn({
           observer.unobserve(el);
         }
       },
-      { threshold: 0.1 }
+      // Reveal as soon as the block's top edge crosses ~10% up from the
+      // viewport bottom, independent of block height. threshold: 0.1 fires
+      // only once 10% of the ELEMENT is on screen — for a tall resource
+      // article that's hundreds of px of blank space scrolling by before the
+      // fade starts, which reads as content appearing far too late. Using
+      // threshold 0 + a viewport-relative rootMargin decouples the trigger
+      // from content height.
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
     );
 
     observer.observe(el);
