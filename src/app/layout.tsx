@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Script from "next/script";
+import Analytics from "@/components/Analytics";
+import ConsentBanner from "@/components/ConsentBanner";
 
 const siteUrl = "https://www.projecti.ch";
 
@@ -51,19 +52,10 @@ export default function RootLayout({
     <html lang="de">
       <body className="antialiased">
         {children}
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-33WXHN1F1Y"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-33WXHN1F1Y');
-          `}
-        </Script>
+        {/* Analytics only renders once consent is granted, so no _ga cookie
+            exists before the visitor has chosen. */}
+        <Analytics gaId="G-33WXHN1F1Y" />
+        <ConsentBanner />
       </body>
     </html>
   );
