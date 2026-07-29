@@ -1,0 +1,48 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      # playwright.config.ts starts the production server itself
+      # (`npm run build && npm run start`) before the suite runs.
+      #
+      # CMS_URL is required: `generateStaticParams` in /projekte/[slug] and
+      # /ressourcen/[slug] fetches the CMS at build time and `src/lib/cms.ts`
+      # rethrows on failure, so the build hard-fails without a reachable CMS.
+      # Add it under Settings > Secrets and variables > Actions.
+      - name: Playwright tests
+        run: npm run test
+        env:
+          CMS_URL: ${{ secrets.CMS_URL }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

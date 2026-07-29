@@ -18,6 +18,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Testing
+
+```bash
+npm run test
+```
+
+Playwright browser tests in `e2e/`. They run against a production build, which
+the config starts itself, and need `CMS_URL` set (`.env.local` locally, a repo
+secret in CI). See [TESTING.md](TESTING.md).
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

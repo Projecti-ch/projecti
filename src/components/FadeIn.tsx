@@ -17,12 +17,31 @@ export default function FadeIn({
     const el = ref.current;
     if (!el) return;
 
+    // Tracked so an unmount mid-delay (route change during the fade) doesn't
+    // leave a timer writing to a detached node.
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const reveal = () => {
+      timer = setTimeout(() => {
+        el.classList.add("visible");
+      }, delay);
+    };
+
+    // Anything already in the first screen fades in on load rather than
+    // waiting for a scroll. The rootMargin below pulls the trigger line 10%
+    // up from the viewport bottom, so a block sitting in that last 10% — the
+    // client logos on a 16:9 desktop — would stay at opacity 0 until the user
+    // nudges the page. Above the fold there is no scroll to wait for, so
+    // reveal straight away and keep the CSS transition as the entrance.
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      reveal();
+      return () => clearTimeout(timer);
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            el.classList.add("visible");
-          }, delay);
+          reveal();
           observer.unobserve(el);
         }
       },
@@ -37,7 +56,10 @@ export default function FadeIn({
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
   }, [delay]);
 
   return (

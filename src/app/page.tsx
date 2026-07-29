@@ -35,9 +35,14 @@ export const metadata: Metadata = {
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
 /* ─── 1. HERO ─── */
+// The hero is 76vh normally, but never so tall that the client-logo strip
+// below it is pushed past the fold. That strip is a fixed ~200px (divider,
+// label, gap, tile), so on shorter screens the hero yields instead of clipping
+// the logos. Below ~500px of viewport the hero's own content wins and the
+// section grows from the content, as min-height implies.
 function Hero() {
   return (
-    <section className="relative flex min-h-[80vh] flex-col justify-end overflow-hidden bg-surface-dark">
+    <section className="relative flex min-h-[min(76vh,calc(100vh-240px))] flex-col justify-end overflow-hidden bg-surface-dark">
       <HeroVideo
         playbackId="dW2PUtb023Lcn971b1QpTXR821FtbrSbLLFoVHw1BYjg"
         poster="https://image.mux.com/dW2PUtb023Lcn971b1QpTXR821FtbrSbLLFoVHw1BYjg/thumbnail.webp?width=1920&height=1080&time=0"
@@ -52,7 +57,9 @@ function Hero() {
         }}
       />
 
-      <div className={`relative z-10 w-full ${cx} pb-20 pt-40`}>
+      <div
+        className={`relative z-10 w-full ${cx} pb-20 pt-40 [@media(max-height:820px)]:pb-12 [@media(max-height:820px)]:pt-24`}
+      >
         <FadeIn>
           <h1 className="max-w-[640px] text-[28px] md:text-[38px] leading-[1.18] tracking-[-0.005em] font-light text-[#f7faf4]">
             Planung und digitale Lösungen für Immobilienentwickler.
@@ -97,10 +104,12 @@ function ClientLogos() {
   // Two identical copies make the marquee loop seamlessly.
   const marqueeLogos = [...logos, ...logos];
 
+  // Top padding and the divider gap stay tighter than the section's bottom
+  // padding so a full logo tile clears the fold on a 16:9 desktop.
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-12 md:pt-12 md:pb-16">
       <SectionDivider label="Kunden, die uns vertrauen" />
-      <div className={`${cx} mt-8 md:mt-12`}>
+      <div className={`${cx} mt-8`}>
         <FadeIn>
           <div className="logo-marquee">
             <div className="logo-marquee__track gap-4 md:gap-6">
@@ -108,14 +117,16 @@ function ClientLogos() {
                 <div
                   key={`${logo.name}-${i}`}
                   aria-hidden={i >= logos.length}
-                  className="flex w-[160px] md:w-[200px] shrink-0 items-center justify-center rounded-xl border border-border bg-card px-4 py-6 md:px-6 md:py-8"
+                  className="flex w-[160px] md:w-[200px] shrink-0 items-center justify-center rounded-xl border border-border bg-card px-4 py-4 md:px-6 md:py-6"
                 >
                   <Image
                     src={logo.src}
                     alt={`${logo.name} Logo`}
                     width={120}
                     height={40}
-                    loading="lazy"
+                    // The first copy sits in the opening viewport on desktop,
+                    // so it must not wait on the lazy-load threshold.
+                    loading={i < logos.length ? "eager" : "lazy"}
                     className="h-8 w-auto object-contain"
                   />
                 </div>
