@@ -464,7 +464,7 @@ Vernetze dich mit mir für Updates, Einblicke und fachlichen Austausch.
 ### Datenschutzerklärung
 
 **01 — Wer sind wir?**
-Für die Datenbearbeitungen nach dieser Datenschutzerklärung ist grundsätzlich das folgende Unternehmen verantwortlich („wir" oder „uns"):
+Für die Datenbearbeitungen nach dieser Datenschutzerklärung ist grundsätzlich das folgende Unternehmen verantwortlich («wir» oder «uns»):
 
 The Luka Dosen Labs
 Bahnhofstrasse 11
@@ -508,9 +508,9 @@ Wir können Ihre Personendaten ausserdem an Dritte weitergeben, wenn wir deren D
 Die Empfänger Ihrer Personendaten können sich jeweils auch im Ausland befinden, auch ausserhalb der Schweiz bzw. der Länder der EU und des Europäischen Wirtschaftsraums (EWR). Wenn wir Ihre Personendaten in einen solchen Staat übermitteln wollen, müssen wir den Schutz Ihrer Personendaten in angemessener Weise sicherstellen. Bitte kontaktieren Sie uns, falls Sie eine Kopie unserer Datenübermittlungsverträge wünschen.
 
 **05 — Wie bearbeiten wir Personendaten im Zusammenhang mit Webseiten, Apps und E-Mail-Newslettern?**
-Wenn Sie unsere Webseite und App besuchen bzw. verwenden, bearbeiten wir technische Daten, z.B. Angaben über den Zeitpunkt des Zugriffs auf unsere Webseite, die Dauer des Besuchs, die aufgerufenen Seiten und Angaben über das verwendete Endgerät, damit wir die Webseite bereitstellen können, aus Gründen der IT-Sicherheit und zur Verbesserung der Nutzerfreundlichkeit. Wir verwenden zudem „Cookies", also Dateien, die auf Ihrem Endgerät gespeichert werden, wenn Sie unsere Webseite besuchen, und ähnliche Technologien.
+Wenn Sie unsere Webseite und App besuchen bzw. verwenden, bearbeiten wir technische Daten, z.B. Angaben über den Zeitpunkt des Zugriffs auf unsere Webseite, die Dauer des Besuchs, die aufgerufenen Seiten und Angaben über das verwendete Endgerät, damit wir die Webseite bereitstellen können, aus Gründen der IT-Sicherheit und zur Verbesserung der Nutzerfreundlichkeit. Wir verwenden zudem «Cookies», also Dateien, die auf Ihrem Endgerät gespeichert werden, wenn Sie unsere Webseite besuchen, und ähnliche Technologien.
 
-Ein Beispiel für einen Dienst zur statistischen Auswertung ist Google Analytics, ein Angebot von Google in USA. Google verwendet Cookies, um Informationen über Ihr Verhalten auf unserer Webseite zu erheben. Sie können die Verwendung von Google Analytics durch ein „Browser Add-on" verhindern, das Sie unter tools.google.com/dlpage/gaoptout installieren können.
+Ein Beispiel für einen Dienst zur statistischen Auswertung ist Google Analytics, ein Angebot von Google in USA. Google verwendet Cookies, um Informationen über Ihr Verhalten auf unserer Webseite zu erheben. Sie können die Verwendung von Google Analytics durch ein «Browser Add-on» verhindern, das Sie unter tools.google.com/dlpage/gaoptout installieren können.
 
 **06 — Wie lange speichern wir Ihre Personendaten?**
 Wir speichern Ihre Personendaten in personenbezogener Form, solange es für den konkreten Zweck, für den wir sie erhoben haben, erforderlich ist, bei Verträgen in der Regel zumindest für die Dauer der Vertragsbeziehung. Wir speichern Personendaten ferner, wenn wir ein berechtigtes Interesse an der Speicherung haben, z.B. zu Dokumentations- und Beweissicherungszwecken.

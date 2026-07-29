@@ -36,7 +36,7 @@ function Datenschutz() {
             <p className={`mt-4 max-w-[800px] ${prose}`}>
               Für die Datenbearbeitungen nach dieser Datenschutzerklärung ist
               grundsätzlich das folgende Unternehmen verantwortlich
-              („wir" oder „uns"):
+              («wir» oder «uns»):
             </p>
             <p className={`mt-4 max-w-[800px] ${prose}`}>
               <strong className="text-foreground font-medium">
@@ -214,7 +214,7 @@ function Datenschutz() {
               aufgerufenen Seiten und Angaben über das verwendete Endgerät,
               damit wir die Webseite bereitstellen können, aus Gründen der
               IT-Sicherheit und zur Verbesserung der Nutzerfreundlichkeit. Wir
-              verwenden zudem „Cookies", also Dateien, die auf Ihrem Endgerät
+              verwenden zudem «Cookies», also Dateien, die auf Ihrem Endgerät
               gespeichert werden, wenn Sie unsere Webseite besuchen, und
               ähnliche Technologien.
             </p>
@@ -223,7 +223,7 @@ function Datenschutz() {
               Google Analytics, ein Angebot von Google in USA. Google verwendet
               Cookies, um Informationen über Ihr Verhalten auf unserer Webseite
               zu erheben. Sie können die Verwendung von Google Analytics durch
-              ein „Browser Add-on" verhindern, das Sie unter{" "}
+              ein «Browser Add-on» verhindern, das Sie unter{" "}
               <a
                 href="https://tools.google.com/dlpage/gaoptout"
                 target="_blank"
