@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useConsent } from "@/lib/consent";
 
 /**
  * MuxPlayer is ~283KB brotli / 1.0MB decoded, which was 60% of all JavaScript
@@ -23,6 +24,8 @@ const HeroVideo = ({
   playbackId?: string;
   poster?: string;
 }) => {
+  const consent = useConsent();
+
   // No playbackId means no video on this page, so the player chunk is never
   // requested. This is the guard that keeps it off /rechtliches and /kontakt.
   if (!playbackId) return null;
@@ -41,6 +44,9 @@ const HeroVideo = ({
       minResolution="720p"
       maxResolution="720p"
       preload="auto"
+      // Mux sets a `muxData` cookie for playback analytics. Withhold it until
+      // the visitor consents; playback itself is unaffected.
+      disableCookies={consent !== "granted"}
     />
   );
 };
