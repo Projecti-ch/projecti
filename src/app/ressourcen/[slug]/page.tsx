@@ -303,7 +303,7 @@ export default async function UpdateDetailPage({
                   href="https://cal.com/luka-dosen/projecti"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center rounded-full bg-mint px-5 py-2 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
+                  className="mt-6 self-center md:self-start inline-flex items-center rounded-full bg-mint px-5 py-2 text-[14px] font-light text-foreground transition-colors duration-200 hover:bg-mint-hover"
                 >
                   Gespräch abmachen
                 </a>
