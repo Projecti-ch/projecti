@@ -28,7 +28,7 @@ export default function ConsentBanner() {
       <div className="mx-auto flex max-w-[1200px] flex-col gap-3 px-6 py-3 md:flex-row md:items-center md:justify-between md:gap-6 md:px-10 lg:px-20">
         <p className="text-[13px] leading-[1.5] text-muted">
           Wir verwenden Analyse-Cookies, um die Website zu verbessern. Nur mit
-          Ihrer Zustimmung.{" "}
+          deiner Zustimmung.{" "}
           <Link
             href="/rechtliches"
             className="text-jade underline underline-offset-2 transition-colors duration-200 hover:text-evergreen"
