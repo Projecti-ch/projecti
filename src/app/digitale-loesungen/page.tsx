@@ -90,7 +90,7 @@ function Schwerpunkte() {
         <FadeIn delay={60}>
           <p className="mt-4 text-[16px] leading-[1.6] text-muted">
             Je nach Bedarf unterstützen wir in einem oder mehreren Bereichen.
-            Die Lösungen werden auf Ihre Situation zugeschnitten.
+            Die Lösungen werden auf deine Situation zugeschnitten.
           </p>
         </FadeIn>
 

@@ -254,7 +254,7 @@ Systematisches Risikomanagement und klare Verantwortlichkeiten machen den Projek
 ### Schwerpunkte
 
 **Headline:** Wo wir dich unterstützen können
-**Subtext:** Je nach Bedarf unterstützen wir in einem oder mehreren Bereichen. Die Lösungen werden auf Ihre Situation zugeschnitten.
+**Subtext:** Je nach Bedarf unterstützen wir in einem oder mehreren Bereichen. Die Lösungen werden auf deine Situation zugeschnitten.
 
 ---
 
