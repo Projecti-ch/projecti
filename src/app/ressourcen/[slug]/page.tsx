@@ -120,7 +120,7 @@ async function RelatedResources({ currentSlug }: { currentSlug: string }) {
 
             return (
               <FadeIn key={update.id} delay={index * 80}>
-                <Link href={`/ressourcen/${update.slug}`} className="block">
+                <Link href={`/ressourcen/${update.slug}`} className="block rounded-xl">
                   <div className="group relative overflow-hidden rounded-xl bg-card h-[280px] border border-border transition-colors duration-300 hover:border-jade">
                     {imageUrl ? (
                       <Image
@@ -259,6 +259,7 @@ export default async function UpdateDetailPage({
       />
       <Nav />
 
+      <main id="inhalt" tabIndex={-1}>
       {/* Hero */}
       <ProjectHero
         imageUrl={heroImage}
@@ -343,6 +344,7 @@ export default async function UpdateDetailPage({
           </FadeIn>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

@@ -40,7 +40,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
   return (
     <FadeIn delay={index * 80}>
-      <Link href={`/projekte/${project.slug}`} className="block">
+      <Link href={`/projekte/${project.slug}`} className="block rounded-xl">
         <div className="group relative overflow-hidden rounded-xl bg-surface-dark h-[280px] border border-border transition-colors duration-300 hover:border-jade">
           {/* Background image or gradient */}
           {imageUrl ? (
@@ -155,7 +155,7 @@ export default function ProjektePage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <SubpageHero
           tag="Projekte"
           headline="Wie wir Projekte strukturiert umsetzen."

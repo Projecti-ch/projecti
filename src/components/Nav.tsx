@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { scrollBehavior } from "@/lib/motion";
 import Image from "next/image";
 
 const links = [
@@ -17,6 +18,7 @@ const links = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [menuHeight, setMenuHeight] = useState(0);
   const pathname = usePathname();
 
@@ -24,9 +26,22 @@ export default function Nav() {
     if (pathname === href) {
       e.preventDefault();
       e.stopPropagation();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: scrollBehavior() });
     }
   };
+
+  // Escape closes the open menu and hands focus back to the button.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   // Measure the inner menu height for the slide animation
   useEffect(() => {
@@ -38,7 +53,8 @@ export default function Nav() {
   }, [open]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
+    <nav aria-label="Hauptnavigation">
       <div className="flex h-16 items-center justify-between mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20">
         <Link href="/" onClick={(e) => handleNavClick(e, "/")} className="shrink-0">
           <Image
@@ -75,9 +91,12 @@ export default function Nav() {
 
         {/* Mobile hamburger */}
         <button
+          ref={buttonRef}
           onClick={() => setOpen(!open)}
           className="lg:hidden flex flex-col gap-1.5 p-2"
           aria-label="Menü"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           <span
             className={`block h-0.5 w-6 bg-foreground transition-transform duration-200 ${
@@ -98,9 +117,13 @@ export default function Nav() {
       </div>
 
       {/* Mobile menu — slides down from navbar */}
+      {/* inert while closed: the collapsed links would otherwise stay in the
+          tab order and be read by screen readers. */}
       <div
-        className="lg:hidden overflow-hidden transition-all duration-300 ease-in-out"
+        id="mobile-menu"
+        className="lg:hidden overflow-hidden transition-all duration-300 ease-in-out motion-reduce:transition-none"
         style={{ maxHeight: menuHeight }}
+        inert={!open}
       >
         <div
           ref={menuRef}
@@ -138,5 +161,6 @@ export default function Nav() {
         </div>
       </div>
     </nav>
+    </header>
   );
 }

@@ -23,7 +23,7 @@ export default function ProjectHero({
   const basePath = parts[0]?.toLowerCase() === "ressourcen" ? "/ressourcen" : "/projekte";
 
   return (
-    <section className="relative h-[70vh] min-h-[280px] w-full overflow-hidden">
+    <section data-surface="dark" className="relative h-[70vh] min-h-[280px] w-full overflow-hidden">
       {/* Background Image */}
       {imageUrl ? (
         <Image

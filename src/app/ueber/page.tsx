@@ -153,7 +153,7 @@ export default function UeberPage() {
     <>
       <JsonLd data={[personSchema()]} />
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <SubpageHero
           tag="Über"
           headline="Die Baubranche braucht neue Ansätze"

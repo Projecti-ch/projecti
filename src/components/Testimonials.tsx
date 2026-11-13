@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import SectionDivider from "./SectionDivider";
+import { scrollBehavior, useReducedMotion } from "@/lib/motion";
 
 const cx = "mx-auto max-w-[1200px] px-6 md:px-10 lg:px-20";
 
@@ -56,7 +57,11 @@ export default function Testimonials() {
   const count = testimonials.length;
   const [active, setActive] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const isPaused = useRef(false);
+  const regionRef = useRef<HTMLDivElement>(null);
+  // Paused while the pointer, a finger or keyboard focus is on the strip.
+  const isHovered = useRef(false);
+  const isFocused = useRef(false);
+  const reduceMotion = useReducedMotion();
   const isAutoScrolling = useRef(false);
 
   // Doubled list for seamless infinite scroll
@@ -90,13 +95,15 @@ export default function Testimonials() {
     if (el) el.scrollLeft = 0;
   }, []);
 
-  // Autoscroll every 3s — continuous loop, pauses on hover
+  // Autoscroll every 3s — continuous loop. Pauses on hover, touch and
+  // keyboard focus; never starts when the visitor prefers reduced motion.
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    const region = regionRef.current;
+    if (!el || !region || reduceMotion) return;
 
     const interval = setInterval(() => {
-      if (isPaused.current) return;
+      if (isHovered.current || isFocused.current) return;
       const step = getCardStep();
       if (step === 0) return;
 
@@ -112,14 +119,14 @@ export default function Testimonials() {
         el.scrollTo({ left: resetIdx * step, behavior: "instant" });
         // Now smooth-scroll to the next card
         requestAnimationFrame(() => {
-          el.scrollTo({ left: (resetIdx + 1) * step, behavior: "smooth" });
+          el.scrollTo({ left: (resetIdx + 1) * step, behavior: scrollBehavior() });
           setActive((resetIdx + 1) % count);
           setTimeout(() => {
             isAutoScrolling.current = false;
           }, 500);
         });
       } else {
-        el.scrollTo({ left: nextScrollIdx * step, behavior: "smooth" });
+        el.scrollTo({ left: nextScrollIdx * step, behavior: scrollBehavior() });
         setActive(nextScrollIdx % count);
         setTimeout(() => {
           isAutoScrolling.current = false;
@@ -128,31 +135,41 @@ export default function Testimonials() {
     }, 3000);
 
     const pause = () => {
-      isPaused.current = true;
+      isHovered.current = true;
     };
     const resume = () => {
-      isPaused.current = false;
+      isHovered.current = false;
+    };
+    const focusIn = () => {
+      isFocused.current = true;
+    };
+    const focusOut = (e: FocusEvent) => {
+      if (!region.contains(e.relatedTarget as Node | null)) isFocused.current = false;
     };
 
-    el.addEventListener("mouseenter", pause);
-    el.addEventListener("mouseleave", resume);
-    el.addEventListener("touchstart", pause, { passive: true });
-    el.addEventListener("touchend", resume);
+    region.addEventListener("mouseenter", pause);
+    region.addEventListener("mouseleave", resume);
+    region.addEventListener("touchstart", pause, { passive: true });
+    region.addEventListener("touchend", resume);
+    region.addEventListener("focusin", focusIn);
+    region.addEventListener("focusout", focusOut);
 
     return () => {
       clearInterval(interval);
-      el.removeEventListener("mouseenter", pause);
-      el.removeEventListener("mouseleave", resume);
-      el.removeEventListener("touchstart", pause);
-      el.removeEventListener("touchend", resume);
+      region.removeEventListener("mouseenter", pause);
+      region.removeEventListener("mouseleave", resume);
+      region.removeEventListener("touchstart", pause);
+      region.removeEventListener("touchend", resume);
+      region.removeEventListener("focusin", focusIn);
+      region.removeEventListener("focusout", focusOut);
     };
-  }, [count]);
+  }, [count, reduceMotion]);
 
   const scrollTo = (idx: number) => {
     const step = getCardStep();
     if (step === 0) return;
     isAutoScrolling.current = true;
-    scrollRef.current?.scrollTo({ left: idx * step, behavior: "smooth" });
+    scrollRef.current?.scrollTo({ left: idx * step, behavior: scrollBehavior() });
     setActive(idx);
     setTimeout(() => {
       isAutoScrolling.current = false;
@@ -162,7 +179,7 @@ export default function Testimonials() {
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
       <SectionDivider label="Was Kunden sagten" />
-      <div className={`${cx} mt-8 md:mt-12`}>
+      <div ref={regionRef} className={`${cx} mt-8 md:mt-12`}>
         {/* Horizontal scroll — cards sized so ~2.5 are visible */}
         <div
           ref={scrollRef}
@@ -171,6 +188,10 @@ export default function Testimonials() {
           {doubled.map((t, i) => (
             <div
               key={`${t.name}-${i}`}
+              // The second copy only exists for the seamless loop: hidden from
+              // screen readers and the tab order so each quote is read once.
+              aria-hidden={i >= count ? true : undefined}
+              inert={i >= count}
               className="w-[calc((100%-48px)/2.5)] min-w-[280px] shrink-0 rounded-xl border border-border bg-card p-6 md:p-8 flex flex-col"
             >
               {/* Quote text — flex-1 pushes the person block to the bottom */}
@@ -207,7 +228,8 @@ export default function Testimonials() {
               className={`h-2 w-2 rounded-full transition-colors duration-200 ${
                 i === active ? "bg-jade" : "bg-border"
               }`}
-              aria-label={`Testimonial ${i + 1}`}
+              aria-label={`Kundenstimme ${i + 1} von ${count}`}
+              aria-current={i === active ? "true" : undefined}
             />
           ))}
         </div>

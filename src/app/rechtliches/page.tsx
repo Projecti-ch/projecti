@@ -403,7 +403,7 @@ export default function RechtlichesPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <SubpageHero
           tag="Rechtliches"
           headline="Datenschutz & Impressum"

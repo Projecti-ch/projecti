@@ -15,7 +15,7 @@ export default function NotFound() {
   return (
     <>
       <Nav />
-      <main className="flex min-h-[80vh] flex-col items-center justify-center px-6 text-center">
+      <main id="inhalt" tabIndex={-1} className="flex min-h-[80vh] flex-col items-center justify-center px-6 text-center">
         <p className="text-[120px] md:text-[180px] lg:text-[240px] font-semibold leading-none tracking-[-0.04em] text-jade">
           404
         </p>

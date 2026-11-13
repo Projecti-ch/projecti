@@ -166,7 +166,14 @@ function initSilk(host: HTMLElement, cfg: Required<SilkConfig>, interactive: boo
       canvas.height = h;
     }
   }
-  const ro = new ResizeObserver(resize);
+  // Reduced motion: draw one still frame instead of the flowing loop, and
+  // redraw it only when the size changes (a resize clears the canvas).
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let started = false;
+  const ro = new ResizeObserver(() => {
+    resize();
+    if (reduceMotion && started) render();
+  });
   ro.observe(host);
   resize();
   st.mouse = [canvas.width * 0.5, canvas.height * 0.55];
@@ -227,6 +234,11 @@ function initSilk(host: HTMLElement, cfg: Required<SilkConfig>, interactive: boo
     gl!.drawArrays(gl!.TRIANGLES, 0, 3);
   }
   function loop() {
+    if (reduceMotion) {
+      started = true;
+      render();
+      return;
+    }
     if (running) return;
     running = true;
     tick();
@@ -239,6 +251,7 @@ function initSilk(host: HTMLElement, cfg: Required<SilkConfig>, interactive: boo
   }
   // keep the silk gently alive even if rAF is throttled
   const keepAlive = setInterval(() => {
+    if (reduceMotion) return;
     if (visible && performance.now() - lastRaf > 200) render();
   }, 80);
   loop();

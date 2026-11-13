@@ -140,7 +140,7 @@ async function RelatedProjects({
 
             return (
               <FadeIn key={project.id} delay={index * 80}>
-                <Link href={`/projekte/${project.slug}`} className="block">
+                <Link href={`/projekte/${project.slug}`} className="block rounded-xl">
                   <div className="group relative overflow-hidden rounded-xl bg-surface-dark h-[280px] border border-border transition-colors duration-300 hover:border-jade">
                     {imageUrl ? (
                       <Image
@@ -319,7 +319,7 @@ export default async function ProjectPage({ params }: Props) {
         ]}
       />
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         {/* Hero with full-width image and breadcrumb */}
         <ProjectHero
           imageUrl={heroImageUrl}

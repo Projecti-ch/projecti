@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useConsent } from "@/lib/consent";
+import { useReducedMotion } from "@/lib/motion";
 
 /**
  * MuxPlayer is ~283KB brotli / 1.0MB decoded, which was 60% of all JavaScript
@@ -25,6 +26,8 @@ const HeroVideo = ({
   poster?: string;
 }) => {
   const consent = useConsent();
+  // With reduced motion the poster stays as a still image.
+  const reduceMotion = useReducedMotion();
 
   // No playbackId means no video on this page, so the player chunk is never
   // requested. This is the guard that keeps it off /rechtliches and /kontakt.
@@ -37,7 +40,7 @@ const HeroVideo = ({
       playbackId={playbackId}
       poster={poster}
       className="absolute inset-0 h-full w-full border-0"
-      autoPlay
+      autoPlay={!reduceMotion}
       muted
       loop
       nohotkeys
