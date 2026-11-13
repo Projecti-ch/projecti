@@ -51,7 +51,7 @@ function UeberMich() {
                   Deutschschweiz. Von der ersten Machbarkeitsstudie bis zur
                   Ausführungsplanung. Insgesamt war ich an über 100 Projekten
                   beteiligt. Dabei durfte ich mit institutionellen Partnern,
-                  Generalunternehmern und private Bauherren arbeiten.
+                  Generalunternehmern und privaten Bauherren arbeiten.
                 </p>
                 <p>
                   In diesen Jahren habe ich eines immer wieder beobachtet. Viele
