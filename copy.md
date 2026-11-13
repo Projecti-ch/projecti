@@ -392,7 +392,7 @@ Nach der Übergabe gehört das System dir. Dein Team kann es eigenständig nutze
 **Label:** Über mich
 **Headline:** Hoi, Luka hier.
 
-Seit über neun Jahren plane und koordiniere ich Wohnbauprojekte in der Deutschschweiz. Von der ersten Machbarkeitsstudie bis zur Ausführungsplanung. Insgesamt war ich an über 100 Projekten beteiligt. Dabei durfte ich mit institutionellen Partnern, Generalunternehmern und private Bauherren arbeiten.
+Seit über neun Jahren plane und koordiniere ich Wohnbauprojekte in der Deutschschweiz. Von der ersten Machbarkeitsstudie bis zur Ausführungsplanung. Insgesamt war ich an über 100 Projekten beteiligt. Dabei durfte ich mit institutionellen Partnern, Generalunternehmern und privaten Bauherren arbeiten.
 
 In diesen Jahren habe ich eines immer wieder beobachtet. Viele Projekte verlieren Zeit und Geld nicht wegen fehlender Kompetenz. Sie scheitern an unklaren Abläufen, fragmentierten Informationen und Entscheidungen, die zu spät oder gar nicht dokumentiert werden. Das hat mich beschäftigt. Und 2025 habe ich darauf eine Antwort gegeben: Projecti.
 
