@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageDescription } from "@/lib/seo";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
@@ -11,11 +12,12 @@ import type { Update } from "@/types/cms";
 export const metadata: Metadata = {
   title: "Ressourcen & Insights",
   description:
-    "Ratgeber, Updates und Einblicke zu Immobilienentwicklung. Von Bauvorschriften über Planungsprozesse bis zu digitalen Werkzeugen. Transparent und praxisnah.",
+    pageDescription("Ratgeber, Updates und Einblicke zu Immobilienentwicklung. Von Bauvorschriften über Planungsprozesse bis zu digitalen Werkzeugen. Transparent und praxisnah."),
+  alternates: { canonical: "/ressourcen" },
   openGraph: {
     title: "Ressourcen & Insights",
     description:
-      "Ratgeber, Updates und Einblicke zu Immobilienentwicklung. Von Bauvorschriften über Planungsprozesse bis zu digitalen Werkzeugen. Transparent und praxisnah.",
+      pageDescription("Ratgeber, Updates und Einblicke zu Immobilienentwicklung. Von Bauvorschriften über Planungsprozesse bis zu digitalen Werkzeugen. Transparent und praxisnah."),
     url: "https://www.projecti.ch/ressourcen",
     images: [
       {
@@ -95,6 +97,8 @@ async function ResourceGrid() {
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
       <div className={`${cx} mt-16 md:mt-20`}>
+        {/* Screen-reader heading so the card titles (h3) sit under an h2. */}
+        <h2 className="sr-only">Alle Ressourcen</h2>
         <div className="grid gap-6 sm:grid-cols-2">
           {updates.map((update, i) => (
             <ResourceCard key={update.id} update={update} index={i} />

@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /rechtliches
-
 Sitemap: https://www.projecti.ch/sitemap.xml

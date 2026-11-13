@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageDescription } from "@/lib/seo";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
@@ -8,11 +9,12 @@ import SectionDivider from "@/components/SectionDivider";
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Kontakt zu Projecti aufnehmen. Erstgespräch vereinbaren, E-Mail senden oder auf LinkedIn vernetzen. Standort: Landquart, Graubünden. Für Projekte in der Deutschschweiz.",
+    pageDescription("Kontakt zu Projecti aufnehmen. Erstgespräch vereinbaren, E-Mail senden oder auf LinkedIn vernetzen. Standort: Landquart, Graubünden. Für Projekte in der Deutschschweiz."),
+  alternates: { canonical: "/kontakt" },
   openGraph: {
     title: "Kontakt",
     description:
-      "Kontakt zu Projecti aufnehmen. Erstgespräch vereinbaren, E-Mail senden oder auf LinkedIn vernetzen. Standort: Landquart, Graubünden. Für Projekte in der Deutschschweiz.",
+      pageDescription("Kontakt zu Projecti aufnehmen. Erstgespräch vereinbaren, E-Mail senden oder auf LinkedIn vernetzen. Standort: Landquart, Graubünden. Für Projekte in der Deutschschweiz."),
     url: "https://www.projecti.ch/kontakt",
     images: [
       {

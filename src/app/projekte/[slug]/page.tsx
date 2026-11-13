@@ -6,6 +6,7 @@ import FadeIn from "@/components/FadeIn";
 import ProjectHero from "@/components/ProjectHero";
 import ContentSection from "@/components/ContentSection";
 import GalleryCarousel from "@/components/GalleryCarousel";
+import JsonLd from "@/components/JsonLd";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -16,7 +17,15 @@ import {
   formatDate,
   getCategoryLabel,
   getCategoryId,
+  getMediaAlt,
 } from "@/lib/cms";
+import {
+  absoluteUrl,
+  articleSchema,
+  breadcrumbSchema,
+  pageDescription,
+  pageTitle,
+} from "@/lib/seo";
 import type { Media, Project, ContentSection as ContentSectionType } from "@/types/cms";
 
 interface Props {
@@ -42,13 +51,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const path = `/projekte/${project.slug}`;
+  const description = pageDescription(
+    project.metaDescription || `${project.title} – Projecti`
+  );
+
   return {
-    title: project.title,
-    description: project.metaDescription || `${project.title} - Projecti`,
+    title: pageTitle(project.title),
+    description,
+    alternates: { canonical: path },
     openGraph: {
       title: project.title,
-      description: project.metaDescription || `${project.title} - Projecti`,
-      url: `https://www.projecti.ch/projekte/${project.slug}`,
+      description,
+      url: absoluteUrl(path),
       images: project.heroImage
         ? [{ url: getMediaUrl(project.heroImage, "hero") || "" }]
         : undefined,
@@ -68,13 +83,12 @@ function GallerySection({
 
   // Transform images for carousel
   const carouselImages = images
-    .map((item, index) => {
+    .map((item) => {
       const imageUrl = getMediaUrl(item.image as Media, "hero");
       if (!imageUrl) return null;
-      const mediaObj = item.image as Media;
       return {
         url: imageUrl,
-        alt: mediaObj?.alt || `Gallery image ${index + 1}`,
+        alt: getMediaAlt(item.image),
       };
     })
     .filter((img): img is { url: string; alt: string } => img !== null);
@@ -232,10 +246,7 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   const heroImageUrl = getMediaUrl(project.heroImage, "hero");
-  const heroImageAlt =
-    typeof project.heroImage === "object" && project.heroImage?.alt
-      ? project.heroImage.alt
-      : project.title;
+  const heroImageAlt = getMediaAlt(project.heroImage) || project.title;
 
   // Build breadcrumb: "Projekte | Category | SlugTitle"
   const categoryLabel = getCategoryLabel(project.category);
@@ -287,9 +298,26 @@ export default async function ProjectPage({ params }: Props) {
   };
 
   const sections = getSections();
+  const path = `/projekte/${project.slug}`;
 
   return (
     <>
+      <JsonLd
+        data={[
+          articleSchema({
+            url: absoluteUrl(path),
+            headline: project.title,
+            description: project.metaDescription,
+            image: heroImageUrl,
+            datePublished: project.date || project.createdAt,
+            dateModified: project.updatedAt,
+          }),
+          breadcrumbSchema([
+            { name: "Projekte", path: "/projekte" },
+            { name: project.slugTitle || project.title, path },
+          ]),
+        ]}
+      />
       <Nav />
       <main>
         {/* Hero with full-width image and breadcrumb */}
@@ -297,6 +325,7 @@ export default async function ProjectPage({ params }: Props) {
           imageUrl={heroImageUrl}
           imageAlt={heroImageAlt}
           breadcrumb={breadcrumb}
+          title={project.title}
         />
 
         {/* Content Sections */}
@@ -306,9 +335,9 @@ export default async function ProjectPage({ params }: Props) {
             label={section.title}
             body={section.body}
             image={getSectionImageUrl(section.image)}
-            imageAlt={`Section ${index + 1} image`}
+            imageAlt={getMediaAlt(section.image)}
             image2={getSectionImageUrl(section.image2)}
-            image2Alt={`Section ${index + 1} image 2`}
+            image2Alt={getMediaAlt(section.image2)}
           />
         ))}
 

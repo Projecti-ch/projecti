@@ -105,6 +105,15 @@ h3, h4 {
   letter-spacing: 0em;     /* Sub-headings — neutral */
 }
 
+/* Section labels (SectionDivider) are h2 inside articles but must look
+   exactly like the former <p> label: same weight, spacing and line height
+   the global p rule below gives them. */
+h2.section-label {
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.65;
+}
+
 /* Body text — loosen for readability with Nohemi */
 p, li, blockquote {
   letter-spacing: 0.03em;

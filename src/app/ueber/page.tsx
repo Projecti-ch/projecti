@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageDescription, personSchema } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
@@ -10,11 +12,12 @@ import HeroVideo from "@/components/HeroVideo";
 export const metadata: Metadata = {
   title: "Über Projecti & Luka Došen",
   description:
-    "Agentur für Architekturplanung und digitale Lösungen in der Deutschschweiz. Gegründet mit dem Ziel, Immobilienprojekte strukturierter zu machen. Über 9 Jahre Erfahrung.",
+    pageDescription("Agentur für Architekturplanung und digitale Lösungen in der Deutschschweiz. Gegründet mit dem Ziel, Immobilienprojekte strukturierter zu machen. Über 9 Jahre Erfahrung."),
+  alternates: { canonical: "/ueber" },
   openGraph: {
     title: "Über Projecti & Luka Došen",
     description:
-      "Agentur für Architekturplanung und digitale Lösungen in der Deutschschweiz. Gegründet mit dem Ziel, Immobilienprojekte strukturierter zu machen. Über 9 Jahre Erfahrung.",
+      pageDescription("Agentur für Architekturplanung und digitale Lösungen in der Deutschschweiz. Gegründet mit dem Ziel, Immobilienprojekte strukturierter zu machen. Über 9 Jahre Erfahrung."),
     url: "https://www.projecti.ch/ueber",
     images: [
       {
@@ -148,6 +151,7 @@ function Vision() {
 export default function UeberPage() {
   return (
     <>
+      <JsonLd data={[personSchema()]} />
       <Nav />
       <main>
         <SubpageHero

@@ -10,7 +10,15 @@ import ContentSection from "@/components/ContentSection";
 import GalleryCarousel from "@/components/GalleryCarousel";
 import SectionDivider from "@/components/SectionDivider";
 import RichText from "@/components/RichText";
-import { getUpdates, getUpdateBySlug, getMediaUrl, formatDate } from "@/lib/cms";
+import JsonLd from "@/components/JsonLd";
+import { getUpdates, getUpdateBySlug, getMediaUrl, getMediaAlt, formatDate } from "@/lib/cms";
+import {
+  absoluteUrl,
+  articleSchema,
+  breadcrumbSchema,
+  pageDescription,
+  pageTitle,
+} from "@/lib/seo";
 import type { Media, ContentSection as ContentSectionType } from "@/types/cms";
 
 /* ─── Static Params ─── */
@@ -32,13 +40,19 @@ export async function generateMetadata({
     return { title: "Update nicht gefunden" };
   }
 
+  const path = `/ressourcen/${update.slug}`;
+  const description = update.metaDescription
+    ? pageDescription(update.metaDescription)
+    : undefined;
+
   return {
-    title: update.title,
-    description: update.metaDescription || undefined,
+    title: pageTitle(update.title),
+    description,
+    alternates: { canonical: path },
     openGraph: {
       title: update.title,
-      description: update.metaDescription || undefined,
-      url: `https://www.projecti.ch/ressourcen/${update.slug}`,
+      description,
+      url: absoluteUrl(path),
       images: update.featuredImage
         ? [{ url: getMediaUrl(update.featuredImage, "hero") || "" }]
         : undefined,
@@ -58,13 +72,12 @@ function GallerySection({
 
   // Transform images for carousel
   const carouselImages = images
-    .map((item, index) => {
+    .map((item) => {
       const imageUrl = getMediaUrl(item.image as Media, "hero");
       if (!imageUrl) return null;
-      const mediaObj = item.image as Media;
       return {
         url: imageUrl,
-        alt: mediaObj?.alt || `Gallery image ${index + 1}`,
+        alt: getMediaAlt(item.image),
       };
     })
     .filter((img): img is { url: string; alt: string } => img !== null);
@@ -224,16 +237,34 @@ export default async function UpdateDetailPage({
   };
 
   const sections = getSections();
+  const path = `/ressourcen/${update.slug}`;
 
   return (
     <>
+      <JsonLd
+        data={[
+          articleSchema({
+            url: absoluteUrl(path),
+            headline: update.title,
+            description: update.metaDescription,
+            image: heroImage,
+            datePublished: update.date || update.createdAt,
+            dateModified: update.updatedAt,
+          }),
+          breadcrumbSchema([
+            { name: "Ressourcen", path: "/ressourcen" },
+            { name: update.slugTitle || update.title, path },
+          ]),
+        ]}
+      />
       <Nav />
 
       {/* Hero */}
       <ProjectHero
         imageUrl={heroImage}
-        imageAlt={update.title}
+        imageAlt={getMediaAlt(update.featuredImage) || update.title}
         breadcrumb={breadcrumb}
+        title={update.title}
       />
 
       {/* Date as SectionDivider */}
@@ -248,9 +279,9 @@ export default async function UpdateDetailPage({
               label={section.title}
               body={section.body}
               image={getSectionImageUrl(section.image)}
-              imageAlt={`Section ${index + 1} image`}
+              imageAlt={getMediaAlt(section.image)}
               image2={getSectionImageUrl(section.image2)}
-              image2Alt={`Section ${index + 1} image 2`}
+              image2Alt={getMediaAlt(section.image2)}
             />
           ))}
 
