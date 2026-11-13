@@ -329,7 +329,7 @@ export default function DigitaleLoesungenPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <SubpageHero
           tag="Digitale Lösungen"
           headline="Systeme, die Immobilienprojekte effizienter machen."

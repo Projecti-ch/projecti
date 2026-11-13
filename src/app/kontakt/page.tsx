@@ -127,7 +127,7 @@ export default function KontaktPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <SubpageHero
           tag="Kontakt"
           headline="Lass uns sprechen"

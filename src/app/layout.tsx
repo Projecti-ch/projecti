@@ -56,6 +56,14 @@ export default function RootLayout({
       <body className="antialiased">
         {/* The organization is on every page so each page's JSON-LD can
             reference it by @id (publisher, worksFor). */}
+        {/* First focusable element: jumps past the navigation (WCAG 2.4.1).
+            Visible only while focused. */}
+        <a
+          href="#inhalt"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-mint focus:px-5 focus:py-3 focus:text-[14px] focus:text-foreground"
+        >
+          Zum Inhalt springen
+        </a>
         <JsonLd data={[organizationSchema()]} />
         {children}
         {/* Analytics only renders once consent is granted, so no _ga cookie

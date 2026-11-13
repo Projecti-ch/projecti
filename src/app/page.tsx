@@ -349,7 +349,7 @@ export default function Home() {
     <>
       <JsonLd data={[websiteSchema()]} />
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <Hero />
         <ClientLogos />
         <Services />

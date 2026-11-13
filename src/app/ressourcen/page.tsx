@@ -39,7 +39,7 @@ function ResourceCard({ update, index }: { update: Update; index: number }) {
 
   return (
     <FadeIn delay={index * 80}>
-      <Link href={`/ressourcen/${update.slug}`} className="block">
+      <Link href={`/ressourcen/${update.slug}`} className="block rounded-xl">
         <div className="group relative overflow-hidden rounded-xl bg-card h-[280px] border border-border transition-colors duration-300 hover:border-jade">
           {/* Background image or gradient */}
           {imageUrl ? (
@@ -157,7 +157,7 @@ export default function RessourcenPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <SubpageHero
           tag="Ressourcen"
           headline="Wissen teilen. Transparenz schaffen. Gemeinsam bauen."

@@ -105,6 +105,22 @@ h3, h4 {
   letter-spacing: 0em;     /* Sub-headings — neutral */
 }
 
+/* ─── Focus ─── */
+/* Visible keyboard focus (WCAG 2.4.7). Jade on light surfaces; on dark
+   surfaces (heroes, CTA band, dark cards) Jade only reaches 2.6:1, so Mint. */
+:focus-visible {
+  outline: 2px solid var(--color-jade);
+  outline-offset: 2px;
+}
+.bg-surface-dark :focus-visible,
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--color-mint);
+}
+/* Programmatic focus targets (skip link destination) need no ring. */
+main:focus-visible {
+  outline: none;
+}
+
 /* Section labels (SectionDivider) are h2 inside articles but must look
    exactly like the former <p> label: same weight, spacing and line height
    the global p rule below gives them. */
@@ -141,6 +157,19 @@ button[class*="rounded-full"] {
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Reduced motion: content is there from the start, no fade or slide.
+   The JS still adds .visible; this only removes the transition. */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Stagger children */

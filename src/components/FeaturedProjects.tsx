@@ -26,7 +26,7 @@ export default async function FeaturedProjects() {
 
             return (
               <FadeIn key={project.id} delay={i * 100}>
-                <Link href={`/projekte/${project.slug}`} className="block">
+                <Link href={`/projekte/${project.slug}`} className="block rounded-xl">
                   <div className="group relative overflow-hidden rounded-xl bg-surface-dark h-[280px] border border-border transition-colors duration-300 hover:border-jade">
                     {imageUrl ? (
                       <Image

@@ -366,7 +366,7 @@ export default function PlanungPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="inhalt" tabIndex={-1}>
         <SubpageHero
           tag="Planung"
           headline="Architekturplanung für moderne Immobilienentwickler."
