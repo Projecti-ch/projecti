@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageDescription } from "@/lib/seo";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
@@ -11,11 +12,12 @@ import type { Project } from "@/types/cms";
 export const metadata: Metadata = {
   title: "Ausgewählte Projekte",
   description:
-    "Referenzprojekte aus Architekturplanung und digitalen Lösungen. Wohnbauprojekte, Marktanalysen, Projektmanagement. Strukturiert und transparent umgesetzt.",
+    pageDescription("Referenzprojekte aus Architekturplanung und digitalen Lösungen. Wohnbauprojekte, Marktanalysen, Projektmanagement. Strukturiert und transparent umgesetzt."),
+  alternates: { canonical: "/projekte" },
   openGraph: {
     title: "Ausgewählte Projekte",
     description:
-      "Referenzprojekte aus Architekturplanung und digitalen Lösungen. Wohnbauprojekte, Marktanalysen, Projektmanagement. Strukturiert und transparent umgesetzt.",
+      pageDescription("Referenzprojekte aus Architekturplanung und digitalen Lösungen. Wohnbauprojekte, Marktanalysen, Projektmanagement. Strukturiert und transparent umgesetzt."),
     url: "https://www.projecti.ch/projekte",
     images: [
       {
@@ -93,6 +95,8 @@ async function ProjectGrid() {
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
       <div className={`${cx} mt-16 md:mt-20`}>
+        {/* Screen-reader heading so the card titles (h3) sit under an h2. */}
+        <h2 className="sr-only">Alle Projekte</h2>
         <div className="grid gap-6 sm:grid-cols-2">
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />

@@ -188,6 +188,17 @@ export function getMediaUrl(
 }
 
 /**
+ * Alternative text of a media field. Returns "" (decorative) when the CMS
+ * entry has none, never a generated placeholder like "Section 1 image".
+ */
+export function getMediaAlt(media: (number | null) | Media | undefined): string {
+  if (!media || typeof media === 'number') return '';
+  const alt = media.alt?.trim() || '';
+  // Old uploads carry filler such as "image" or "Section 1 image".
+  return /(^|\s)image( \d+)?$/i.test(alt) ? '' : alt;
+}
+
+/**
  * Format a date string to German locale
  */
 export function formatDate(dateString: string | null | undefined): string {

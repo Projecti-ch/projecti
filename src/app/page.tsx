@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageDescription, websiteSchema } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import FadeIn from "@/components/FadeIn";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -12,13 +14,17 @@ import SilkBackground from "@/components/SilkBackground";
 import ShapeIcon from "@/components/shapes/ShapeIcon";
 
 export const metadata: Metadata = {
-  title: "Projecti | Planung und digitale Lösungen für Immobilienentwickler",
+  // absolute: written with the brand suffix already, within 60 characters.
+  title: {
+    absolute: "Planung & digitale Lösungen für Immobilien | Projecti",
+  },
   description:
-    "Viele Projekte verlieren Zeit und Geld durch fragmentierte Informationen und unklare Entscheidungen. Projecti arbeitet anders. Wir strukturieren Planungsphasen, digitalisieren Abläufe und dokumentieren jede wichtige Entscheidung.",
+    pageDescription("Viele Projekte verlieren Zeit und Geld durch fragmentierte Informationen und unklare Entscheidungen. Projecti arbeitet anders. Wir strukturieren Planungsphasen, digitalisieren Abläufe und dokumentieren jede wichtige Entscheidung."),
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Projecti | Planung und digitale Lösungen für Immobilienentwickler",
+    title: "Planung & digitale Lösungen für Immobilien | Projecti",
     description:
-      "Wir strukturieren Planungsphasen, digitalisieren Abläufe und dokumentieren jede wichtige Entscheidung für planbare Projektverläufe.",
+      pageDescription("Wir strukturieren Planungsphasen, digitalisieren Abläufe und dokumentieren jede wichtige Entscheidung für planbare Projektverläufe."),
     url: "https://www.projecti.ch",
     images: [
       {
@@ -341,6 +347,7 @@ function FinalCta() {
 export default function Home() {
   return (
     <>
+      <JsonLd data={[websiteSchema()]} />
       <Nav />
       <main>
         <Hero />

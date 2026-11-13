@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageDescription } from "@/lib/seo";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
@@ -8,7 +9,18 @@ import FadeIn from "@/components/FadeIn";
 export const metadata: Metadata = {
   title: "Impressum & Datenschutz",
   description:
-    "Impressum und Datenschutzerklärung von Projecti GmbH, Bahnhofstrasse 11, 7302 Landquart, Schweiz.",
+    pageDescription("Impressum und Datenschutzerklärung von Projecti GmbH, Bahnhofstrasse 11, 7302 Landquart, Schweiz."),
+  alternates: { canonical: "/rechtliches" },
+  // Own og:url; without it the page inherited the homepage URL from the layout.
+  openGraph: {
+    type: "website",
+    locale: "de_CH",
+    siteName: "Projecti",
+    title: "Impressum & Datenschutz",
+    description:
+      "Impressum und Datenschutzerklärung von Projecti GmbH, Bahnhofstrasse 11, 7302 Landquart, Schweiz.",
+    url: "https://www.projecti.ch/rechtliches",
+  },
   robots: {
     index: false,
     follow: false,
@@ -28,6 +40,8 @@ function Datenschutz() {
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
       <div className={`${cx}`}>
+        {/* Screen-reader heading: the page h1 already reads "Datenschutz & Impressum". */}
+        <h2 className="sr-only">Datenschutzerklärung</h2>
         <FadeIn delay={60}>
           <div className="mt-0">
 
@@ -324,7 +338,7 @@ function Datenschutz() {
 function Impressum() {
   return (
     <section className="py-16 md:py-20 lg:py-[120px]">
-      <SectionDivider label="Impressum" />
+      <SectionDivider label="Impressum" as="h2" />
       <div className={`${cx} mt-8 md:mt-12`}>
         <FadeIn delay={60}>
           <div className="mt-0">

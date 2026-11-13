@@ -24,9 +24,9 @@ export default function ContentSection({
   label,
   body,
   image,
-  imageAlt = "Section image",
+  imageAlt = "",
   image2,
-  image2Alt = "Section image",
+  image2Alt = "",
 }: ContentSectionProps) {
   // Don't render if no content
   if (!label && !body && !image && !image2) {
@@ -36,7 +36,7 @@ export default function ContentSection({
   return (
     <section className="py-12 md:py-16">
       {/* Divider with label */}
-      {label && <SectionDivider label={label} />}
+      {label && <SectionDivider label={label} as="h2" />}
 
       {/* Body content */}
       {body && (

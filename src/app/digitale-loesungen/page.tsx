@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageDescription } from "@/lib/seo";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SubpageHero from "@/components/SubpageHero";
@@ -8,11 +9,12 @@ import SectionDivider from "@/components/SectionDivider";
 export const metadata: Metadata = {
   title: "Digitale Lösungen Immobilien Schweiz",
   description:
-    "Digitale Lösungen für effizientere Immobilienprojekte. GIS Analysen, Projektmanagement, AI Workflows. Pragmatisch umgesetzt, nicht nur konzipiert. Deutschschweiz.",
+    pageDescription("Digitale Lösungen für effizientere Immobilienprojekte. GIS Analysen, Projektmanagement, AI Workflows. Pragmatisch umgesetzt, nicht nur konzipiert. Deutschschweiz."),
+  alternates: { canonical: "/digitale-loesungen" },
   openGraph: {
     title: "Digitale Lösungen Immobilien Schweiz",
     description:
-      "Digitale Lösungen für effizientere Immobilienprojekte. GIS Analysen, Projektmanagement, AI Workflows. Pragmatisch umgesetzt, nicht nur konzipiert. Deutschschweiz.",
+      pageDescription("Digitale Lösungen für effizientere Immobilienprojekte. GIS Analysen, Projektmanagement, AI Workflows. Pragmatisch umgesetzt, nicht nur konzipiert. Deutschschweiz."),
     url: "https://www.projecti.ch/digitale-loesungen",
     images: [
       {
