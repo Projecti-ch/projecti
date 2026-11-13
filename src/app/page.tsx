@@ -14,15 +14,15 @@ import SilkBackground from "@/components/SilkBackground";
 import ShapeIcon from "@/components/shapes/ShapeIcon";
 
 export const metadata: Metadata = {
-  // absolute: the brand already leads, so skip the "%s | Projecti" template.
+  // absolute: written with the brand suffix already, within 60 characters.
   title: {
-    absolute: "Projecti | Planung und digitale Lösungen für Immobilienentwickler",
+    absolute: "Planung & digitale Lösungen für Immobilien | Projecti",
   },
   description:
     pageDescription("Viele Projekte verlieren Zeit und Geld durch fragmentierte Informationen und unklare Entscheidungen. Projecti arbeitet anders. Wir strukturieren Planungsphasen, digitalisieren Abläufe und dokumentieren jede wichtige Entscheidung."),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Projecti | Planung und digitale Lösungen für Immobilienentwickler",
+    title: "Planung & digitale Lösungen für Immobilien | Projecti",
     description:
       pageDescription("Wir strukturieren Planungsphasen, digitalisieren Abläufe und dokumentieren jede wichtige Entscheidung für planbare Projektverläufe."),
     url: "https://www.projecti.ch",

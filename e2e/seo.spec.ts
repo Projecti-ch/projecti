@@ -11,10 +11,6 @@ import { test, expect, type APIRequestContext } from "@playwright/test";
 const SITE = "https://www.projecti.ch";
 const STATIC = ["/", "/ueber", "/planung", "/digitale-loesungen", "/projekte", "/ressourcen", "/kontakt"];
 
-// Open question to Luka (Briefing A6): the homepage title is 65 characters
-// and is copy, not code. Remove from this list once the new title is in.
-const TITLE_LENGTH_PENDING = new Set(["/"]);
-
 async function sitemapPaths(request: APIRequestContext): Promise<string[]> {
   const xml = await (await request.get("/sitemap.xml")).text();
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => {
@@ -94,9 +90,7 @@ test("every sitemap page: one h1, no skipped heading level, canonical, JSON-LD, 
     expect(info.jsonLd.length, `${path}: JSON-LD`).toBeGreaterThan(0);
     for (const raw of info.jsonLd) expect(() => JSON.parse(raw), `${path}: JSON-LD parses`).not.toThrow();
 
-    if (!TITLE_LENGTH_PENDING.has(path)) {
-      expect(info.title.length, `${path}: title «${info.title}»`).toBeLessThanOrEqual(60);
-    }
+    expect(info.title.length, `${path}: title «${info.title}»`).toBeLessThanOrEqual(60);
     expect(info.description.length, `${path}: description`).toBeLessThanOrEqual(160);
 
     for (const alt of info.alts) {
